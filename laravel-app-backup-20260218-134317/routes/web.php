@@ -5,3 +5,4 @@ use App\Http\Controllers\PortfolioController;
 
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
 Route::post('/contact', [PortfolioController::class, 'contact'])->name('contact');
+// view name changed to `portfolio` (Blade created below)
