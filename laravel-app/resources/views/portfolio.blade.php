@@ -5,43 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Portfolio</title>
 
-        <script src="https://cdn.tailwindcss.com"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
         
         <style>
-            :root {
-                --font-sans: 'Barlow Semi Condensed', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-                --accent: #06b6d4; /* teal-400 */
-                --muted: #6b7280; /* gray-500 */
-            }
-
-            body {
-                font-family: var(--font-sans);
-            }
-
-            .container-max {
-                max-width: 1100px;
-                margin-left: auto;
-                margin-right: auto;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .card-shadow {
-                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            }
-
-            .accent-btn {
-                background: linear-gradient(90deg, var(--accent), #0ea5a3);
-            }
-
-            .project-img {
-                height: 160px;
-                object-fit: cover;
-                width: 100%;
-            }
+            /* kept minimal — main styles moved to resources/css/app.css */
         </style>
     </head>
     <body class="min-h-screen bg-gray-100 text-gray-900">
@@ -133,8 +103,14 @@
             <section id="contact" class="mb-24">
                 <div class="bg-white p-6 rounded card-shadow">
                     <h2 class="text-2xl font-semibold mb-4">Contact</h2>
+
+                    @if(session('status'))
+                        <div class="mb-4 p-3 rounded bg-green-50 text-green-800 text-sm">{{ session('status') }}</div>
+                    @endif
+
                     <p class="text-gray-600 mb-4">Want to work together? Send a message and I'll get back to you.</p>
-                    <form action="/" method="POST" class="grid sm:grid-cols-2 gap-4">
+                    <form action="{{ route('contact') }}" method="POST" class="grid sm:grid-cols-2 gap-4">
+                        @csrf
                         <input type="text" name="name" placeholder="Your name" class="p-3 border rounded" />
                         <input type="email" name="email" placeholder="Email" class="p-3 border rounded" />
                         <textarea name="message" placeholder="Message" class="p-3 border rounded sm:col-span-2" rows="5"></textarea>
