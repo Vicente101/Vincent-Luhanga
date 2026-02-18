@@ -5,13 +5,41 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Portfolio</title>
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
         
         <style>
-            /* kept minimal — main styles moved to resources/css/app.css */
+            :root {
+                --font-sans: 'Barlow Semi Condensed', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+                --accent: #06b6d4; /* teal-400 */
+                --muted: #6b7280; /* gray-500 */
+            }
+
+            body { font-family: var(--font-sans); }
+
+            .container-max {
+                max-width: 1100px;
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .card-shadow {
+                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            }
+
+            .accent-btn {
+                background: linear-gradient(90deg, var(--accent), #0ea5a3);
+            }
+
+            .project-img {
+                height: 160px;
+                object-fit: cover;
+                width: 100%;
+            }
         </style>
     </head>
     <body class="min-h-screen bg-gray-100 text-gray-900">
