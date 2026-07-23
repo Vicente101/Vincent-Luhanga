@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vincent Luhanga - Portfolio</title>
+    <script>
+      const repoBase = '/Portfolio';
+      const path = window.location.pathname.startsWith(repoBase)
+        ? window.location.pathname.slice(repoBase.length) || '/'
+        : window.location.pathname;
+      const target = `${window.location.origin}${repoBase}/?path=${encodeURIComponent(path)}${window.location.hash}`;
+      window.location.replace(target);
+    </script>
+  </head>
+  <body></body>
+</html>
