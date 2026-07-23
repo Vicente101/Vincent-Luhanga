@@ -621,6 +621,16 @@ body.theme-night .hero-shade {
     color: var(--ink);
 }
 
+.action-button.download {
+    border-color: var(--line);
+    background: transparent;
+    color: var(--line);
+}
+
+.action-button.download::before {
+    background: rgba(255, 255, 255, 0.14);
+}
+
 body.theme-night .action-button {
     border-color: rgba(200, 221, 239, 0.34);
     box-shadow: 0 18px 34px rgba(64, 226, 209, 0.1);
@@ -1452,6 +1462,8 @@ body.theme-night .systems-console {
 
 .project-detail {
     position: relative;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
     min-height: 356px;
     border: 1px solid var(--line);
     border-radius: 2px;
@@ -1491,15 +1503,33 @@ body.theme-night .systems-console {
 .project-detail header {
     position: relative;
     z-index: 1;
-    padding: 2px 54px 34px;
+    display: grid;
+    gap: 10px;
+    padding: 2px 54px 30px;
     border-bottom: 1px solid var(--line);
+}
+
+.project-role {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 28px;
+    align-items: center;
+    border: 1px solid rgba(199, 214, 230, 0.48);
+    border-radius: 2px;
+    background: rgba(199, 214, 230, 0.08);
+    color: var(--accent);
+    padding: 6px 9px;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
 .project-detail header h2 {
     margin: 0;
-    font-size: 19px;
+    font-size: 22px;
     font-weight: 800;
-    text-transform: uppercase;
+    line-height: 1.06;
 }
 
 .project-columns {
@@ -1507,8 +1537,12 @@ body.theme-night .systems-console {
     z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    gap: 34px;
     padding-top: 30px;
+}
+
+.project-detail p {
+    line-height: 1.34;
 }
 
 .tag-row {
@@ -1996,8 +2030,16 @@ body.theme-night .image-card:hover .card-bg-image {
     }
 
     .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 10px;
         margin-top: 24px;
+        max-width: 340px;
+    }
+
+    .hero-actions .action-button {
+        width: 100%;
+        min-height: 46px;
     }
 
     .showcase-line,
@@ -2012,19 +2054,85 @@ body.theme-night .image-card:hover .card-bg-image {
     }
 
     .page-heading.dark,
-    .frame-card.inner,
-    .project-detail {
+    .frame-card.inner {
         padding: 30px 22px;
     }
 
+    .project-grid {
+        gap: 16px;
+    }
+
+    .project-detail {
+        min-height: auto;
+        padding: 24px;
+        box-shadow: 0 18px 36px rgba(14, 29, 37, 0.16);
+    }
+
+    .project-detail::before,
+    .project-detail::after {
+        top: 18px;
+        width: 24px;
+        height: 18px;
+    }
+
+    .project-detail::before {
+        left: 24px;
+    }
+
+    .project-detail::after {
+        right: 24px;
+    }
+
     .project-detail header {
-        padding: 4px 42px 24px;
+        gap: 10px;
+        padding: 0 36px 18px;
+    }
+
+    .project-role {
+        min-height: 26px;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+    .project-detail header h2 {
+        font-size: 24px;
+        line-height: 1.04;
+        overflow-wrap: anywhere;
     }
 
     .project-columns,
     .contact-form {
         grid-template-columns: 1fr;
-        gap: 22px;
+        gap: 18px;
+    }
+
+    .project-columns {
+        padding-top: 18px;
+    }
+
+    .project-detail h3 {
+        color: var(--accent);
+        font-size: 13px;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    .project-detail p {
+        margin-top: 9px;
+        font-size: 16px;
+        font-weight: 650;
+        line-height: 1.38;
+    }
+
+    .tag-row {
+        gap: 6px;
+        margin-top: 14px;
+    }
+
+    .tag {
+        padding: 6px 8px;
+        font-size: 12px;
+        line-height: 1.08;
     }
 
     .capability-item {
@@ -2126,6 +2234,31 @@ body.theme-night .image-card:hover .card-bg-image {
 
     .hero-actions .action-button {
         width: 100%;
+    }
+
+    .project-detail {
+        padding: 22px 18px;
+    }
+
+    .project-detail::before {
+        left: 18px;
+    }
+
+    .project-detail::after {
+        right: 18px;
+    }
+
+    .project-detail header {
+        padding-inline: 30px;
+    }
+
+    .project-detail header h2 {
+        font-size: 22px;
+    }
+
+    .tag {
+        max-width: 100%;
+        overflow-wrap: anywhere;
     }
 }
 

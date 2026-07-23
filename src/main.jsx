@@ -126,33 +126,37 @@ const cardImages = {
 const projects = [
     {
         title: 'Student Information System',
+        role: 'Academic admin UI',
         signal: 'Academic Operations',
-        result: 'Role-aware student records, results, academic information, and responsive admin dashboards.',
-        detail: 'React screens, MySQL-informed data models, access rules, validation, and practical dashboard workflows.',
+        result: 'A structured interface for student records, academic results, and admin dashboards.',
+        detail: 'Built around clean data entry, validation states, role-aware screens, and fast record review.',
         tags: ['React.js', 'MySQL', 'Tailwind CSS', 'Dashboards'],
         image: cardImages.student,
     },
     {
         title: 'Venue Booking System',
+        role: 'Booking workflow UI',
         signal: 'Reservations & Scheduling',
-        result: 'Reservations, venue availability, scheduling, and organization-facing operational screens.',
-        detail: 'React screens, Supabase data, reusable state, and mobile-first booking logic.',
+        result: 'A booking flow for checking availability, managing reservations, and keeping venue schedules clear.',
+        detail: 'Focused on mobile usability, reusable state, Supabase-backed data, and action-ready booking screens.',
         tags: ['React.js', 'Supabase', 'Tailwind CSS', 'Booking UI'],
         image: cardImages.booking,
     },
     {
         title: 'Database Visualizer',
+        role: 'Developer tool UI',
         signal: 'Developer Tooling',
-        result: 'An open-source tool that makes database structures and relationships easier to inspect.',
-        detail: 'React, TypeScript thinking, stateful UI, and developer-focused information design.',
+        result: 'A visual tool that helps developers inspect tables, relationships, and structure faster.',
+        detail: 'Designed for technical users who need clear context, stateful controls, and readable schema views.',
         tags: ['React.js', 'TypeScript', 'Context UI', 'Open Source'],
         image: cardImages.visualizer,
     },
     {
         title: 'Crop Recommendation System',
+        role: 'Decision support UI',
         signal: 'Open SmartGrow',
-        result: 'Decision support that recommends suitable crops from environmental and agricultural input data.',
-        detail: 'Form logic, MySQL-backed records, and simple screens for non-technical users.',
+        result: 'A simple decision-support screen that turns agricultural inputs into useful crop guidance.',
+        detail: 'Designed around clear form logic, readable results, and a flow that non-technical users can follow.',
         tags: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
         image: cardImages.smartgrow,
     },
@@ -161,12 +165,12 @@ const projects = [
 const capabilities = [
     {
         title: 'Product UI',
-        copy: 'Responsive React interfaces, dashboards, forms, and reusable front-end patterns.',
+        copy: 'React interfaces for dashboards, forms, records, and reusable product patterns.',
         image: cardImages.webApp,
     },
     {
         title: 'React Systems',
-        copy: 'Stateful screens, validation flows, access-aware interfaces, and maintainable component logic.',
+        copy: 'Stateful screens, validation flows, access-aware views, and maintainable component logic.',
         image: cardImages.backend,
     },
     {
@@ -185,7 +189,7 @@ const buildStages = [
     {
         index: '01',
         title: 'Model the workflow',
-        copy: 'Users, records, permissions, screens, and decisions are mapped before the interface gets busy.',
+        copy: 'I identify the users, records, permissions, and decisions before the interface gets busy.',
     },
     {
         index: '02',
@@ -223,18 +227,18 @@ const timeline = [
 const homeSignals = [
     {
         value: 'React',
-        label: 'Product UI',
-        copy: 'Responsive interfaces, dashboard states, forms, and practical front-end flows.',
-    },
-    {
-        value: 'React UI',
-        label: 'Application workflows',
-        copy: 'State, validation, access-aware screens, and maintainable component systems.',
+        label: 'Interfaces',
+        copy: 'Responsive screens, reusable components, stateful forms, and dashboard views.',
     },
     {
         value: 'Data',
-        label: 'Reliable records',
-        copy: 'MySQL and Supabase structures for relationships, reporting screens, and clean data handling.',
+        label: 'Workflow Clarity',
+        copy: 'Records, filters, validation, and data views shaped around real user tasks.',
+    },
+    {
+        value: 'Delivery',
+        label: 'Build Discipline',
+        copy: 'Careful debugging, testing, documentation awareness, and practical handoff habits.',
     },
 ];
 
@@ -242,35 +246,35 @@ const homeProfileCards = [
     {
         icon: Folder,
         title: 'Workflow Builder',
-        copy: 'I shape records, forms, permissions, and dashboard views around the real task users need to finish.',
+        copy: 'I turn records, forms, permissions, and repeated tasks into interfaces people can operate without confusion.',
     },
     {
         icon: Monitor,
         title: 'Dashboard Thinking',
-        copy: 'I design screens for scanning, status, decisions, and follow-up actions instead of decorative noise.',
+        copy: 'I design screens for scanning status, comparing information, and taking the next action quickly.',
     },
     {
         icon: CheckCircle,
         title: 'Delivery Discipline',
-        copy: 'Testing, debugging, data checks, documentation awareness, and clear communication support the build.',
+        copy: 'I care about debugging, edge cases, data checks, and communication because small misses become real user friction.',
     },
 ];
 
 const skillProofItems = [
     {
         icon: Code,
-        title: 'Frontend Implementation',
-        copy: 'React interfaces, responsive layouts, reusable UI patterns, and careful interaction states.',
+        title: 'React Implementation',
+        copy: 'Component-based screens, responsive layouts, reusable patterns, and interaction states that feel considered.',
     },
     {
         icon: Database,
-        title: 'System Data Flow',
-        copy: 'Database structure, validation, reporting views, and record integrity across app workflows.',
+        title: 'Data-Aware UI',
+        copy: 'Interfaces that respect records, relationships, validation, reporting needs, and data integrity.',
     },
     {
         icon: Layers,
-        title: 'Full Workflow Delivery',
-        copy: 'From problem scope to UI, backend logic, testing pass, and practical handoff notes.',
+        title: 'Practical Delivery',
+        copy: 'From problem scope to screen states, testing pass, and handoff notes that help the project keep moving.',
     },
 ];
 
@@ -956,8 +960,8 @@ function HomePage({ navigate }) {
                         <p className="hero-label reveal">Software Engineer / Product UI Builder</p>
                         <h1 className="hero-title reveal">Vincent Luhanga</h1>
                         <p className="reveal">
-                            I build responsive web apps, practical dashboards, database-backed workflows, and reusable
-                            interface systems with React, reusable components, data-aware flows, Supabase, and careful UI thinking.
+                            I build React interfaces for dashboards, records, booking flows, and data-heavy tools.
+                            My focus is simple: clear screens, reliable states, and products people can actually use.
                         </p>
                         <div className="hero-actions reveal">
                             <a className="action-button" href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}>
@@ -967,6 +971,10 @@ function HomePage({ navigate }) {
                             <a className="action-button secondary" href={routeHref('/capabilities')} onClick={(event) => handleNav(event, '/capabilities', navigate)}>
                                 <span>View capabilities</span>
                                 <ChartSquare size={19} weight="Bold" />
+                            </a>
+                            <a className="action-button download" href={config.cvUrl} download>
+                                <span>Download CV</span>
+                                <Download size={19} weight="Bold" />
                             </a>
                         </div>
                     </div>
@@ -994,21 +1002,21 @@ function HomePage({ navigate }) {
                     <FeatureLink
                         icon={Layers}
                         title="Projects"
-                        copy="Practical systems for dashboards, records, bookings, and database clarity."
+                        copy="A closer look at the systems I have built for records, bookings, dashboards, and data clarity."
                         path="/projects"
                         navigate={navigate}
                     />
                     <FeatureLink
                         icon={ChartSquare}
                         title="Capabilities"
-                        copy="Frontend, backend, data, and delivery skills organized by practical use."
+                        copy="How I approach React UI, responsive layouts, data workflows, testing, and delivery."
                         path="/capabilities"
                         navigate={navigate}
                     />
                     <FeatureLink
                         icon={CalendarMark}
                         title="Experience"
-                        copy="Work history, placement experience, education, and professional growth."
+                        copy="The work, training, and habits that shaped how I build software with care."
                         path="/experience"
                         navigate={navigate}
                     />
@@ -1734,11 +1742,11 @@ function HomeProfileSection() {
         <section className="section-pad home-profile">
             <div className="container-max home-profile-layout">
                 <div className="home-profile-copy reveal">
-                    <p className="eyebrow">Start Here</p>
-                    <h2>A cleaner portfolio entry point with the detail kept in the right places.</h2>
+                    <p className="eyebrow">Why Work With Me</p>
+                    <h2>I build React screens for work that needs accuracy: records, dashboards, bookings, and data checks.</h2>
                     <p>
-                        Home gives you the map. The About Me menu carries background, Projects carries proof,
-                        and Contact gives a direct path for work conversations.
+                        I bring software engineering training, hands-on project work, and a practical eye for interfaces
+                        that need to stay readable, responsive, and easy to operate.
                     </p>
                 </div>
 
@@ -1768,11 +1776,11 @@ function SkillProofSection() {
             <div className="container-max section-heading reveal">
                 <div>
                     <p className="eyebrow">Skill Evidence</p>
-                    <h2>What the portfolio should make clear.</h2>
+                    <h2>What I bring to a product team.</h2>
                 </div>
                 <p>
-                    I focus on usable software: clean interfaces, reliable records, practical backend behavior,
-                    and delivery habits that make projects easier to maintain.
+                    I bring a mix of React implementation, data awareness, careful debugging, and a practical eye for
+                    the screens users depend on every day.
                 </p>
             </div>
 
@@ -1882,10 +1890,10 @@ function ProjectsPage({ navigate, nightMode, toggleTheme }) {
                 <div className="container-max project-hero-grid">
                     <div className="project-hero-copy reveal">
                         <p className="eyebrow">Projects</p>
-                        <h1>Systems, dashboards, and workflow tools built for real use.</h1>
+                        <h1>React systems, dashboards, and workflow tools built for real use.</h1>
                         <p>
-                            My projects focus on records, bookings, visual data, and decision support. The 3D model
-                            here represents the way those screens, data blocks, and workflows connect into one system.
+                            I build interfaces around the jobs users need to finish: managing records, checking
+                            availability, reading data, and making decisions without fighting the screen.
                         </p>
                         <a className="action-button compact" href={routeHref('/capabilities')} onClick={(event) => handleNav(event, '/capabilities', navigate)}>
                             <span>View capabilities</span>
@@ -1908,7 +1916,7 @@ function ProjectsPage({ navigate, nightMode, toggleTheme }) {
                 <div className="container-max section-heading reveal">
                     <div>
                         <p className="eyebrow">Selected Projects</p>
-                        <h2>Practical products with clear users and data.</h2>
+                        <h2>React products with clear users, clean data, and practical outcomes.</h2>
                     </div>
                 </div>
                 <div className="container-max project-grid">
@@ -1927,7 +1935,7 @@ function ProjectProcessStrip() {
             <div className="container-max project-process reveal">
                 <div>
                     <p className="eyebrow">Project Rhythm</p>
-                    <h2>Every project moves from problem shape to usable workflow.</h2>
+                    <h2>I start with the user task, then build toward a screen that can be trusted.</h2>
                 </div>
                 <div className="process-track" aria-label="Project delivery stages">
                     {projectProcess.map((stage, index) => (
@@ -1947,8 +1955,8 @@ function CapabilitiesPage() {
         <>
             <PageHeading
                 eyebrow="Capabilities"
-                title="The stack is useful because it supports clear workflows."
-                copy="I work across product UI, React systems, data workflows, and delivery quality without separating design from implementation."
+                title="React UI, data workflows, and delivery habits I can bring to your project."
+                copy="I can plan the screen, build the component, connect the data flow, test the awkward states, and keep the interface readable on every viewport."
             />
 
             <section className="section-pad slim">
@@ -2026,8 +2034,8 @@ function ExperiencePage() {
         <>
             <PageHeading
                 eyebrow="Experience"
-                title="Software delivery, workflow accuracy, and customer-facing discipline."
-                copy="My experience combines development practice with careful verification, communication, and steady work habits."
+                title="Software delivery shaped by accuracy, communication, and real users."
+                copy="My background combines development practice, document verification, customer-facing work, and the patience needed to catch details before users do."
                 dark
             />
             <section className="section-pad">
@@ -3301,6 +3309,7 @@ function ProjectCard({ project }) {
         <article className="project-detail image-card reveal" style={cardBackgroundStyle(project.image)}>
             <span className="card-bg-image" aria-hidden="true" />
             <header>
+                <span className="project-role">{project.role}</span>
                 <h2>{project.title}</h2>
             </header>
             <div className="project-columns">
