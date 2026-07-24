@@ -23,6 +23,7 @@ import {
     Phone,
     UserCircle,
     Stars,
+    SquareArrowRightUp,
     Sun,
     Widget5,
     WindowFrame,
@@ -166,24 +167,25 @@ const projects = [
         result: 'A simple decision-support screen that turns agricultural inputs into useful crop guidance.',
         detail: 'Designed around clear form logic, readable results, and a flow that non-technical users can follow.',
         tags: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
+        liveUrl: 'https://smartgrow.nyimboo.com/HTML/index.php',
         image: cardImages.smartgrow,
     },
 ];
 
 const capabilities = [
     {
-        title: 'System Frontends',
-        copy: 'React interfaces for dashboards, forms, records, portals, and system control panels.',
+        title: 'Software Development',
+        copy: 'Complete web and mobile software for dashboards, portals, bookings, records, and internal operations.',
         image: cardImages.webApp,
     },
     {
-        title: 'React Systems',
-        copy: 'Stateful screens, validation flows, access-aware views, and maintainable application logic.',
-        image: cardImages.backend,
+        title: 'Mobile Applications',
+        copy: 'Mobile app experiences with clear flows, touch-friendly controls, responsive states, and practical user journeys.',
+        image: cardImages.mobile,
     },
     {
         title: 'Data Workflows',
-        copy: 'MySQL and Supabase structures for management systems, reporting, relationships, and reliable records.',
+        copy: 'Reliable records, relationships, validation, reporting views, and data checks for systems people depend on.',
         image: cardImages.database,
     },
     {
@@ -201,13 +203,13 @@ const buildStages = [
     },
     {
         index: '02',
-        title: 'Design the surface',
+        title: 'Design the experience',
         copy: 'Layouts, forms, tables, and states are shaped so repeated tasks feel clear and controlled.',
     },
     {
         index: '03',
         title: 'Connect the system',
-        copy: 'React components, data contracts, Supabase or MySQL-backed flows, and validation logic are wired into one product experience.',
+        copy: 'The screens, data, rules, and user actions are wired into one product experience that behaves reliably.',
     },
 ];
 
@@ -234,9 +236,9 @@ const timeline = [
 
 const homeSignals = [
     {
-        value: 'React',
-        label: 'System Interfaces',
-        copy: 'Dashboards, portals, admin panels, forms, and workflow screens built with reusable components.',
+        value: 'Web + Mobile',
+        label: 'Software Interfaces',
+        copy: 'Web apps, mobile screens, dashboards, portals, forms, and workflow tools built for real use.',
     },
     {
         value: 'Data',
@@ -272,12 +274,12 @@ const skillProofItems = [
     {
         icon: WindowFrame,
         title: 'Web App Development',
-        copy: 'React and Laravel web systems with APIs, dashboards, forms, validation, routing, and responsive layouts.',
+        copy: 'Business-ready web apps for dashboards, portals, booking flows, admin tools, and record management.',
     },
     {
         icon: IPhone,
         title: 'Mobile App Development',
-        copy: 'Mobile-first app screens and workflows shaped for small devices, clear actions, touch targets, and fast user paths.',
+        copy: 'Mobile app experiences shaped around clear user flows, responsive screens, touch targets, and practical actions.',
     },
     {
         icon: Database,
@@ -292,10 +294,10 @@ const skillProofItems = [
 ];
 
 const stackGroups = [
-    { title: 'Frontend', items: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Tailwind CSS'] },
-    { title: 'Backend & APIs', items: ['Laravel', 'PHP', 'REST APIs'] },
-    { title: 'Database', items: ['MySQL', 'Supabase'] },
-    { title: 'Tools', items: ['GitHub', 'Canva', 'Adobe XD', 'MS Office'] },
+    { title: 'Web Applications', items: ['Portals', 'Dashboards', 'Admin systems', 'Booking workflows'] },
+    { title: 'Mobile Applications', items: ['Mobile screens', 'Touch-friendly flows', 'App journeys', 'Responsive states'] },
+    { title: 'Management Systems', items: ['Records', 'Roles', 'Approvals', 'Reports'] },
+    { title: 'Delivery Support', items: ['Testing', 'Debugging', 'Documentation', 'Deployment handoff'] },
 ];
 
 const projectProcess = [
@@ -332,16 +334,16 @@ const staggerStyle = (index = 0, step = 70) => ({
 
 const capabilityDetails = [
     {
-        title: 'Interface Design',
-        copy: 'System planning, responsive layouts, dashboard composition, and reusable component architecture.',
+        title: 'Software Products',
+        copy: 'I can build web apps, mobile apps, dashboards, portals, management tools, and workflow systems around real users.',
     },
     {
-        title: 'Application Logic',
-        copy: 'React state, Laravel workflows, validation, API-ready features, debugging, and maintainable application behavior.',
+        title: 'System Logic',
+        copy: 'I shape user roles, validation rules, approvals, actions, records, and states so the product works beyond the first screen.',
     },
     {
         title: 'Data Confidence',
-        copy: 'MySQL and Supabase structures, data verification, relationship modeling, and clean record handling.',
+        copy: 'I plan data structures, relationships, verification checks, reporting needs, and clean record handling.',
     },
     {
         title: 'Team Delivery',
@@ -353,7 +355,7 @@ const educationItems = [
     {
         time: 'Ongoing',
         title: 'Professional Growth',
-        copy: 'Continuous learning across React, UI/UX design, database management, testing, and mobile app basics.',
+        copy: 'Continuous learning across software engineering, UI/UX design, database management, testing, and mobile application development.',
         image: cardImages.learning,
     },
     {
@@ -972,13 +974,11 @@ function MobileNavItem({ route, currentPath, navigate, expanded = false, toggleE
                     </span>
                     <AltArrowDown size={14} weight="Bold" />
                 </button>
-                {expanded && (
-                    <div className="mobile-subnav">
-                        {route.children.map((child) => (
-                            <NavButton key={child.path} route={child} currentPath={currentPath} navigate={navigate} />
-                        ))}
-                    </div>
-                )}
+                <div className={`mobile-subnav ${expanded ? 'open' : ''}`} aria-hidden={!expanded}>
+                    {route.children.map((child) => (
+                        <NavButton key={child.path} route={child} currentPath={currentPath} navigate={navigate} />
+                    ))}
+                </div>
             </div>
         );
     }
@@ -1041,8 +1041,8 @@ function HomePage({ navigate }) {
                         <h1 className="hero-title reveal">VINCENT <span>LUHANGA</span></h1>
                         <p className="hero-label reveal font-extrabold">Software Engineer</p>
                         <p className="reveal">
-                            I build full software systems: management platforms, dashboards, booking workflows,
-                            database-backed tools, APIs, and React interfaces that make complex work easier to run.
+                            I build full software systems: management platforms, mobile apps, dashboards,
+                            booking workflows, and data-backed tools that make complex work easier to run.
                         </p>
                         <div className="hero-actions reveal">
                             <a className="action-button" href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}>
@@ -1090,7 +1090,7 @@ function HomePage({ navigate }) {
                     <FeatureLink
                         icon={ChartSquare}
                         title="Capabilities"
-                        copy="How I approach full-stack delivery: React, Laravel, databases, APIs, testing, and system logic."
+                        copy="How I approach software delivery: web apps, mobile apps, data workflows, testing, and system logic."
                         path="/capabilities"
                         navigate={navigate}
                     />
@@ -1224,8 +1224,8 @@ function createDesktopTexture(nightMode = false) {
         context.fillText('SYSTEMS BOARD', 70, 122);
         context.fillStyle = palette.muted;
         context.font = '700 15px Arial';
-        context.fillText('Management systems / APIs / Data', 70, 154);
-        context.fillText('React / Laravel / MySQL', 70, 178);
+        context.fillText('Management systems / Mobile / Data', 70, 154);
+        context.fillText('Web apps / Workflows / Records', 70, 178);
         context.fillStyle = palette.accent;
         context.fillRect(70, 188, 164, 7);
         context.fillStyle = palette.grid;
@@ -1868,7 +1868,7 @@ function HomeProfileSection() {
             <div className="container-max home-profile-layout">
                 <div className="home-profile-copy reveal">
                     <p className="eyebrow">Why Work With Me</p>
-                    <h2>I build React screens for work that needs accuracy: records, dashboards, bookings, and data checks.</h2>
+                    <h2>I build software for work that needs accuracy: mobile apps, records, dashboards, bookings, and data checks.</h2>
                     <p>
                         I bring software engineering training, hands-on project work, and a practical eye for interfaces
                         that need to stay readable, responsive, and easy to operate.
@@ -2017,10 +2017,10 @@ function SiteFooter({ navigate }) {
                     <a href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}><Folder size={18} weight="Bold" />Projects</a>
                     <a href={routeHref('/capabilities')} onClick={(event) => handleNav(event, '/capabilities', navigate)}><ChartSquare size={18} weight="Bold" />Capabilities</a>
                     <a href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}><CalendarMark size={18} weight="Bold" />Experience</a>
-                    <a href={routeHref('/contact')} onClick={(event) => handleNav(event, '/contact', navigate)}><Letter size={18} weight="Bold" />Contact</a>
                 </nav>
 
                 <div className="footer-contact">
+                    <h2 className="footer-contact-title">Contact or Find me on</h2>
                     <a href="mailto:vluhanga64@gmail.com"><Letter size={18} weight="Bold" />vluhanga64@gmail.com</a>
                     <PhoneSequenceLinks iconSize={18} />
                     <a href="https://github.com/vicente101" target="_blank" rel="noreferrer"><GitHubIcon size={18} />github.com/vicente101</a>
@@ -2107,8 +2107,8 @@ function CapabilitiesPage() {
         <>
             <PageHeading
                 eyebrow="Capabilities"
-                title="Full-stack systems, data workflows, and delivery habits I can bring to your project."
-                copy="I can plan the workflow, build the React surface, connect Laravel or API logic, structure the data, test awkward states, and keep the product usable on every viewport."
+                title="Software systems, mobile applications, data workflows, and delivery habits I can bring to your project."
+                copy="I can understand the workflow, design the experience, build the product, structure the data, test awkward states, and keep it usable across web and mobile."
             />
 
             <section className="section-pad slim">
@@ -2168,11 +2168,15 @@ function CapabilityDetailSection() {
                 </div>
 
                 <div className="capability-stack-console reveal">
-                    <p className="eyebrow font-extrabold uppercase">Developer Stack</p>
+                    <p className="eyebrow font-extrabold uppercase">Software Delivery Range</p>
                     {stackGroups.map((group, index) => (
                         <div className="stack-line" key={group.title} style={staggerStyle(index)}>
                             <strong>{group.title}</strong>
-                            <span>{group.items.join(' / ')}</span>
+                            <div className="stack-item-list" aria-label={`${group.title} capabilities`}>
+                                {group.items.map((item) => (
+                                    <span className="stack-chip" key={item}>{item}</span>
+                                ))}
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -3349,8 +3353,8 @@ function BuildMethodSection() {
                     <p className="eyebrow">How I Build</p>
                     <h2>Workflows, data, and handoffs guide the system.</h2>
                     <p>
-                        I keep the process direct: understand the real task, model the data, build the surface, then
-                        connect the application logic carefully.
+                        I keep the process direct: understand the real task, model the data, design the experience,
+                        then connect the product logic carefully.
                     </p>
                 </div>
 
@@ -3397,7 +3401,7 @@ function ContactPage() {
             <PageHeading
                 eyebrow="Contact"
                 title="Tell me what you want to build, improve, or launch."
-                copy="I am open to management systems, dashboard builds, workflow tools, Laravel-backed applications, React frontends, and full-stack collaboration."
+                copy="I am open to management systems, dashboard builds, workflow tools, mobile applications, web applications, and full software delivery collaboration."
             />
             <section className="section-pad">
                 <div className="container-max frame-card inner reveal">
@@ -3458,7 +3462,7 @@ function CapabilityItem({ item, compact = false }) {
 
 function ProjectCard({ project, index = 0 }) {
     return (
-        <article className="project-detail image-card reveal" style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
+        <article className={`project-detail image-card reveal ${project.liveUrl ? 'has-live-link' : ''}`} style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
             <span className="card-bg-image" aria-hidden="true" />
             <header>
                 <h2>{project.title}</h2>
@@ -3476,6 +3480,12 @@ function ProjectCard({ project, index = 0 }) {
                     </div>
                 </div>
             </div>
+            {project.liveUrl && (
+                <a className="project-live-link" href={project.liveUrl} target="_blank" rel="noreferrer">
+                    <span>Go to project</span>
+                    <SquareArrowRightUp size={17} weight="Bold" />
+                </a>
+            )}
         </article>
     );
 }
