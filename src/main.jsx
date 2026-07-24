@@ -15,6 +15,7 @@ import {
     Download,
     Folder,
     HamburgerMenu,
+    IPhone,
     Layers,
     Letter,
     Monitor,
@@ -24,6 +25,7 @@ import {
     Stars,
     Sun,
     Widget5,
+    WindowFrame,
     CloseSquare,
 } from '@solar-icons/react';
 import './app.css';
@@ -268,9 +270,14 @@ const homeProfileCards = [
 
 const skillProofItems = [
     {
-        icon: Code,
-        title: 'Application Development',
-        copy: 'React, Laravel, APIs, validation, responsive layouts, reusable patterns, and interaction states that feel considered.',
+        icon: WindowFrame,
+        title: 'Web App Development',
+        copy: 'React and Laravel web systems with APIs, dashboards, forms, validation, routing, and responsive layouts.',
+    },
+    {
+        icon: IPhone,
+        title: 'Mobile App Development',
+        copy: 'Mobile-first app screens and workflows shaped for small devices, clear actions, touch targets, and fast user paths.',
     },
     {
         icon: Database,
@@ -292,12 +299,30 @@ const stackGroups = [
 ];
 
 const projectProcess = [
-    'Problem scope',
-    'Data structure',
-    'Screen states',
-    'Access rules',
-    'Testing pass',
-    'Delivery notes',
+    {
+        title: 'Problem scope',
+        copy: 'Define users, constraints, success rules, and the workflow the system must support.',
+    },
+    {
+        title: 'Data structure',
+        copy: 'Map records, relationships, validation, permissions, and reporting needs before the UI gets busy.',
+    },
+    {
+        title: 'Screen states',
+        copy: 'Design empty, loading, error, success, and edge-case states so the product behaves predictably.',
+    },
+    {
+        title: 'Access rules',
+        copy: 'Shape role-aware flows for admins, users, and reviewers so the right actions stay clear.',
+    },
+    {
+        title: 'Testing pass',
+        copy: 'Check forms, routes, data flows, mobile layouts, and awkward scenarios before delivery.',
+    },
+    {
+        title: 'Delivery notes',
+        copy: 'Leave setup details, decisions, known limits, and handoff notes that help the project keep moving.',
+    },
 ];
 
 const staggerStyle = (index = 0, step = 70) => ({
@@ -326,6 +351,12 @@ const capabilityDetails = [
 
 const educationItems = [
     {
+        time: 'Ongoing',
+        title: 'Professional Growth',
+        copy: 'Continuous learning across React, UI/UX design, database management, testing, and mobile app basics.',
+        image: cardImages.learning,
+    },
+    {
         time: 'December 2025',
         title: 'Bachelor of Software Engineering',
         copy: 'Zambia University College of Technology. Strong academic performance with multiple distinctions.',
@@ -336,12 +367,6 @@ const educationItems = [
         title: 'Grade 12 Certificate',
         copy: 'Naboye Secondary School. Foundation for technical study, communication, and structured problem solving.',
         image: cardImages.certificate,
-    },
-    {
-        time: 'Ongoing',
-        title: 'Professional Growth',
-        copy: 'Continuous learning across React, UI/UX design, database management, testing, and mobile app basics.',
-        image: cardImages.learning,
     },
 ];
 
@@ -776,8 +801,8 @@ function App() {
             <header className="topbar">
                 <div className="container-max nav-row">
                     <a href={routeHref('/')} className="brand-link" onClick={(event) => handleNav(event, '/', navigate)}>
-                        <span>Vincent</span>
-                        <span>Luhanga</span>
+                        <span>VINCENT</span>
+                        <span>LUHANGA</span>
                     </a>
 
                     <nav className="nav-links desktop" aria-label="Primary navigation">
@@ -1879,8 +1904,8 @@ function SkillProofSection() {
                     <h2>What I bring to a product team.</h2>
                 </div>
                 <p>
-                    I bring a mix of React implementation, data awareness, careful debugging, and a practical eye for
-                    the screens users depend on every day.
+                    I bring a mix of web application builds, mobile-first product thinking, data awareness,
+                    careful debugging, and a practical eye for the screens users depend on every day.
                 </p>
             </div>
 
@@ -1983,7 +2008,7 @@ function SiteFooter({ navigate }) {
                         Vincent <span>Luhanga</span>
                     </a>
                     <p>
-                        Software engineering graduate building responsive web apps, dashboards,
+                        Software engineer building responsive web apps, dashboards,
                         database-backed workflows, and practical systems with a delivery mindset.
                     </p>
                 </div>
@@ -2063,10 +2088,13 @@ function ProjectProcessStrip() {
                 </div>
                 <div className="process-track" aria-label="Project delivery stages">
                     {projectProcess.map((stage, index) => (
-                        <div className="process-step" key={stage} style={staggerStyle(index, 80)}>
+                        <article className="process-step" key={stage.title} style={staggerStyle(index, 80)}>
                             <span>{String(index + 1).padStart(2, '0')}</span>
-                            <strong>{stage}</strong>
-                        </div>
+                            <div>
+                                <strong>{stage.title}</strong>
+                                <p>{stage.copy}</p>
+                            </div>
+                        </article>
                     ))}
                 </div>
             </div>
@@ -3376,7 +3404,7 @@ function ContactPage() {
                     <div className="contact-layout">
                         <div>
                             <p className="eyebrow">Direct Lines</p>
-                            <h2>Let's start with a clear message.</h2>
+                            <h2>Let's start with a chat.</h2>
                             <div className="contact-links">
                                 <a href="mailto:vluhanga64@gmail.com"><Letter size={21} weight="Bold" />vluhanga64@gmail.com</a>
                                 <PhoneSequenceLinks iconSize={21} />

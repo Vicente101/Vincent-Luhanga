@@ -2911,7 +2911,6 @@ body.theme-night .feature-link > span {
     font-size: 16px;
     font-weight: 800;
     line-height: 1.08;
-    text-transform: uppercase;
 }
 
 .home-signal-card p {
@@ -2993,13 +2992,13 @@ body.theme-night .feature-link > span {
 
 .skill-proof-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 18px;
 }
 
 .skill-proof-card {
     position: relative;
-    min-height: 176px;
+    min-height: 214px;
     overflow: hidden;
     border: 1px solid var(--ink);
     border-radius: 2px;
@@ -3054,7 +3053,7 @@ body.theme-night .feature-link > span {
     color: var(--muted);
     font-size: 15px;
     font-weight: 750;
-    line-height: 1.4;
+    line-height: 1.42;
 }
 
 .home-stack-band {
@@ -3144,79 +3143,122 @@ body.theme-night .skill-proof-card {
 }
 
 .project-process {
+    position: relative;
     display: grid;
-    grid-template-columns: 0.72fr 1.28fr;
-    gap: 28px;
-    align-items: center;
+    grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+    gap: 32px;
+    align-items: start;
     border-top: 1px solid var(--ink);
     border-bottom: 1px solid var(--ink);
-    padding: 30px 0;
+    padding: 34px 0;
 }
 
 .process-track {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    border: 1px solid var(--ink);
-    overflow: hidden;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    overflow: visible;
 }
 
 .process-step {
+    --step-line-scale: 0.22;
     position: relative;
     display: grid;
-    min-height: 116px;
-    align-content: space-between;
+    grid-template-columns: auto minmax(0, 1fr);
+    min-height: 178px;
+    align-content: start;
+    align-items: start;
+    gap: 14px;
     overflow: hidden;
-    border-right: 1px solid var(--ink);
-    padding: 14px;
-    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), background-color 320ms ease, box-shadow 320ms ease;
+    border: 1px solid rgba(14, 29, 37, 0.22);
+    border-radius: 2px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(245, 248, 251, 0.72));
+    padding: 18px;
+    box-shadow: 0 18px 38px rgba(14, 29, 37, 0.08);
+    transition: transform 420ms var(--ease-smooth), background-color 420ms var(--ease-smooth), border-color 420ms var(--ease-smooth), box-shadow 420ms var(--ease-smooth);
     will-change: transform;
-}
-
-.process-step:last-child {
-    border-right: 0;
 }
 
 .process-step::before {
     content: '';
     position: absolute;
-    inset: auto 0 0;
+    inset: 0 auto auto 0;
+    width: 100%;
     height: 4px;
-    background: var(--accent);
-    transform: scaleX(0);
+    background:
+        linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 58%, var(--line)));
+    transform: scaleX(var(--step-line-scale));
     transform-origin: left;
 }
 
+.process-step::after {
+    content: '';
+    position: absolute;
+    inset: 4px 0 auto;
+    height: 56px;
+    pointer-events: none;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 9%, transparent), transparent);
+    opacity: 0;
+    transition: opacity 420ms var(--ease-smooth);
+}
+
 .process-step span,
-.process-step strong {
+.process-step strong,
+.process-step p {
     position: relative;
     z-index: 1;
 }
 
 .process-step:hover {
-    background: color-mix(in srgb, var(--accent) 9%, transparent);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent);
+    --step-line-scale: 1;
+    border-color: color-mix(in srgb, var(--accent) 44%, var(--ink));
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, #ffffff), rgba(245, 248, 251, 0.94));
+    box-shadow: 0 22px 44px rgba(14, 29, 37, 0.12);
     transition-delay: 0ms;
     transform: translateY(-4px);
 }
 
+.process-step:hover::after {
+    opacity: 1;
+}
+
 .reveal.in .process-step::before {
-    animation: processLoad 1800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: processLoad 1300ms var(--ease-smooth) both;
     animation-delay: var(--item-delay, 0ms);
 }
 
 .process-step span {
+    display: inline-flex;
+    width: 48px;
+    min-width: 48px;
+    min-height: 38px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, rgba(14, 29, 37, 0.22));
+    background: var(--panel);
     color: var(--accent);
-    font-size: 15px;
-    font-weight: 800;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
 }
 
 .process-step strong {
     color: var(--ink);
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 1.05;
-    text-transform: uppercase;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.08;
+}
+
+.process-step p {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.36;
 }
 
 .process-step:nth-child(2)::before { animation-delay: 100ms; }
@@ -3226,13 +3268,26 @@ body.theme-night .skill-proof-card {
 .process-step:nth-child(6)::before { animation-delay: 420ms; }
 
 body.theme-night .project-process,
-body.theme-night .process-track,
 body.theme-night .process-step {
     border-color: rgba(200, 221, 239, 0.36);
 }
 
+body.theme-night .process-step {
+    background: linear-gradient(135deg, rgba(8, 22, 31, 0.9), rgba(16, 40, 51, 0.62));
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.24);
+}
+
+body.theme-night .process-step:hover {
+    border-color: color-mix(in srgb, var(--accent) 48%, rgba(200, 221, 239, 0.36));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, rgba(8, 22, 31, 0.94)), rgba(16, 40, 51, 0.76));
+}
+
 body.theme-night .process-step strong {
     color: var(--line);
+}
+
+body.theme-night .process-step p {
+    color: var(--muted);
 }
 
 .capability-detail-grid {
@@ -7471,6 +7526,38 @@ body.theme-night .empty-preview {
     transition-timing-function: var(--ease-smooth);
 }
 
+:is(.feature-link h2, .home-signal-card span, .profile-card h3, .skill-proof-card h3, .project-detail header h2, .project-detail h3, .mini-card h3, .timeline-card h3, .capability-item h3, .capability-board-item h2, .capability-detail-card h2, .stack-group-card h3, .stack-line strong, .method-row h3, .process-step strong, .frame-card h2, .frame-card h3, .template-list-heading strong, .template-list button strong, .component-list button strong, .library-header h2, .component-doc h2, .preview-row strong, .status-preview strong, .alert-preview strong, .empty-preview strong, .component-action-card strong, .component-danger-confirm strong, .component-upload-zone strong, .component-warning-banner strong, .component-empty-panel strong, .component-success-toast strong, .component-error-card strong) {
+    color: inherit;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.08;
+    text-transform: none;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+}
+
+:is(.feature-link h2, .project-detail header h2, .library-header h2, .component-doc h2, .frame-card h2) {
+    font-size: clamp(22px, 2.1vw, 26px);
+}
+
+:is(.profile-card h3, .skill-proof-card h3, .capability-detail-card h2, .stack-group-card h3, .method-row h3, .frame-card h3, .component-action-card strong, .component-danger-confirm strong, .component-upload-zone strong) {
+    font-size: 22px;
+}
+
+:is(.home-signal-card span, .project-detail h3, .mini-card h3, .timeline-card h3, .capability-item h3, .capability-board-item h2, .stack-line strong, .process-step strong, .template-list-heading strong, .template-list button strong, .component-list button strong, .preview-row strong, .status-preview strong, .alert-preview strong, .empty-preview strong, .component-warning-banner strong, .component-empty-panel strong, .component-success-toast strong, .component-error-card strong) {
+    font-size: clamp(17px, 1.35vw, 19px);
+}
+
+:is(.feature-link p, .home-signal-card p, .profile-card p, .skill-proof-card p, .project-detail p, .mini-card p, .timeline-card p, .capability-item p, .capability-board-item p, .capability-detail-card p, .process-step p, .method-row p, .library-header p:not(.eyebrow), .component-action-card p, .component-danger-confirm p, .component-warning-banner span, .component-empty-panel span, .component-success-toast span, .component-error-card span, .preview-row span, .preview-row em) {
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.4;
+}
+
+.stack-line strong {
+    color: var(--accent);
+}
+
 :where(.feature-link, .home-signal-card, .profile-card, .skill-proof-card, .project-detail, .mini-card, .timeline-card, .capability-item, .capability-board-item, .capability-detail-card, .stack-group-card) {
     --card-hover-x: 0px;
     --card-hover-y: -6px;
@@ -7545,6 +7632,13 @@ body.theme-night .empty-preview {
     --card-hover-y: -7px;
     --card-hover-rotate: 0.25deg;
     --card-text-x: -2px;
+}
+
+.skill-proof-grid .skill-proof-card:nth-child(4) {
+    --card-hover-x: 1px;
+    --card-hover-y: -6px;
+    --card-hover-scale: 1.01;
+    --card-text-x: 2px;
 }
 
 .capability-detail-grid .capability-detail-card:nth-child(4) {
@@ -7699,7 +7793,6 @@ body.theme-night .empty-preview {
     .home-profile-layout,
     .home-signal-grid,
     .profile-card-grid,
-    .skill-proof-grid,
     .stack-layout,
     .project-process,
     .project-hero-grid,
@@ -7714,6 +7807,10 @@ body.theme-night .empty-preview {
 
     .process-track {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .skill-proof-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .capability-board {
@@ -7843,10 +7940,10 @@ body.theme-night .empty-preview {
 
     .process-track {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 12px;
         overflow: visible;
         border: 0;
-        padding: 2px 0;
+        padding: 0;
     }
 
     .process-track::before {
@@ -7861,15 +7958,15 @@ body.theme-night .empty-preview {
     .process-step,
     .process-step:last-child {
         display: grid;
-        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-columns: 48px minmax(0, 1fr);
         min-height: auto;
-        align-content: center;
-        align-items: center;
-        gap: 12px;
+        align-content: start;
+        align-items: start;
+        gap: 13px;
         border: 1px solid rgba(14, 29, 37, 0.22);
         border-radius: 2px;
         background: rgba(245, 248, 251, 0.94);
-        padding: 13px 14px;
+        padding: 17px 16px 16px;
         box-shadow: 0 12px 24px rgba(14, 29, 37, 0.07);
         opacity: 0;
         transform: translateY(12px);
@@ -7890,8 +7987,8 @@ body.theme-night .empty-preview {
     }
 
     .process-step::before {
-        display: none;
-        content: none;
+        display: block;
+        content: '';
     }
 
     .process-step::after {
@@ -7903,7 +8000,7 @@ body.theme-night .empty-preview {
         display: inline-flex;
         width: 44px;
         min-width: 44px;
-        min-height: 32px;
+        min-height: 36px;
         align-items: center;
         justify-content: center;
         border: 1px solid rgba(214, 229, 245, 0.34);
@@ -7915,9 +8012,15 @@ body.theme-night .empty-preview {
 
     .process-step strong {
         min-width: 0;
-        font-size: 17px;
+        font-size: 18px;
         line-height: 1.1;
         overflow-wrap: anywhere;
+    }
+
+    .process-step p {
+        margin-top: 6px;
+        font-size: 14px;
+        line-height: 1.36;
     }
 
     body.theme-night .process-step,
