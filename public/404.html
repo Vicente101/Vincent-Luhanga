@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vincent Luhanga - Portfolio</title>
     <script>
-      const repoBase = '/Portfolio';
+      const segments = window.location.pathname.split('/').filter(Boolean);
+      const repoBase = segments.length ? `/${segments[0]}` : '';
       const path = window.location.pathname.startsWith(repoBase)
         ? window.location.pathname.slice(repoBase.length) || '/'
         : window.location.pathname;
