@@ -99,8 +99,12 @@ const routes = [
     { path: '/contact', label: 'Contact' },
 ];
 
+const whatsappContact = {
+    label: '+260 768891429',
+    href: 'https://wa.me/260768891429?text=Hello%20Vincent%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20contact%20you.',
+};
+
 const contactPhones = [
-    { label: '+260 768 891429', href: 'tel:+260768891429' },
     { label: '0963659222', href: 'tel:0963659222' },
     { label: '0955334043', href: 'tel:0955334043' },
 ];
@@ -126,25 +130,25 @@ const cardImages = {
 const projects = [
     {
         title: 'Student Information System',
-        role: 'Academic admin UI',
+        role: 'Academic management system',
         signal: 'Academic Operations',
         result: 'A structured interface for student records, academic results, and admin dashboards.',
-        detail: 'Built around clean data entry, validation states, role-aware screens, and fast record review.',
-        tags: ['React.js', 'MySQL', 'Tailwind CSS', 'Dashboards'],
+        detail: 'Built with Laravel-backed workflows, clean data entry, validation states, role-aware screens, and fast record review.',
+        tags: ['Laravel', 'React.js', 'MySQL', 'Tailwind CSS'],
         image: cardImages.student,
     },
     {
         title: 'Venue Booking System',
-        role: 'Booking workflow UI',
+        role: 'Venue management system',
         signal: 'Reservations & Scheduling',
         result: 'A booking flow for checking availability, managing reservations, and keeping venue schedules clear.',
-        detail: 'Focused on mobile usability, reusable state, Supabase-backed data, and action-ready booking screens.',
-        tags: ['React.js', 'Supabase', 'Tailwind CSS', 'Booking UI'],
+        detail: 'Built around Laravel workflows, mobile usability, reusable state, Supabase-backed data, and action-ready booking screens.',
+        tags: ['Laravel', 'React.js', 'Supabase', 'Booking UI'],
         image: cardImages.booking,
     },
     {
         title: 'Database Visualizer',
-        role: 'Developer tool UI',
+        role: 'Developer system tool',
         signal: 'Developer Tooling',
         result: 'A visual tool that helps developers inspect tables, relationships, and structure faster.',
         detail: 'Designed for technical users who need clear context, stateful controls, and readable schema views.',
@@ -153,7 +157,7 @@ const projects = [
     },
     {
         title: 'Crop Recommendation System',
-        role: 'Decision support UI',
+        role: 'Decision support system',
         signal: 'Open SmartGrow',
         result: 'A simple decision-support screen that turns agricultural inputs into useful crop guidance.',
         detail: 'Designed around clear form logic, readable results, and a flow that non-technical users can follow.',
@@ -164,18 +168,18 @@ const projects = [
 
 const capabilities = [
     {
-        title: 'Product UI',
-        copy: 'React interfaces for dashboards, forms, records, and reusable product patterns.',
+        title: 'System Frontends',
+        copy: 'React interfaces for dashboards, forms, records, portals, and system control panels.',
         image: cardImages.webApp,
     },
     {
         title: 'React Systems',
-        copy: 'Stateful screens, validation flows, access-aware views, and maintainable component logic.',
+        copy: 'Stateful screens, validation flows, access-aware views, and maintainable application logic.',
         image: cardImages.backend,
     },
     {
         title: 'Data Workflows',
-        copy: 'MySQL and Supabase structures for reliable records, relationships, and reporting screens.',
+        copy: 'MySQL and Supabase structures for management systems, reporting, relationships, and reliable records.',
         image: cardImages.database,
     },
     {
@@ -227,13 +231,13 @@ const timeline = [
 const homeSignals = [
     {
         value: 'React',
-        label: 'Interfaces',
-        copy: 'Responsive screens, reusable components, stateful forms, and dashboard views.',
+        label: 'System Interfaces',
+        copy: 'Dashboards, portals, admin panels, forms, and workflow screens built with reusable components.',
     },
     {
         value: 'Data',
-        label: 'Workflow Clarity',
-        copy: 'Records, filters, validation, and data views shaped around real user tasks.',
+        label: 'Management Logic',
+        copy: 'Records, permissions, filters, validation, reporting, and data views shaped around real operations.',
     },
     {
         value: 'Delivery',
@@ -245,13 +249,13 @@ const homeSignals = [
 const homeProfileCards = [
     {
         icon: Folder,
-        title: 'Workflow Builder',
-        copy: 'I turn records, forms, permissions, and repeated tasks into interfaces people can operate without confusion.',
+        title: 'Management Systems',
+        copy: 'I build software for records, approvals, bookings, academic operations, reporting, and internal workflows.',
     },
     {
         icon: Monitor,
-        title: 'Dashboard Thinking',
-        copy: 'I design screens for scanning status, comparing information, and taking the next action quickly.',
+        title: 'Engineer Mindset',
+        copy: 'I think through data models, user roles, edge cases, states, and handoff before polishing the interface.',
     },
     {
         icon: CheckCircle,
@@ -263,13 +267,13 @@ const homeProfileCards = [
 const skillProofItems = [
     {
         icon: Code,
-        title: 'React Implementation',
-        copy: 'Component-based screens, responsive layouts, reusable patterns, and interaction states that feel considered.',
+        title: 'Application Development',
+        copy: 'React, Laravel, APIs, validation, responsive layouts, reusable patterns, and interaction states that feel considered.',
     },
     {
         icon: Database,
-        title: 'Data-Aware UI',
-        copy: 'Interfaces that respect records, relationships, validation, reporting needs, and data integrity.',
+        title: 'Data-Aware Systems',
+        copy: 'Systems that respect records, relationships, validation, reporting needs, and data integrity.',
     },
     {
         icon: Layers,
@@ -280,7 +284,7 @@ const skillProofItems = [
 
 const stackGroups = [
     { title: 'Frontend', items: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Tailwind CSS'] },
-    { title: 'Data & APIs', items: ['Supabase', 'MySQL', 'REST APIs'] },
+    { title: 'Backend & APIs', items: ['Laravel', 'PHP', 'REST APIs'] },
     { title: 'Database', items: ['MySQL', 'Supabase'] },
     { title: 'Tools', items: ['GitHub', 'Canva', 'Adobe XD', 'MS Office'] },
 ];
@@ -294,14 +298,19 @@ const projectProcess = [
     'Delivery notes',
 ];
 
+const staggerStyle = (index = 0, step = 70) => ({
+    '--item-index': index,
+    '--item-delay': `${index * step}ms`,
+});
+
 const capabilityDetails = [
     {
         title: 'Interface Design',
-        copy: 'UI/UX planning, responsive layouts, dashboard composition, and reusable component thinking.',
+        copy: 'System planning, responsive layouts, dashboard composition, and reusable component architecture.',
     },
     {
         title: 'Application Logic',
-        copy: 'React state, validation, API-ready workflows, JavaScript fundamentals, debugging, and maintainable application behavior.',
+        copy: 'React state, Laravel workflows, validation, API-ready features, debugging, and maintainable application behavior.',
     },
     {
         title: 'Data Confidence',
@@ -957,11 +966,11 @@ function HomePage({ navigate }) {
 
                 <div className="container-max hero-window">
                     <div className="hero-copy">
-                        <p className="hero-label reveal">Software Engineer / Product UI Builder</p>
-                        <h1 className="hero-title reveal">Vincent Luhanga</h1>
+                        <p className="hero-label reveal">Software Engineer</p>
+                        <h1 className="hero-title reveal">Vincent <span>Luhanga</span></h1>
                         <p className="reveal">
-                            I build React interfaces for dashboards, records, booking flows, and data-heavy tools.
-                            My focus is simple: clear screens, reliable states, and products people can actually use.
+                            I build full software systems: management platforms, dashboards, booking workflows,
+                            database-backed tools, APIs, and React interfaces that make complex work easier to run.
                         </p>
                         <div className="hero-actions reveal">
                             <a className="action-button" href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}>
@@ -1002,21 +1011,21 @@ function HomePage({ navigate }) {
                     <FeatureLink
                         icon={Layers}
                         title="Projects"
-                        copy="A closer look at the systems I have built for records, bookings, dashboards, and data clarity."
+                        copy="A closer look at the management systems, booking flows, dashboards, and data tools I have built."
                         path="/projects"
                         navigate={navigate}
                     />
                     <FeatureLink
                         icon={ChartSquare}
                         title="Capabilities"
-                        copy="How I approach React UI, responsive layouts, data workflows, testing, and delivery."
+                        copy="How I approach full-stack delivery: React, Laravel, databases, APIs, testing, and system logic."
                         path="/capabilities"
                         navigate={navigate}
                     />
                     <FeatureLink
                         icon={CalendarMark}
                         title="Experience"
-                        copy="The work, training, and habits that shaped how I build software with care."
+                        copy="The work, training, and habits that shaped me as a software engineer."
                         path="/experience"
                         navigate={navigate}
                     />
@@ -1030,10 +1039,11 @@ function HomePage({ navigate }) {
 }
 
 const desktopLinks = [
-    { label: 'Projects', path: '/projects', x: -1.15, y: 0.72 },
-    { label: 'Capabilities', path: '/capabilities', x: 0.32, y: 0.72 },
-    { label: 'Experience', path: '/experience', x: -1.15, y: -0.36 },
-    { label: 'Contact', path: '/contact', x: 0.32, y: -0.36 },
+    { label: 'Home', path: '/', x: -1.42, y: 0.82 },
+    { label: 'Projects', path: '/projects', x: -0.28, y: 0.82 },
+    { label: 'Capabilities', path: '/capabilities', x: 0.86, y: 0.82 },
+    { label: 'Experience', path: '/experience', x: -0.86, y: -0.34 },
+    { label: 'Contact', path: '/contact', x: 0.48, y: -0.34 },
 ];
 
 const pcPalettes = {
@@ -1139,14 +1149,15 @@ function createDesktopTexture(nightMode = false) {
         context.strokeRect(42, 80, 260, 126);
         context.fillStyle = palette.line;
         context.font = '800 22px Arial';
-        context.fillText('BUILD BOARD', 70, 122);
+        context.fillText('SYSTEMS BOARD', 70, 122);
         context.fillStyle = palette.muted;
         context.font = '700 15px Arial';
-        context.fillText('React / Supabase / MySQL', 70, 154);
+        context.fillText('Management systems / APIs / Data', 70, 154);
+        context.fillText('React / Laravel / MySQL', 70, 178);
         context.fillStyle = palette.accent;
-        context.fillRect(70, 174, 164, 7);
+        context.fillRect(70, 188, 164, 7);
         context.fillStyle = palette.grid;
-        context.fillRect(70, 188, 208, 6);
+        context.fillRect(70, 200, 208, 6);
 
         context.fillStyle = palette.panel;
         context.fillRect(width - 282, 82, 224, 118);
@@ -1157,13 +1168,13 @@ function createDesktopTexture(nightMode = false) {
         context.fillRect(width - 152, 114, 34, 34);
         context.fillStyle = palette.line;
         context.font = '800 18px Arial';
-        context.fillText('4 ROUTES', width - 252, 176);
+        context.fillText('5 ROUTES', width - 252, 176);
 
         context.fillStyle = palette.panel;
         context.fillRect(0, height - 58, width, 58);
         context.fillStyle = palette.line;
         context.font = '700 24px Arial';
-        context.fillText('WORKSPACE READY', 34, height - 22);
+        context.fillText('SOFTWARE ENGINEER WORKSPACE', 34, height - 22);
         context.fillStyle = palette.accent;
         context.fillRect(width - 170, height - 38, 108, 6);
     });
@@ -1179,7 +1190,18 @@ function drawDesktopGlyph(context, label, centerX, centerY, palette, active) {
     context.lineJoin = 'miter';
     context.lineCap = 'square';
 
-    if (label === 'Projects') {
+    if (label === 'Home') {
+        context.beginPath();
+        context.moveTo(-56, 0);
+        context.lineTo(0, -48);
+        context.lineTo(56, 0);
+        context.moveTo(-38, -4);
+        context.lineTo(-38, 44);
+        context.lineTo(38, 44);
+        context.lineTo(38, -4);
+        context.stroke();
+        context.fillRect(-10, 12, 20, 32);
+    } else if (label === 'Projects') {
         context.beginPath();
         context.moveTo(-54, -24);
         context.lineTo(-12, -24);
@@ -1343,6 +1365,7 @@ function ThreeModelStage({ navigate, nightMode, toggleTheme }) {
         const clickable = [];
         const hoverRings = [];
         const ledKeys = [];
+        const keyboardKeys = [];
         const ownedTextures = new Set();
         const raycaster = new THREE.Raycaster();
         const pointer = { x: 0, y: 0 };
@@ -1393,6 +1416,7 @@ function ThreeModelStage({ navigate, nightMode, toggleTheme }) {
             glow: new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: nightMode ? 0.21 : 0.13 }),
             key: new THREE.MeshStandardMaterial({ color: palette.keyThree, metalness: 0.34, roughness: 0.38 }),
             keyLit: new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: 0.86 }),
+            keyboardGlow: new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: nightMode ? 0.48 : 0.34 }),
             glass: new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: nightMode ? 0.055 : 0.11, depthWrite: false }),
         };
 
@@ -1421,23 +1445,44 @@ function ThreeModelStage({ navigate, nightMode, toggleTheme }) {
         addBox([0.18, 0.18, 0.12], [0, 2.02, 0.13], materials.bevel, monitorGroup, false);
         addBox([0.48, 1.06, 0.3], [0, -1.28, -0.12], materials.frame, monitorGroup);
         addBox([2.18, 0.18, 0.82], [0, -1.9, 0.18], materials.frame, monitorGroup);
-        addBox([3.84, 0.14, 0.82], [0, -2.28, 0.62], materials.key, monitorGroup);
-
         const keyboardGroup = new THREE.Group();
         monitorGroup.add(keyboardGroup);
-        for (let row = 0; row < 3; row += 1) {
-            for (let col = 0; col < 9; col += 1) {
+        keyboardGroup.position.set(-0.36, -2.1, 0.78);
+        keyboardGroup.rotation.x = 0.22;
+        keyboardGroup.userData = { baseY: keyboardGroup.position.y };
+        addBox([4.32, 0.16, 1.22], [0, 0, 0], materials.key, keyboardGroup);
+        addBox([4.04, 0.04, 0.08], [0, 0.13, 0.55], materials.keyboardGlow, keyboardGroup, false);
+        addBox([3.94, 0.035, 0.06], [0, 0.1, -0.55], materials.bevel, keyboardGroup, false);
+
+        const keyRows = [
+            { count: 12, startX: -1.68, y: 0.13, z: 0.36, offset: 0 },
+            { count: 11, startX: -1.52, y: 0.19, z: 0.12, offset: 0.04 },
+            { count: 10, startX: -1.34, y: 0.25, z: -0.12, offset: 0.08 },
+            { count: 7, startX: -1.08, y: 0.31, z: -0.38, offset: 0.12 },
+        ];
+
+        keyRows.forEach((rowSpec, row) => {
+            for (let col = 0; col < rowSpec.count; col += 1) {
                 const isLed = (row + col) % 5 === 0;
+                const isSpacebar = row === 3 && col === 3;
                 const key = addBox(
-                    [0.23, 0.035, 0.12],
-                    [-1.18 + col * 0.3 + row * 0.045, -2.2 + row * 0.055, 0.94 - row * 0.17],
+                    [isSpacebar ? 1.02 : 0.24, 0.058, 0.16],
+                    [rowSpec.startX + col * 0.3 + rowSpec.offset, rowSpec.y, rowSpec.z],
                     isLed ? materials.keyLit : materials.key,
                     keyboardGroup,
-                    false,
+                    true,
                 );
+                key.userData = {
+                    baseY: key.position.y,
+                    phase: row * 0.72 + col * 0.23,
+                };
+                keyboardKeys.push(key);
                 if (isLed) ledKeys.push(key);
             }
-        }
+        });
+        addBox([0.84, 0.12, 0.68], [2.54, 0.16, 0.08], materials.key, keyboardGroup);
+        addBox([0.048, 0.026, 0.46], [2.54, 0.235, 0.08], materials.bevel, keyboardGroup, false);
+        addBox([0.32, 0.026, 0.08], [2.54, 0.25, 0.36], materials.keyboardGlow, keyboardGroup, false);
 
         const screenGlow = new THREE.Mesh(new THREE.PlaneGeometry(4.52, 2.76), materials.glow);
         screenGlow.position.set(0, 0.58, 0.1);
@@ -1654,7 +1699,9 @@ function ThreeModelStage({ navigate, nightMode, toggleTheme }) {
             const elapsed = (time - startTime) / 1000;
             pcGroup.rotation.y += ((-0.08 + pointer.x * 0.06) - pcGroup.rotation.y) * 0.035;
             pcGroup.rotation.x += ((0.02 - pointer.y * 0.025) - pcGroup.rotation.x) * 0.035;
+            keyboardGroup.position.y = keyboardGroup.userData.baseY + Math.sin(elapsed * 1.25) * 0.012;
             scanLine.position.y = 1.7 - ((elapsed * 0.42) % 2.42);
+            screenGlow.material.opacity = (nightMode ? 0.21 : 0.13) + Math.sin(elapsed * 1.7) * 0.025;
             fanRing.rotation.z = elapsed * 1.6;
             fanBlade.rotation.z = elapsed * 3.2;
             particles.rotation.y = elapsed * 0.035;
@@ -1665,6 +1712,10 @@ function ThreeModelStage({ navigate, nightMode, toggleTheme }) {
             });
             ledKeys.forEach((key, index) => {
                 key.scale.y = 1 + Math.sin(elapsed * 3.2 + index) * 0.18;
+            });
+            keyboardKeys.forEach((key) => {
+                const tap = Math.max(0, Math.sin(elapsed * (hovered ? 5.2 : 2.8) + key.userData.phase));
+                key.position.y = key.userData.baseY - tap * 0.016;
             });
             hoverRings.forEach((ring) => {
                 const target = hovered && hovered.userData.ring === ring ? 0.58 : 0;
@@ -1726,8 +1777,10 @@ function ThreeModelStage({ navigate, nightMode, toggleTheme }) {
 function FeatureLink({ icon: Icon, title, copy, path, navigate }) {
     return (
         <a className="feature-link reveal" href={routeHref(path)} onClick={(event) => handleNav(event, path, navigate)}>
-            <Icon size={28} weight="Bold" />
-            <h2>{title}</h2>
+            <div className="feature-link-head">
+                <Icon size={28} weight="Bold" />
+                <h2>{title}</h2>
+            </div>
             <p>{copy}</p>
             <span>
                 Open
@@ -1751,8 +1804,8 @@ function HomeProfileSection() {
                 </div>
 
                 <div className="home-signal-grid reveal">
-                    {homeSignals.map((signal) => (
-                        <article className="home-signal-card" key={signal.label}>
+                    {homeSignals.map((signal, index) => (
+                        <article className="home-signal-card" key={signal.label} style={staggerStyle(index)}>
                             <strong>{signal.value}</strong>
                             <span>{signal.label}</span>
                             <p>{signal.copy}</p>
@@ -1762,8 +1815,8 @@ function HomeProfileSection() {
             </div>
 
             <div className="container-max profile-card-grid">
-                {homeProfileCards.map((item) => (
-                    <ProfileCard key={item.title} item={item} />
+                {homeProfileCards.map((item, index) => (
+                    <ProfileCard key={item.title} item={item} index={index} />
                 ))}
             </div>
         </section>
@@ -1785,12 +1838,14 @@ function SkillProofSection() {
             </div>
 
             <div className="container-max skill-proof-grid">
-                {skillProofItems.map((item) => {
+                {skillProofItems.map((item, index) => {
                     const Icon = item.icon;
                     return (
-                        <article className="skill-proof-card reveal" key={item.title}>
-                            <Icon size={25} weight="Bold" />
-                            <h3>{item.title}</h3>
+                        <article className="skill-proof-card reveal" key={item.title} style={staggerStyle(index)}>
+                            <div className="skill-proof-card-head">
+                                <Icon size={25} weight="Bold" />
+                                <h3>{item.title}</h3>
+                            </div>
                             <p>{item.copy}</p>
                         </article>
                     );
@@ -1800,13 +1855,15 @@ function SkillProofSection() {
     );
 }
 
-function ProfileCard({ item }) {
+function ProfileCard({ item, index = 0 }) {
     const Icon = item.icon;
 
     return (
-        <article className="profile-card reveal">
-            <Icon size={27} weight="Bold" />
-            <h3>{item.title}</h3>
+        <article className="profile-card reveal" style={staggerStyle(index)}>
+            <div className="profile-card-head">
+                <Icon size={27} weight="Bold" />
+                <h3>{item.title}</h3>
+            </div>
             <p>{item.copy}</p>
         </article>
     );
@@ -1834,18 +1891,38 @@ function LinkedInIcon({ size = 21 }) {
     );
 }
 
+function WhatsAppIcon({ size = 21 }) {
+    return (
+        <svg className="brand-mark whatsapp-mark" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+                fill="currentColor"
+                d="M12.04 2.2A9.75 9.75 0 0 0 3.6 16.82L2.5 21.8l5.08-1.08a9.7 9.7 0 0 0 4.46 1.08h.01a9.8 9.8 0 0 0 0-19.6Zm0 17.95h-.01a8.05 8.05 0 0 1-4.1-1.12l-.29-.17-3.02.64.65-2.94-.19-.31a8.08 8.08 0 1 1 6.96 3.9Zm4.42-6.05c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"
+            />
+        </svg>
+    );
+}
+
 function PhoneSequenceLinks({ iconSize = 18 }) {
     return (
-        <div className="phone-sequence" aria-label="Phone numbers">
-            <Phone size={iconSize} weight="Bold" />
-            <span>
-                {contactPhones.map((phone, index) => (
-                    <React.Fragment key={phone.href}>
-                        <a href={phone.href}>{phone.label}</a>
-                        {index < contactPhones.length - 1 && <em>/</em>}
-                    </React.Fragment>
-                ))}
-            </span>
+        <div className="contact-methods" aria-label="Phone and WhatsApp contact options">
+            <a className="whatsapp-link" href={whatsappContact.href} target="_blank" rel="noreferrer">
+                <WhatsAppIcon size={iconSize} />
+                <span className="whatsapp-copy">
+                    <strong>WhatsApp</strong>
+                    <span>{whatsappContact.label}</span>
+                </span>
+            </a>
+            <div className="phone-sequence" aria-label="Direct call numbers">
+                <Phone size={iconSize} weight="Bold" />
+                <span>
+                    {contactPhones.map((phone, index) => (
+                        <React.Fragment key={phone.href}>
+                            <a href={phone.href}>{phone.label}</a>
+                            {index < contactPhones.length - 1 && <em>/</em>}
+                        </React.Fragment>
+                    ))}
+                </span>
+            </div>
         </div>
     );
 }
@@ -1890,10 +1967,10 @@ function ProjectsPage({ navigate, nightMode, toggleTheme }) {
                 <div className="container-max project-hero-grid">
                     <div className="project-hero-copy reveal">
                         <p className="eyebrow">Projects</p>
-                        <h1>React systems, dashboards, and workflow tools built for real use.</h1>
+                        <h1>Management systems, dashboards, and workflow tools built for real operations.</h1>
                         <p>
-                            I build interfaces around the jobs users need to finish: managing records, checking
-                            availability, reading data, and making decisions without fighting the screen.
+                            I build software around the jobs organizations need to run: managing records, controlling
+                            access, handling bookings, reading reports, and keeping data reliable.
                         </p>
                         <a className="action-button compact" href={routeHref('/capabilities')} onClick={(event) => handleNav(event, '/capabilities', navigate)}>
                             <span>View capabilities</span>
@@ -1916,12 +1993,12 @@ function ProjectsPage({ navigate, nightMode, toggleTheme }) {
                 <div className="container-max section-heading reveal">
                     <div>
                         <p className="eyebrow">Selected Projects</p>
-                        <h2>React products with clear users, clean data, and practical outcomes.</h2>
+                        <h2>Systems with clear users, clean data, and practical outcomes.</h2>
                     </div>
                 </div>
                 <div className="container-max project-grid">
-                    {projects.map((project) => (
-                        <ProjectCard key={project.title} project={project} />
+                    {projects.map((project, index) => (
+                        <ProjectCard key={project.title} project={project} index={index} />
                     ))}
                 </div>
             </section>
@@ -1935,11 +2012,11 @@ function ProjectProcessStrip() {
             <div className="container-max project-process reveal">
                 <div>
                     <p className="eyebrow">Project Rhythm</p>
-                    <h2>I start with the user task, then build toward a screen that can be trusted.</h2>
+                    <h2>I start with the workflow, then build toward a system that can be trusted.</h2>
                 </div>
                 <div className="process-track" aria-label="Project delivery stages">
                     {projectProcess.map((stage, index) => (
-                        <div className="process-step" key={stage} style={{ '--step-index': index }}>
+                        <div className="process-step" key={stage} style={staggerStyle(index, 80)}>
                             <span>{String(index + 1).padStart(2, '0')}</span>
                             <strong>{stage}</strong>
                         </div>
@@ -1955,8 +2032,8 @@ function CapabilitiesPage() {
         <>
             <PageHeading
                 eyebrow="Capabilities"
-                title="React UI, data workflows, and delivery habits I can bring to your project."
-                copy="I can plan the screen, build the component, connect the data flow, test the awkward states, and keep the interface readable on every viewport."
+                title="Full-stack systems, data workflows, and delivery habits I can bring to your project."
+                copy="I can plan the workflow, build the React surface, connect Laravel or API logic, structure the data, test awkward states, and keep the product usable on every viewport."
             />
 
             <section className="section-pad slim">
@@ -1973,8 +2050,8 @@ function CapabilityBoard() {
     return (
         <div className="container-max capability-board reveal">
             <div className="capability-board-row top">
-                {capabilities.slice(0, 2).map((item) => (
-                    <CapabilityBoardItem key={item.title} item={item} />
+                {capabilities.slice(0, 2).map((item, index) => (
+                    <CapabilityBoardItem key={item.title} item={item} index={index} />
                 ))}
             </div>
 
@@ -1985,17 +2062,17 @@ function CapabilityBoard() {
             </div>
 
             <div className="capability-board-row bottom">
-                {capabilities.slice(2).map((item) => (
-                    <CapabilityBoardItem key={item.title} item={item} />
+                {capabilities.slice(2).map((item, index) => (
+                    <CapabilityBoardItem key={item.title} item={item} index={index + 2} />
                 ))}
             </div>
         </div>
     );
 }
 
-function CapabilityBoardItem({ item }) {
+function CapabilityBoardItem({ item, index = 0 }) {
     return (
-        <article className="capability-board-item">
+        <article className="capability-board-item" style={staggerStyle(index)}>
             <h2>{item.title}</h2>
             <p>{item.copy}</p>
         </article>
@@ -2007,8 +2084,8 @@ function CapabilityDetailSection() {
         <section className="section-pad slim">
             <div className="container-max capability-detail-layout">
                 <div className="capability-detail-grid reveal">
-                    {capabilityDetails.map((item) => (
-                        <article className="capability-detail-card" key={item.title}>
+                    {capabilityDetails.map((item, index) => (
+                        <article className="capability-detail-card" key={item.title} style={staggerStyle(index)}>
                             <h2>{item.title}</h2>
                             <p>{item.copy}</p>
                         </article>
@@ -2017,8 +2094,8 @@ function CapabilityDetailSection() {
 
                 <div className="capability-stack-console reveal">
                     <p className="eyebrow">CV Stack</p>
-                    {stackGroups.map((group) => (
-                        <div className="stack-line" key={group.title}>
+                    {stackGroups.map((group, index) => (
+                        <div className="stack-line" key={group.title} style={staggerStyle(index)}>
                             <strong>{group.title}</strong>
                             <span>{group.items.join(' / ')}</span>
                         </div>
@@ -2040,8 +2117,8 @@ function ExperiencePage() {
             />
             <section className="section-pad">
                 <div className="container-max timeline-grid">
-                    {timeline.map((item) => (
-                        <TimelineCard key={item.title} item={item} />
+                    {timeline.map((item, index) => (
+                        <TimelineCard key={item.title} item={item} index={index} />
                     ))}
                 </div>
             </section>
@@ -2054,8 +2131,8 @@ function ExperiencePage() {
                     </div>
                 </div>
                 <div className="container-max timeline-grid">
-                    {educationItems.map((item) => (
-                        <TimelineCard key={item.title} item={item} />
+                    {educationItems.map((item, index) => (
+                        <TimelineCard key={item.title} item={item} index={index} />
                     ))}
                 </div>
             </section>
@@ -3195,16 +3272,16 @@ function BuildMethodSection() {
             <div className="container-max method-layout compact-method">
                 <div className="method-intro reveal">
                     <p className="eyebrow">How I Build</p>
-                    <h2>Workflows, states, and handoffs guide the interface.</h2>
+                    <h2>Workflows, data, and handoffs guide the system.</h2>
                     <p>
-                        I keep the process direct: understand the real task, design the surface, then connect the
-                        application logic carefully.
+                        I keep the process direct: understand the real task, model the data, build the surface, then
+                        connect the application logic carefully.
                     </p>
                 </div>
 
                 <div className="method-rail reveal">
-                    {buildStages.map((stage) => (
-                        <div className="method-row" key={stage.index}>
+                    {buildStages.map((stage, index) => (
+                        <div className="method-row" key={stage.index} style={staggerStyle(index)}>
                             <span>{stage.index}</span>
                             <div>
                                 <h3>{stage.title}</h3>
@@ -3245,7 +3322,7 @@ function ContactPage() {
             <PageHeading
                 eyebrow="Contact"
                 title="Tell me what you want to build, improve, or launch."
-                copy="I am open to web application work, dashboard builds, workflow tools, component systems, and front-end collaboration."
+                copy="I am open to management systems, dashboard builds, workflow tools, Laravel-backed applications, React frontends, and full-stack collaboration."
             />
             <section className="section-pad">
                 <div className="container-max frame-card inner reveal">
@@ -3304,9 +3381,9 @@ function CapabilityItem({ item, compact = false }) {
     );
 }
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, index = 0 }) {
     return (
-        <article className="project-detail image-card reveal" style={cardBackgroundStyle(project.image)}>
+        <article className="project-detail image-card reveal" style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
             <span className="card-bg-image" aria-hidden="true" />
             <header>
                 <span className="project-role">{project.role}</span>
@@ -3329,9 +3406,9 @@ function ProjectCard({ project }) {
     );
 }
 
-function TimelineCard({ item }) {
+function TimelineCard({ item, index = 0 }) {
     return (
-        <article className="timeline-card image-card reveal" style={cardBackgroundStyle(item.image)}>
+        <article className="timeline-card image-card reveal" style={{ ...cardBackgroundStyle(item.image), ...staggerStyle(index) }}>
             <span className="card-bg-image" aria-hidden="true" />
             <span className="time">{item.time}</span>
             <h3>{item.title}</h3>
