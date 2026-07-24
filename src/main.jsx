@@ -20,6 +20,7 @@ import {
     Monitor,
     Moon,
     Phone,
+    UserCircle,
     Stars,
     Sun,
     Widget5,
@@ -87,16 +88,17 @@ const config = {
 };
 
 const routes = [
-    { path: '/', label: 'Home' },
+    { path: '/', label: 'Home', icon: Monitor },
     {
         label: 'About Me',
+        icon: UserCircle,
         children: [
-            { path: '/experience', label: 'Experience' },
-            { path: '/capabilities', label: 'Capabilities' },
-            { path: '/projects', label: 'Projects' },
+            { path: '/experience', label: 'Experience', icon: CalendarMark },
+            { path: '/capabilities', label: 'Capabilities', icon: ChartSquare },
+            { path: '/projects', label: 'Projects', icon: Folder },
         ],
     },
-    { path: '/contact', label: 'Contact' },
+    { path: '/contact', label: 'Contact', icon: Letter },
 ];
 
 const whatsappContact = {
@@ -860,27 +862,65 @@ function isRouteActive(route, currentPath) {
 }
 
 function NavItem({ route, currentPath, navigate }) {
+    const Icon = route.icon;
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        setOpen(false);
+    }, [currentPath]);
+
     if (route.children) {
         const active = isRouteActive(route, currentPath);
+        const menuId = `nav-menu-${route.label.toLowerCase().replace(/\s+/g, '-')}`;
+        const closeDropdown = () => setOpen(false);
+        const handleBlur = (event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+                closeDropdown();
+            }
+        };
 
         return (
-            <div className={`nav-dropdown ${active ? 'active' : ''}`}>
-                <button className={`nav-button ${active ? 'active' : ''}`} type="button" aria-haspopup="true">
+            <div
+                className={`nav-dropdown ${active ? 'active' : ''} ${open ? 'open' : ''}`}
+                onMouseEnter={() => setOpen(true)}
+                onMouseLeave={closeDropdown}
+                onBlur={handleBlur}
+            >
+                <button
+                    className={`nav-button ${active ? 'active' : ''}`}
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded={open}
+                    aria-controls={menuId}
+                    onClick={() => setOpen((value) => !value)}
+                    onKeyDown={(event) => {
+                        if (event.key === 'Escape') closeDropdown();
+                    }}
+                >
+                    {Icon && <Icon size={16} weight="Bold" />}
                     <span>{route.label}</span>
                     <AltArrowDown size={14} weight="Bold" />
                 </button>
-                <div className="nav-dropdown-menu" role="menu">
-                    {route.children.map((child) => (
-                        <a
-                            key={child.path}
-                            href={routeHref(child.path)}
-                            className={isRouteActive(child, currentPath) ? 'active' : ''}
-                            role="menuitem"
-                            onClick={(event) => handleNav(event, child.path, navigate)}
-                        >
-                            {child.label}
-                        </a>
-                    ))}
+                <div className="nav-dropdown-menu" id={menuId} role="menu">
+                    {route.children.map((child) => {
+                        const ChildIcon = child.icon;
+
+                        return (
+                            <a
+                                key={child.path}
+                                href={routeHref(child.path)}
+                                className={isRouteActive(child, currentPath) ? 'active' : ''}
+                                role="menuitem"
+                                onClick={(event) => {
+                                    handleNav(event, child.path, navigate);
+                                    closeDropdown();
+                                }}
+                            >
+                                {ChildIcon && <ChildIcon size={16} weight="Bold" />}
+                                {child.label}
+                            </a>
+                        );
+                    })}
                 </div>
             </div>
         );
@@ -890,6 +930,8 @@ function NavItem({ route, currentPath, navigate }) {
 }
 
 function MobileNavItem({ route, currentPath, navigate, expanded = false, toggleExpanded }) {
+    const Icon = route.icon;
+
     if (route.children) {
         return (
             <div className="mobile-nav-group">
@@ -899,7 +941,10 @@ function MobileNavItem({ route, currentPath, navigate, expanded = false, toggleE
                     onClick={toggleExpanded}
                     aria-expanded={expanded}
                 >
-                    {route.label}
+                    <span>
+                        {Icon && <Icon size={17} weight="Bold" />}
+                        {route.label}
+                    </span>
                     <AltArrowDown size={14} weight="Bold" />
                 </button>
                 {expanded && (
@@ -918,6 +963,7 @@ function MobileNavItem({ route, currentPath, navigate, expanded = false, toggleE
 
 function NavButton({ route, currentPath, navigate }) {
     const active = isRouteActive(route, currentPath);
+    const Icon = route.icon;
 
     return (
         <a
@@ -925,6 +971,7 @@ function NavButton({ route, currentPath, navigate }) {
             className={`nav-button ${active ? 'active' : ''}`}
             onClick={(event) => handleNav(event, route.path, navigate)}
         >
+            {Icon && <Icon size={16} weight="Bold" />}
             <span>{route.label}</span>
         </a>
     );
@@ -966,8 +1013,8 @@ function HomePage({ navigate }) {
 
                 <div className="container-max hero-window">
                     <div className="hero-copy">
-                        <p className="hero-label reveal">Software Engineer</p>
-                        <h1 className="hero-title reveal">Vincent <span>Luhanga</span></h1>
+                        <h1 className="hero-title reveal">VINCENT <span>LUHANGA</span></h1>
+                        <p className="hero-label reveal font-extrabold">Software Engineer</p>
                         <p className="reveal">
                             I build full software systems: management platforms, dashboards, booking workflows,
                             database-backed tools, APIs, and React interfaces that make complex work easier to run.
@@ -2093,7 +2140,7 @@ function CapabilityDetailSection() {
                 </div>
 
                 <div className="capability-stack-console reveal">
-                    <p className="eyebrow">CV Stack</p>
+                    <p className="eyebrow font-extrabold uppercase">Developer Stack</p>
                     {stackGroups.map((group, index) => (
                         <div className="stack-line" key={group.title} style={staggerStyle(index)}>
                             <strong>{group.title}</strong>
@@ -3386,7 +3433,6 @@ function ProjectCard({ project, index = 0 }) {
         <article className="project-detail image-card reveal" style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
             <span className="card-bg-image" aria-hidden="true" />
             <header>
-                <span className="project-role">{project.role}</span>
                 <h2>{project.title}</h2>
             </header>
             <div className="project-columns">
