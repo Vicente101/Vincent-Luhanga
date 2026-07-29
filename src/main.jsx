@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
     AltArrowDown,
     ArrowRight,
     CalendarMark,
-    ChartSquare,
     CloseSquare,
     Database,
     Download,
@@ -47,7 +46,8 @@ function routeFromLocation() {
     const redirectedPath = new URLSearchParams(window.location.search).get('path');
 
     if (redirectedPath) {
-        const routePath = normalizeRoutePath(redirectedPath);
+        const requestedPath = normalizeRoutePath(redirectedPath);
+        const routePath = requestedPath === '/capabilities' ? '/' : requestedPath;
         window.history.replaceState({}, '', routeHref(routePath));
         return routePath;
     }
@@ -57,7 +57,13 @@ function routeFromLocation() {
         ? pathname.slice(basePath.length) || '/'
         : pathname;
 
-    return normalizeRoutePath(routePath);
+    const normalizedRoute = normalizeRoutePath(routePath);
+    if (normalizedRoute === '/capabilities') {
+        window.history.replaceState({}, '', routeHref('/'));
+        return '/';
+    }
+
+    return normalizedRoute;
 }
 
 const defaultConfig = {
@@ -87,7 +93,6 @@ const routes = [
         icon: UserCircle,
         children: [
             { path: '/experience', label: 'Experience', icon: CalendarMark },
-            { path: '/capabilities', label: 'Capabilities', icon: ChartSquare },
             { path: '/projects', label: 'Projects', icon: Folder },
         ],
     },
@@ -155,24 +160,6 @@ const projects = [
     },
 ];
 
-const buildStages = [
-    {
-        index: '01',
-        title: 'Understand & define',
-        copy: 'Clarify the business need, users, constraints, acceptance criteria, and technical risks before implementation.',
-    },
-    {
-        index: '02',
-        title: 'Design & implement',
-        copy: 'Translate requirements into maintainable components, data structures, integrations, and accessible user experiences.',
-    },
-    {
-        index: '03',
-        title: 'Verify & improve',
-        copy: 'Test expected and edge-case behaviour, resolve defects, document decisions, and refine the result through feedback.',
-    },
-];
-
 const timeline = [
     {
         time: '2026 - Present',
@@ -204,13 +191,6 @@ const homeSignals = [
         label: 'Team Contribution',
         copy: 'Clear updates, constructive feedback, accountability, and continuous learning support healthy product delivery.',
     },
-];
-
-const stackGroups = [
-    { title: 'Engineering Practice', items: ['Requirements analysis', 'System design', 'Maintainable code', 'Version control'] },
-    { title: 'Quality & Reliability', items: ['Testing', 'Debugging', 'Edge cases', 'Data integrity'] },
-    { title: 'Product Delivery', items: ['Responsive UI', 'APIs & integrations', 'Documentation', 'Technical handover'] },
-    { title: 'Team Contribution', items: ['Agile collaboration', 'Clear communication', 'Feedback', 'Continuous learning'] },
 ];
 
 const technologyStack = [
@@ -401,24 +381,78 @@ function cardBackgroundStyle(image) {
     return image ? { '--card-image': `url("${image}")` } : undefined;
 }
 
+function resetScrollPosition() {
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    root.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    if (previousBehavior) {
+        root.style.scrollBehavior = previousBehavior;
+    } else {
+        root.style.removeProperty('scroll-behavior');
+    }
+}
+
 function useRoute() {
     const [path, setPath] = useState(routeFromLocation);
+    const [isLeaving, setIsLeaving] = useState(false);
+    const currentPathRef = useRef(path);
+    const transitionTimerRef = useRef(null);
 
-    useEffect(() => {
-        const onPop = () => setPath(routeFromLocation());
-        window.addEventListener('popstate', onPop);
-        return () => window.removeEventListener('popstate', onPop);
+    const commitRoute = useCallback((routePath, pushHistory) => {
+        if (pushHistory) {
+            window.history.pushState({}, '', routeHref(routePath));
+        }
+
+        resetScrollPosition();
+        currentPathRef.current = routePath;
+        setPath(routePath);
+        setIsLeaving(false);
+        transitionTimerRef.current = null;
     }, []);
 
-    const navigate = useCallback((nextPath) => {
-        const routePath = normalizeRoutePath(nextPath);
-        if (routePath === path) return;
-        window.history.pushState({}, '', routeHref(routePath));
-        setPath(routePath);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [path]);
+    const queueRoute = useCallback((routePath, pushHistory) => {
+        if (routePath === currentPathRef.current) return;
 
-    return [path, navigate];
+        if (transitionTimerRef.current) {
+            window.clearTimeout(transitionTimerRef.current);
+        }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            commitRoute(routePath, pushHistory);
+            return;
+        }
+
+        setIsLeaving(true);
+        transitionTimerRef.current = window.setTimeout(() => {
+            commitRoute(routePath, pushHistory);
+        }, 240);
+    }, [commitRoute]);
+
+    useEffect(() => {
+        const previousScrollRestoration = window.history.scrollRestoration;
+        window.history.scrollRestoration = 'manual';
+        const onPop = () => queueRoute(routeFromLocation(), false);
+        window.addEventListener('popstate', onPop);
+        return () => {
+            window.removeEventListener('popstate', onPop);
+            window.history.scrollRestoration = previousScrollRestoration;
+            if (transitionTimerRef.current) {
+                window.clearTimeout(transitionTimerRef.current);
+            }
+        };
+    }, [queueRoute]);
+
+    const navigate = useCallback((nextPath) => {
+        const requestedPath = normalizeRoutePath(nextPath);
+        const routePath = requestedPath === '/capabilities' ? '/' : requestedPath;
+        queueRoute(routePath, true);
+    }, [queueRoute]);
+
+    return [path, navigate, isLeaving];
 }
 
 function useReveal(path) {
@@ -449,12 +483,22 @@ function useReveal(path) {
 }
 
 function App() {
-    const [path, navigate] = useRoute();
+    const [path, navigate, isPageLeaving] = useRoute();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
     const [nightMode, setNightMode] = useState(() => localStorage.getItem('portfolio-theme') === 'night');
     const [themeBurst, setThemeBurst] = useState(false);
     useReveal(path);
+
+    useLayoutEffect(() => {
+        resetScrollPosition();
+        const frameId = window.requestAnimationFrame(resetScrollPosition);
+        const settleTimer = window.setTimeout(resetScrollPosition, 100);
+        return () => {
+            window.cancelAnimationFrame(frameId);
+            window.clearTimeout(settleTimer);
+        };
+    }, [path]);
 
     useEffect(() => {
         document.body.classList.toggle('theme-night', nightMode);
@@ -473,7 +517,6 @@ function App() {
 
     const page = useMemo(() => {
         if (path === '/projects' || path === '/work') return <ProjectsPage navigate={navigate} />;
-        if (path === '/capabilities') return <CapabilitiesPage />;
         if (path === '/experience') return <ExperiencePage />;
         if (path === '/contact') return <ContactPage />;
         return <HomePage navigate={navigate} />;
@@ -534,11 +577,10 @@ function App() {
                 </div>
             </header>
 
-            <main className="page-shell" key={path}>
+            <main className={`page-shell ${isPageLeaving ? 'page-leaving' : ''}`} key={path}>
                 {page}
+                {path === '/' && <SiteFooter navigate={navigate} />}
             </main>
-
-            {path === '/' && <SiteFooter navigate={navigate} />}
         </div>
     );
 }
@@ -749,9 +791,9 @@ function HomePage({ navigate }) {
                             collaboration from requirement to release.
                         </p>
                         <div className="hero-actions reveal">
-                            <a className="action-button secondary" href={routeHref('/capabilities')} onClick={(event) => handleNav(event, '/capabilities', navigate)}>
-                                <span>Professional strengths</span>
-                                <ChartSquare size={19} weight="Bold" />
+                            <a className="action-button secondary" href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}>
+                                <span>View projects</span>
+                                <Folder size={19} weight="Bold" />
                             </a>
                             <a className="action-button" href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}>
                                 <span>View experience</span>
@@ -785,13 +827,6 @@ function HomePage({ navigate }) {
             <section className="section-pad home-hub">
                 <div className="container-max hub-grid">
                     <FeatureLink
-                        icon={ChartSquare}
-                        title="Capabilities"
-                        copy="Core engineering strengths across problem-solving, implementation, quality, and professional delivery."
-                        path="/capabilities"
-                        navigate={navigate}
-                    />
-                    <FeatureLink
                         icon={CalendarMark}
                         title="Experience"
                         copy="Relevant work, formal engineering training, and the responsibilities that shaped a dependable professional."
@@ -803,6 +838,13 @@ function HomePage({ navigate }) {
                         title="Selected Work"
                         copy="A focused selection of software that demonstrates technical decisions, usability, and practical execution."
                         path="/projects"
+                        navigate={navigate}
+                    />
+                    <FeatureLink
+                        icon={Letter}
+                        title="Contact"
+                        copy="Get in touch to discuss software engineering opportunities, product needs, and professional collaboration."
+                        path="/contact"
                         navigate={navigate}
                     />
                 </div>
@@ -930,8 +972,8 @@ function SiteFooter({ navigate }) {
 
                 <nav className="footer-links" aria-label="Footer navigation">
                     <a href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}><Folder size={18} weight="Bold" />Projects</a>
-                    <a href={routeHref('/capabilities')} onClick={(event) => handleNav(event, '/capabilities', navigate)}><ChartSquare size={18} weight="Bold" />Capabilities</a>
                     <a href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}><CalendarMark size={18} weight="Bold" />Experience</a>
+                    <a href={routeHref('/contact')} onClick={(event) => handleNav(event, '/contact', navigate)}><Letter size={18} weight="Bold" />Contact</a>
                 </nav>
 
                 <div className="footer-contact">
@@ -959,8 +1001,8 @@ function ProjectsPage({ navigate }) {
                             These examples show the application of requirements analysis, interface design, data
                             modelling, validation, and full-stack implementation to real user needs.
                         </p>
-                        <a className="action-button compact" href={routeHref('/capabilities')} onClick={(event) => handleNav(event, '/capabilities', navigate)}>
-                            <span>View capabilities</span>
+                        <a className="action-button compact" href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}>
+                            <span>View experience</span>
                             <ArrowRight size={18} weight="Bold" />
                         </a>
                     </div>
@@ -984,54 +1026,6 @@ function ProjectsPage({ navigate }) {
                 </div>
             </section>
         </>
-    );
-}
-
-function CapabilitiesPage() {
-    return (
-        <>
-            <PageHeading
-                eyebrow="Capabilities"
-                title="Engineering capability grounded in problem-solving, quality, and professional delivery."
-                copy="A balanced software engineering profile covering requirements, implementation, data, user experience, testing, collaboration, and maintainability."
-            />
-
-            <CapabilityDetailSection />
-            <BuildMethodSection />
-        </>
-    );
-}
-
-function CapabilityDetailSection() {
-    return (
-        <section className="section-pad slim">
-            <div className="container-max">
-                <div className="section-heading reveal">
-                    <div>
-                        <p className="eyebrow">Professional Toolkit</p>
-                        <h2>Competencies that support the full software lifecycle.</h2>
-                    </div>
-                    <p>
-                        Technical execution is supported by quality awareness, communication, documentation,
-                        and a willingness to learn from feedback.
-                    </p>
-                </div>
-
-                <div className="capability-stack-console reveal">
-                    <p className="eyebrow font-extrabold uppercase">Engineering Strengths</p>
-                    {stackGroups.map((group, index) => (
-                        <div className="stack-line" key={group.title} style={staggerStyle(index)}>
-                            <strong>{group.title}</strong>
-                            <div className="stack-item-list" aria-label={`${group.title} capabilities`}>
-                                {group.items.map((item) => (
-                                    <span className="stack-chip" key={item}>{item}</span>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
     );
 }
 
@@ -1066,35 +1060,6 @@ function ExperiencePage() {
                 </div>
             </section>
         </>
-    );
-}
-
-function BuildMethodSection() {
-    return (
-        <section className="section-pad">
-            <div className="container-max method-layout compact-method">
-                <div className="method-intro reveal">
-                    <p className="eyebrow">Engineering Approach</p>
-                    <h2>Clear thinking from requirement to reliable release.</h2>
-                    <p>
-                        Each stage balances user needs, technical constraints, maintainability, and the quality
-                        checks required for confident delivery.
-                    </p>
-                </div>
-
-                <div className="method-rail reveal">
-                    {buildStages.map((stage, index) => (
-                        <div className="method-row" key={stage.index} style={staggerStyle(index)}>
-                            <span>{stage.index}</span>
-                            <div>
-                                <h3>{stage.title}</h3>
-                                <p>{stage.copy}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
     );
 }
 
@@ -1171,16 +1136,6 @@ function PageHeading({ eyebrow, title, copy, dark = false }) {
                 <p>{copy}</p>
             </div>
         </section>
-    );
-}
-
-function CapabilityItem({ item, compact = false }) {
-    return (
-        <div className={`capability-item image-card ${compact ? 'compact' : ''}`} style={cardBackgroundStyle(item.image)}>
-            <span className="card-bg-image" aria-hidden="true" />
-            <h3>{item.title}</h3>
-            <p>{item.copy}</p>
-        </div>
     );
 }
 
