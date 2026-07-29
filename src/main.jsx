@@ -146,6 +146,7 @@ const projects = [
         result: 'A visual tool that helps developers inspect tables, relationships, and structure faster.',
         detail: 'Designed for technical users who need clear context, stateful controls, and readable schema views.',
         tags: ['React.js', 'TypeScript', 'Context UI', 'Open Source'],
+        liveUrl: 'https://vicente101.github.io/Database-Schema-Visualizer/',
         image: cardImages.visualizer,
     },
     {
