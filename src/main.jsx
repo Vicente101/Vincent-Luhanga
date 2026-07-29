@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
     AltArrowDown,
@@ -239,6 +239,145 @@ const stackGroups = [
     { title: 'Team Contribution', items: ['Agile collaboration', 'Clear communication', 'Feedback', 'Continuous learning'] },
 ];
 
+const technologyStack = [
+    { id: 'javascript', label: 'JavaScript', x: 50, y: 10, color: '#f7df1e' },
+    { id: 'typescript', label: 'TypeScript', x: 70, y: 13, color: '#5aa7e8' },
+    { id: 'react', label: 'React', x: 86, y: 27, color: '#61dafb' },
+    { id: 'supabase', label: 'Supabase', x: 92, y: 49, color: '#4ade80' },
+    { id: 'laravel', label: 'Laravel', x: 86, y: 72, color: '#ff6b68' },
+    { id: 'php', label: 'PHP', x: 69, y: 87, color: '#a7a9dc' },
+    { id: 'mysql', label: 'MySQL', x: 47, y: 91, color: '#67c5e8' },
+    { id: 'git', label: 'Git', x: 26, y: 86, color: '#f97352' },
+    { id: 'tailwind', label: 'Tailwind CSS', x: 9, y: 68, color: '#38bdf8' },
+    { id: 'css', label: 'CSS3', x: 7, y: 45, color: '#57a9e9' },
+    { id: 'html', label: 'HTML5', x: 16, y: 25, color: '#ff7849' },
+    { id: 'api', label: 'REST APIs', x: 31, y: 13, color: '#c8ddef' },
+];
+
+function TechnologyGlyph({ type }) {
+    if (type === 'react') {
+        return (
+            <>
+                <ellipse cx="24" cy="24" rx="19" ry="7.2" />
+                <ellipse cx="24" cy="24" rx="19" ry="7.2" transform="rotate(60 24 24)" />
+                <ellipse cx="24" cy="24" rx="19" ry="7.2" transform="rotate(120 24 24)" />
+                <circle cx="24" cy="24" r="3.2" className="tech-glyph-fill" />
+            </>
+        );
+    }
+
+    if (type === 'javascript' || type === 'typescript') {
+        return (
+            <>
+                <rect x="6" y="6" width="36" height="36" rx="5" />
+                <text x="24" y="31">{type === 'javascript' ? 'JS' : 'TS'}</text>
+            </>
+        );
+    }
+
+    if (type === 'html' || type === 'css') {
+        return (
+            <>
+                <path d="M9 5h30l-3 34-12 4-12-4z" />
+                <path d="M15 13h19l-.7 7H22l.5 5h10.3l-1.1 9-7.7 2.5-7.6-2.5-.5-5" />
+                <text x="24" y="19">{type === 'html' ? '5' : '3'}</text>
+            </>
+        );
+    }
+
+    if (type === 'tailwind') {
+        return (
+            <>
+                <path d="M7 19c4.5-7 10-9 16.5-5.5 3.8 2 5.6 5 9.7 5 3.2 0 5.7-1.5 7.8-4.5-4.5 8.8-10.8 11.2-18.1 6.8C19.6 18.8 17.8 17 15 17c-3 0-5.7.7-8 2Z" />
+                <path d="M7 31c4.5-7 10-9 16.5-5.5 3.8 2 5.6 5 9.7 5 3.2 0 5.7-1.5 7.8-4.5-4.5 8.8-10.8 11.2-18.1 6.8C19.6 30.8 17.8 29 15 29c-3 0-5.7.7-8 2Z" />
+            </>
+        );
+    }
+
+    if (type === 'supabase') {
+        return <path d="M27 5 10 28h13l-2 15 17-24H25z" />;
+    }
+
+    if (type === 'laravel') {
+        return (
+            <>
+                <path d="m6 12 10-5 10 5v12l-10 5-10-5z" />
+                <path d="m26 18 9-4 7 4v10l-9 5-7-4M16 29v10l9 4 8-5v-5M6 12l10 6 10-6M16 18v11" />
+            </>
+        );
+    }
+
+    if (type === 'mysql') {
+        return (
+            <>
+                <ellipse cx="24" cy="12" rx="15" ry="6" />
+                <path d="M9 12v11c0 3.3 6.7 6 15 6s15-2.7 15-6V12M9 23v11c0 3.3 6.7 6 15 6s15-2.7 15-6V23" />
+                <path d="m31 31 4 3 5-2" />
+            </>
+        );
+    }
+
+    if (type === 'git') {
+        return (
+            <>
+                <path d="M14 10v19c0 5 4 9 9 9h3M14 19h13c4 0 7 3 7 7v3" />
+                <circle cx="14" cy="9" r="4" />
+                <circle cx="34" cy="33" r="4" />
+                <circle cx="29" cy="19" r="4" />
+            </>
+        );
+    }
+
+    if (type === 'php') {
+        return (
+            <>
+                <ellipse cx="24" cy="24" rx="20" ry="12" />
+                <text x="24" y="29">PHP</text>
+            </>
+        );
+    }
+
+    return (
+        <>
+            <path d="m17 12-9 12 9 12M31 12l9 12-9 12M27 8l-6 32" />
+        </>
+    );
+}
+
+function StackConstellation() {
+    return (
+        <div className="stack-constellation reveal" role="group" aria-label="Technology stack">
+            <div className="stack-orbit stack-orbit-outer" aria-hidden="true" />
+            <div className="stack-orbit stack-orbit-inner" aria-hidden="true" />
+            <div className="stack-core" aria-hidden="true">
+                <span>&lt;/&gt;</span>
+                <strong>Full-stack</strong>
+                <small>Engineering toolkit</small>
+            </div>
+            <ul className="stack-node-list">
+                {technologyStack.map((technology) => (
+                    <li
+                        className="stack-node"
+                        key={technology.id}
+                        style={{
+                            '--stack-x': `${technology.x}%`,
+                            '--stack-y': `${technology.y}%`,
+                            '--stack-color': technology.color,
+                        }}
+                    >
+                        <span className="stack-node-icon">
+                            <svg viewBox="0 0 48 48" role="img" aria-label={technology.label}>
+                                <TechnologyGlyph type={technology.id} />
+                            </svg>
+                        </span>
+                        <span className="stack-node-label">{technology.label}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
 const staggerStyle = (index = 0, step = 70) => ({
     '--item-index': index,
     '--item-delay': `${index * step}ms`,
@@ -286,14 +425,17 @@ function useRoute() {
 function useReveal(path) {
     useEffect(() => {
         const items = document.querySelectorAll('.reveal');
-        if (!('IntersectionObserver' in window)) {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reducedMotion || !('IntersectionObserver' in window)) {
             items.forEach((item) => item.classList.add('in'));
             return undefined;
         }
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                entry.target.classList.toggle('in', entry.isIntersecting);
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('in');
+                observer.unobserve(entry.target);
             });
         }, { rootMargin: '-8% 0px 12% 0px', threshold: 0.12 });
 
@@ -321,14 +463,6 @@ function App() {
     }, [nightMode]);
 
     useEffect(() => {
-        const move = (event) => {
-            document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
-        };
-        window.addEventListener('pointermove', move);
-        return () => window.removeEventListener('pointermove', move);
-    }, []);
-
-    useEffect(() => {
         if (!mobileOpen) setMobileAboutOpen(false);
     }, [mobileOpen]);
 
@@ -339,16 +473,15 @@ function App() {
     }, []);
 
     const page = useMemo(() => {
-        if (path === '/projects' || path === '/work') return <ProjectsPage navigate={navigate} nightMode={nightMode} toggleTheme={toggleTheme} />;
+        if (path === '/projects' || path === '/work') return <ProjectsPage navigate={navigate} />;
         if (path === '/capabilities') return <CapabilitiesPage />;
         if (path === '/experience') return <ExperiencePage />;
         if (path === '/contact') return <ContactPage />;
         return <HomePage navigate={navigate} />;
-    }, [path, navigate, nightMode, toggleTheme]);
+    }, [path, navigate]);
 
     return (
         <div className="app-shell">
-            <div className="cursor-line" aria-hidden="true" />
             <div className={`theme-burst ${themeBurst ? 'active' : ''}`} aria-hidden="true" />
             <header className="topbar">
                 <div className="container-max nav-row">
@@ -681,828 +814,6 @@ function HomePage({ navigate }) {
     );
 }
 
-const desktopLinks = [
-    { label: 'Home', path: '/', x: -1.42, y: 0.82 },
-    { label: 'Projects', path: '/projects', x: -0.28, y: 0.82 },
-    { label: 'Capabilities', path: '/capabilities', x: 0.86, y: 0.82 },
-    { label: 'Experience', path: '/experience', x: -0.86, y: -0.34 },
-    { label: 'Contact', path: '/contact', x: 0.48, y: -0.34 },
-];
-
-const pcPalettes = {
-    night: {
-        mode: 'Night',
-        screen: '#041117',
-        screenSoft: '#0b222d',
-        panel: 'rgba(8, 22, 31, 0.92)',
-        panelStrong: '#0d2632',
-        grid: 'rgba(200, 221, 239, 0.13)',
-        line: '#c8ddef',
-        muted: 'rgba(200, 221, 239, 0.68)',
-        accent: '#16b8ad',
-        accentSoft: 'rgba(22, 184, 173, 0.18)',
-        frameThree: 0x061018,
-        trimThree: 0xc8ddef,
-        keyThree: 0x11252f,
-        towerThree: 0x0a1b24,
-        accentThree: 0x16b8ad,
-        particleThree: 0xbad8ef,
-    },
-    day: {
-        mode: 'Day',
-        screen: '#dce9f4',
-        screenSoft: '#edf5fb',
-        panel: 'rgba(200, 221, 239, 0.9)',
-        panelStrong: '#c8ddef',
-        grid: 'rgba(14, 29, 37, 0.14)',
-        line: '#0e1d25',
-        muted: 'rgba(14, 29, 37, 0.64)',
-        accent: '#0f948e',
-        accentSoft: 'rgba(15, 148, 142, 0.16)',
-        frameThree: 0x10212a,
-        trimThree: 0xe8f2fb,
-        keyThree: 0xb4c6d4,
-        towerThree: 0x152d38,
-        accentThree: 0x0f948e,
-        particleThree: 0x0f948e,
-    },
-};
-
-function getPcPalette(nightMode) {
-    return nightMode ? pcPalettes.night : pcPalettes.day;
-}
-
-function createCanvasTexture(THREE, width, height, draw) {
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const context = canvas.getContext('2d');
-    draw(context, width, height);
-
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = 2;
-    texture.generateMipmaps = false;
-    texture.minFilter = THREE.LinearFilter;
-    texture.needsUpdate = true;
-    return texture;
-}
-
-function createDesktopTexture(THREE, nightMode = false) {
-    const palette = getPcPalette(nightMode);
-
-    return createCanvasTexture(THREE, 1024, 620, (context, width, height) => {
-        context.fillStyle = palette.screen;
-        context.fillRect(0, 0, width, height);
-
-        const glow = context.createRadialGradient(width * 0.74, height * 0.18, 28, width * 0.74, height * 0.18, 440);
-        glow.addColorStop(0, palette.accentSoft);
-        glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        context.fillStyle = glow;
-        context.fillRect(0, 0, width, height);
-
-        context.strokeStyle = palette.grid;
-        context.lineWidth = 1;
-        for (let x = 0; x < width; x += 82) {
-            context.beginPath();
-            context.moveTo(x, 0);
-            context.lineTo(x, height);
-            context.stroke();
-        }
-        for (let y = 0; y < height; y += 82) {
-            context.beginPath();
-            context.moveTo(0, y);
-            context.lineTo(width, y);
-            context.stroke();
-        }
-
-        context.fillStyle = palette.panel;
-        context.fillRect(0, 0, width, 54);
-        context.fillStyle = palette.line;
-        context.font = '800 22px Arial';
-        context.fillText('VINCENT OS', 34, 35);
-        context.fillStyle = palette.accent;
-        context.fillRect(186, 20, 68, 6);
-        context.fillStyle = palette.muted;
-        context.font = '700 16px Arial';
-        context.fillText(`${palette.mode.toUpperCase()} WORKSTATION`, width - 260, 34);
-
-        context.fillStyle = palette.panel;
-        context.strokeStyle = palette.grid;
-        context.lineWidth = 3;
-        context.fillRect(42, 80, 260, 126);
-        context.strokeRect(42, 80, 260, 126);
-        context.fillStyle = palette.line;
-        context.font = '800 22px Arial';
-        context.fillText('SYSTEMS BOARD', 70, 122);
-        context.fillStyle = palette.muted;
-        context.font = '700 15px Arial';
-        context.fillText('Management systems / Mobile / Data', 70, 154);
-        context.fillText('Web apps / Workflows / Records', 70, 178);
-        context.fillStyle = palette.accent;
-        context.fillRect(70, 188, 164, 7);
-        context.fillStyle = palette.grid;
-        context.fillRect(70, 200, 208, 6);
-
-        context.fillStyle = palette.panel;
-        context.fillRect(width - 282, 82, 224, 118);
-        context.strokeRect(width - 282, 82, 224, 118);
-        context.fillStyle = palette.accent;
-        context.fillRect(width - 252, 114, 34, 34);
-        context.fillRect(width - 202, 114, 34, 34);
-        context.fillRect(width - 152, 114, 34, 34);
-        context.fillStyle = palette.line;
-        context.font = '800 18px Arial';
-        context.fillText('5 ROUTES', width - 252, 176);
-
-        context.fillStyle = palette.panel;
-        context.fillRect(0, height - 58, width, 58);
-        context.fillStyle = palette.line;
-        context.font = '700 24px Arial';
-        context.fillText('SOFTWARE ENGINEER WORKSPACE', 34, height - 22);
-        context.fillStyle = palette.accent;
-        context.fillRect(width - 170, height - 38, 108, 6);
-    });
-}
-
-function drawDesktopGlyph(context, label, centerX, centerY, palette, active) {
-    const accent = active ? palette.accent : palette.line;
-    context.save();
-    context.translate(centerX, centerY);
-    context.strokeStyle = accent;
-    context.fillStyle = active ? palette.accent : palette.line;
-    context.lineWidth = 9;
-    context.lineJoin = 'miter';
-    context.lineCap = 'square';
-
-    if (label === 'Home') {
-        context.beginPath();
-        context.moveTo(-56, 0);
-        context.lineTo(0, -48);
-        context.lineTo(56, 0);
-        context.moveTo(-38, -4);
-        context.lineTo(-38, 44);
-        context.lineTo(38, 44);
-        context.lineTo(38, -4);
-        context.stroke();
-        context.fillRect(-10, 12, 20, 32);
-    } else if (label === 'Projects') {
-        context.beginPath();
-        context.moveTo(-54, -24);
-        context.lineTo(-12, -24);
-        context.lineTo(2, -8);
-        context.lineTo(58, -8);
-        context.lineTo(58, 38);
-        context.lineTo(-54, 38);
-        context.closePath();
-        context.stroke();
-    } else if (label === 'Capabilities') {
-        context.beginPath();
-        context.moveTo(-52, 38);
-        context.lineTo(-52, -34);
-        context.moveTo(-52, 38);
-        context.lineTo(56, 38);
-        context.moveTo(-34, 18);
-        context.lineTo(-10, -6);
-        context.lineTo(16, 8);
-        context.lineTo(48, -28);
-        context.stroke();
-    } else if (label === 'Experience') {
-        context.strokeRect(-56, -36, 112, 78);
-        context.beginPath();
-        context.moveTo(-56, -12);
-        context.lineTo(56, -12);
-        context.moveTo(-28, -48);
-        context.lineTo(-28, -24);
-        context.moveTo(28, -48);
-        context.lineTo(28, -24);
-        context.stroke();
-        context.fillRect(-32, 6, 18, 18);
-        context.fillRect(-4, 6, 18, 18);
-        context.fillRect(24, 6, 18, 18);
-    } else {
-        context.strokeRect(-58, -34, 116, 70);
-        context.beginPath();
-        context.moveTo(-58, -34);
-        context.lineTo(0, 10);
-        context.lineTo(58, -34);
-        context.moveTo(-58, 36);
-        context.lineTo(-14, 2);
-        context.moveTo(58, 36);
-        context.lineTo(14, 2);
-        context.stroke();
-    }
-
-    context.restore();
-}
-
-function createFolderTexture(THREE, label, active = false, nightMode = false) {
-    const palette = getPcPalette(nightMode);
-
-    return createCanvasTexture(THREE, 320, 260, (context, width, height) => {
-        context.clearRect(0, 0, width, height);
-        context.fillStyle = active ? palette.panelStrong : palette.panel;
-        context.strokeStyle = active ? palette.accent : palette.line;
-        context.lineWidth = 5;
-        context.fillRect(18, 18, width - 36, height - 36);
-        context.strokeRect(18, 18, width - 36, height - 36);
-
-        context.fillStyle = active ? palette.accent : palette.line;
-        context.beginPath();
-        context.moveTo(18, 18);
-        context.lineTo(72, 18);
-        context.lineTo(18, 72);
-        context.closePath();
-        context.fill();
-
-        drawDesktopGlyph(context, label, width / 2, 116, palette, active);
-
-        context.fillStyle = active ? palette.accent : palette.line;
-        context.font = '800 24px Arial';
-        context.textAlign = 'center';
-        const words = label.split(' ');
-        if (words.length > 1) {
-            context.fillText(words[0].toUpperCase(), width / 2, 206);
-            context.fillText(words.slice(1).join(' ').toUpperCase(), width / 2, 232);
-        } else {
-            context.fillText(label.toUpperCase(), width / 2, 220);
-        }
-    });
-}
-
-function createStatusTexture(THREE, link, nightMode = false) {
-    const palette = getPcPalette(nightMode);
-    const label = link?.label || 'Workspace';
-    const path = link?.path || 'Ready';
-
-    return createCanvasTexture(THREE, 520, 150, (context, width, height) => {
-        context.clearRect(0, 0, width, height);
-        context.fillStyle = palette.panel;
-        context.fillRect(0, 0, width, height);
-        context.strokeStyle = palette.accent;
-        context.lineWidth = 4;
-        context.strokeRect(2, 2, width - 4, height - 4);
-        context.fillStyle = palette.accent;
-        context.fillRect(22, 24, 48, 12);
-        context.fillStyle = palette.line;
-        context.font = '800 34px Arial';
-        context.fillText(label.toUpperCase(), 22, 82);
-        context.fillStyle = palette.muted;
-        context.font = '700 22px Arial';
-        context.fillText(path, 22, 118);
-        context.fillStyle = palette.accentSoft;
-        context.fillRect(width - 144, 28, 92, 92);
-        context.strokeStyle = palette.line;
-        context.lineWidth = 7;
-        context.strokeRect(width - 120, 52, 44, 44);
-    });
-}
-
-function createModeSwitchTexture(THREE, nightMode = false, active = false) {
-    const palette = getPcPalette(nightMode);
-    const nextMode = nightMode ? 'DAY' : 'NIGHT';
-
-    return createCanvasTexture(THREE, 360, 150, (context, width, height) => {
-        context.clearRect(0, 0, width, height);
-        context.fillStyle = active ? palette.panelStrong : palette.panel;
-        context.fillRect(0, 0, width, height);
-        context.strokeStyle = active ? palette.accent : palette.line;
-        context.lineWidth = 5;
-        context.strokeRect(3, 3, width - 6, height - 6);
-
-        context.fillStyle = palette.accent;
-        context.fillRect(24, 30, 62, 62);
-        context.fillStyle = palette.screen;
-        context.beginPath();
-        if (nightMode) {
-            context.arc(55, 61, 20, 0, Math.PI * 2);
-            context.fill();
-        } else {
-            context.arc(55, 61, 16, 0, Math.PI * 2);
-            context.fill();
-            for (let index = 0; index < 8; index += 1) {
-                const angle = (Math.PI * 2 * index) / 8;
-                context.fillRect(54 + Math.cos(angle) * 25, 60 + Math.sin(angle) * 25, 4, 11);
-            }
-        }
-
-        context.fillStyle = palette.line;
-        context.font = '900 28px Arial';
-        context.fillText(`SWITCH ${nextMode}`, 112, 62);
-        context.fillStyle = palette.muted;
-        context.font = '800 18px Arial';
-        context.fillText('CLICK TO CHANGE MODE', 112, 98);
-    });
-}
-
-function ThreeModelStage({ navigate, nightMode, toggleTheme }) {
-    const mountRef = useRef(null);
-
-    useEffect(() => {
-        const mount = mountRef.current;
-        if (!mount) return undefined;
-
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const compactViewport = window.matchMedia('(max-width: 760px)').matches;
-        const deviceMemory = Number(navigator.deviceMemory || 0);
-        const lowMemoryDevice = deviceMemory > 0 && deviceMemory <= 4;
-
-        if (prefersReducedMotion || compactViewport || lowMemoryDevice) {
-            mount.classList.add('three-model-static');
-            return () => mount.classList.remove('three-model-static');
-        }
-
-        let cancelled = false;
-        let disposeScene = () => {};
-
-        import('./three-runtime.js').then((THREE) => {
-            if (cancelled) return;
-
-        const palette = getPcPalette(nightMode);
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-        const renderer = new THREE.WebGLRenderer({
-            alpha: true,
-            antialias: (window.devicePixelRatio || 1) <= 1.5,
-            powerPreference: 'low-power',
-        });
-        const pcGroup = new THREE.Group();
-        const clickable = [];
-        const hoverRings = [];
-        const ledKeys = [];
-        const keyboardKeys = [];
-        const ownedTextures = new Set();
-        const raycaster = new THREE.Raycaster();
-        const pointer = { x: 0, y: 0 };
-        let hovered = null;
-        let isVisible = true;
-        let pageVisible = !document.hidden;
-        let frameId = 0;
-        const trackTexture = (texture) => {
-            ownedTextures.add(texture);
-            return texture;
-        };
-
-        renderer.setClearColor(0x000000, 0);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-        renderer.domElement.setAttribute('data-three-canvas', 'portfolio-model');
-        renderer.domElement.style.display = 'block';
-        renderer.domElement.style.width = '100%';
-        renderer.domElement.style.height = '100%';
-        mount.appendChild(renderer.domElement);
-        mount.classList.add('three-model-ready');
-
-        camera.position.set(0.35, 1.04, 8.25);
-        scene.add(pcGroup);
-        scene.add(new THREE.AmbientLight(nightMode ? 0xc8ddef : 0xf4fbff, nightMode ? 1.25 : 1.55));
-
-        const keyLight = new THREE.DirectionalLight(0xffffff, nightMode ? 2.25 : 2.7);
-        keyLight.position.set(4, 5, 5);
-        scene.add(keyLight);
-
-        const accentLight = new THREE.PointLight(palette.accentThree, nightMode ? 4.2 : 3.2, 10);
-        accentLight.position.set(-3.2, 1.8, 3.8);
-        scene.add(accentLight);
-
-        const towerLight = new THREE.PointLight(palette.accentThree, nightMode ? 2.5 : 1.6, 7);
-        towerLight.position.set(3.1, 0.2, 1.4);
-        scene.add(towerLight);
-
-        const edgeMaterial = new THREE.LineBasicMaterial({
-            color: palette.trimThree,
-            transparent: true,
-            opacity: nightMode ? 0.68 : 0.46,
-        });
-
-        const materials = {
-            frame: new THREE.MeshStandardMaterial({ color: palette.frameThree, metalness: 0.68, roughness: 0.24 }),
-            tower: new THREE.MeshStandardMaterial({ color: palette.towerThree, metalness: 0.6, roughness: 0.3 }),
-            bevel: new THREE.MeshStandardMaterial({ color: palette.trimThree, metalness: 0.26, roughness: 0.32 }),
-            screen: new THREE.MeshBasicMaterial({ map: trackTexture(createDesktopTexture(THREE, nightMode)) }),
-            glow: new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: nightMode ? 0.21 : 0.13 }),
-            key: new THREE.MeshStandardMaterial({ color: palette.keyThree, metalness: 0.34, roughness: 0.38 }),
-            keyLit: new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: 0.86 }),
-            keyboardGlow: new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: nightMode ? 0.48 : 0.34 }),
-            glass: new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: nightMode ? 0.055 : 0.11, depthWrite: false }),
-        };
-
-        const addBox = (size, position, material, target = pcGroup, edges = true) => {
-            const mesh = new THREE.Mesh(new THREE.BoxGeometry(...size), material);
-            mesh.position.set(...position);
-            target.add(mesh);
-
-            if (edges) {
-                const edgeLines = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), edgeMaterial);
-                edgeLines.position.copy(mesh.position);
-                edgeLines.rotation.copy(mesh.rotation);
-                target.add(edgeLines);
-            }
-
-            return mesh;
-        };
-
-        const monitorGroup = new THREE.Group();
-        pcGroup.add(monitorGroup);
-
-        addBox([5.05, 3.22, 0.24], [0, 0.56, -0.1], materials.frame, monitorGroup);
-        addBox([4.5, 2.66, 0.07], [0, 0.58, 0.05], materials.screen, monitorGroup);
-        addBox([0.88, 0.14, 0.24], [-1.82, 2.06, 0.07], materials.bevel, monitorGroup);
-        addBox([0.58, 0.14, 0.24], [1.9, -0.82, 0.07], materials.bevel, monitorGroup);
-        addBox([0.18, 0.18, 0.12], [0, 2.02, 0.13], materials.bevel, monitorGroup, false);
-        addBox([0.48, 1.06, 0.3], [0, -1.28, -0.12], materials.frame, monitorGroup);
-        addBox([2.18, 0.18, 0.82], [0, -1.9, 0.18], materials.frame, monitorGroup);
-        const keyboardGroup = new THREE.Group();
-        monitorGroup.add(keyboardGroup);
-        keyboardGroup.position.set(-0.36, -2.1, 0.78);
-        keyboardGroup.rotation.x = 0.22;
-        keyboardGroup.userData = { baseY: keyboardGroup.position.y };
-        addBox([4.32, 0.16, 1.22], [0, 0, 0], materials.key, keyboardGroup);
-        addBox([4.04, 0.04, 0.08], [0, 0.13, 0.55], materials.keyboardGlow, keyboardGroup, false);
-        addBox([3.94, 0.035, 0.06], [0, 0.1, -0.55], materials.bevel, keyboardGroup, false);
-
-        const keyRows = [
-            { count: 12, startX: -1.68, y: 0.13, z: 0.36, offset: 0 },
-            { count: 11, startX: -1.52, y: 0.19, z: 0.12, offset: 0.04 },
-            { count: 10, startX: -1.34, y: 0.25, z: -0.12, offset: 0.08 },
-            { count: 7, startX: -1.08, y: 0.31, z: -0.38, offset: 0.12 },
-        ];
-
-        keyRows.forEach((rowSpec, row) => {
-            for (let col = 0; col < rowSpec.count; col += 1) {
-                const isLed = (row + col) % 5 === 0;
-                const isSpacebar = row === 3 && col === 3;
-                const key = addBox(
-                    [isSpacebar ? 1.02 : 0.24, 0.058, 0.16],
-                    [rowSpec.startX + col * 0.3 + rowSpec.offset, rowSpec.y, rowSpec.z],
-                    isLed ? materials.keyLit : materials.key,
-                    keyboardGroup,
-                    true,
-                );
-                key.userData = {
-                    baseY: key.position.y,
-                    phase: row * 0.72 + col * 0.23,
-                };
-                keyboardKeys.push(key);
-                if (isLed) ledKeys.push(key);
-            }
-        });
-        addBox([0.84, 0.12, 0.68], [2.54, 0.16, 0.08], materials.key, keyboardGroup);
-        addBox([0.048, 0.026, 0.46], [2.54, 0.235, 0.08], materials.bevel, keyboardGroup, false);
-        addBox([0.32, 0.026, 0.08], [2.54, 0.25, 0.36], materials.keyboardGlow, keyboardGroup, false);
-
-        const screenGlow = new THREE.Mesh(new THREE.PlaneGeometry(4.52, 2.76), materials.glow);
-        screenGlow.position.set(0, 0.58, 0.1);
-        monitorGroup.add(screenGlow);
-
-        const scanLine = new THREE.Mesh(
-            new THREE.PlaneGeometry(4.26, 0.035),
-            new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: nightMode ? 0.62 : 0.34, depthWrite: false }),
-        );
-        scanLine.position.set(0, 1.76, 0.27);
-        monitorGroup.add(scanLine);
-
-        const glassSheen = new THREE.Mesh(new THREE.PlaneGeometry(4.5, 2.66), materials.glass);
-        glassSheen.position.set(0, 0.58, 0.29);
-        monitorGroup.add(glassSheen);
-
-        const statusTextures = new Map();
-        statusTextures.set('ready', trackTexture(createStatusTexture(THREE, null, nightMode)));
-        statusTextures.set('theme', trackTexture(createStatusTexture(THREE, {
-            label: 'Theme',
-            path: nightMode ? 'Switch to day mode' : 'Switch to night mode',
-        }, nightMode)));
-        desktopLinks.forEach((link) => {
-            statusTextures.set(link.path, trackTexture(createStatusTexture(THREE, link, nightMode)));
-        });
-
-        const statusMaterial = new THREE.MeshBasicMaterial({
-            map: statusTextures.get('ready'),
-            transparent: true,
-        });
-        const statusPanel = new THREE.Mesh(new THREE.PlaneGeometry(1.86, 0.52), statusMaterial);
-        statusPanel.position.set(1.12, -0.48, 0.22);
-        monitorGroup.add(statusPanel);
-
-        const modeNormalMap = trackTexture(createModeSwitchTexture(THREE, nightMode, false));
-        const modeActiveMap = trackTexture(createModeSwitchTexture(THREE, nightMode, true));
-        const modeMaterial = new THREE.MeshBasicMaterial({
-            map: modeNormalMap,
-            transparent: true,
-        });
-        const modeSwitch = new THREE.Mesh(new THREE.PlaneGeometry(1.04, 0.43), modeMaterial);
-        modeSwitch.position.set(1.73, 1.4, 0.22);
-        const modeRing = new THREE.Mesh(
-            new THREE.RingGeometry(0.58, 0.64, 4),
-            new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: 0, side: THREE.DoubleSide }),
-        );
-        modeRing.rotation.z = Math.PI / 4;
-        modeRing.position.z = 0.026;
-        modeSwitch.add(modeRing);
-        modeSwitch.userData = {
-            action: 'toggleTheme',
-            label: nightMode ? 'Switch Day' : 'Switch Night',
-            statusKey: 'theme',
-            baseScale: 1,
-            baseY: modeSwitch.position.y,
-            ring: modeRing,
-            material: modeMaterial,
-            normalMap: modeNormalMap,
-            activeMap: modeActiveMap,
-        };
-        hoverRings.push(modeRing);
-        clickable.push(modeSwitch);
-        monitorGroup.add(modeSwitch);
-
-        const towerGroup = new THREE.Group();
-        towerGroup.position.set(3.06, -0.12, -0.15);
-        monitorGroup.add(towerGroup);
-        addBox([0.84, 2.58, 0.58], [0, 0.28, 0], materials.tower, towerGroup);
-        addBox([0.5, 0.1, 0.08], [0, 1.32, 0.34], materials.bevel, towerGroup, false);
-        addBox([0.12, 1.24, 0.1], [-0.26, 0.25, 0.34], materials.keyLit, towerGroup, false);
-        addBox([0.12, 0.72, 0.1], [0.26, -0.12, 0.34], materials.keyLit, towerGroup, false);
-
-        const fanRing = new THREE.Mesh(
-            new THREE.TorusGeometry(0.22, 0.022, 8, 42),
-            new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: 0.72 }),
-        );
-        fanRing.position.set(0, 0.42, 0.36);
-        towerGroup.add(fanRing);
-
-        const fanBlade = addBox([0.38, 0.035, 0.04], [0, 0.42, 0.38], materials.bevel, towerGroup, false);
-
-        desktopLinks.forEach((link) => {
-            const normalMap = trackTexture(createFolderTexture(THREE, link.label, false, nightMode));
-            const activeMap = trackTexture(createFolderTexture(THREE, link.label, true, nightMode));
-            const material = new THREE.MeshBasicMaterial({
-                map: normalMap,
-                transparent: true,
-            });
-            const icon = new THREE.Mesh(new THREE.PlaneGeometry(0.84, 0.68), material);
-            icon.position.set(link.x, link.y + 0.58, 0.18);
-
-            const ring = new THREE.Mesh(
-                new THREE.RingGeometry(0.46, 0.52, 4),
-                new THREE.MeshBasicMaterial({ color: palette.accentThree, transparent: true, opacity: 0, side: THREE.DoubleSide }),
-            );
-            ring.rotation.z = Math.PI / 4;
-            ring.position.z = 0.025;
-            icon.add(ring);
-
-            icon.userData = {
-                path: link.path,
-                label: link.label,
-                baseScale: 1,
-                baseY: icon.position.y,
-                ring,
-                material,
-                normalMap,
-                activeMap,
-            };
-            hoverRings.push(ring);
-            clickable.push(icon);
-            monitorGroup.add(icon);
-        });
-
-        const particleGeometry = new THREE.BufferGeometry();
-        const particleCount = 120;
-        const particlePositions = new Float32Array(particleCount * 3);
-        for (let index = 0; index < particleCount; index += 1) {
-            particlePositions[index * 3] = -3.1 + Math.random() * 6.7;
-            particlePositions[index * 3 + 1] = -2.2 + Math.random() * 4.7;
-            particlePositions[index * 3 + 2] = -1.2 + Math.random() * 2.7;
-        }
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-        const particles = new THREE.Points(
-            particleGeometry,
-            new THREE.PointsMaterial({ color: palette.particleThree, size: 0.018, transparent: true, opacity: nightMode ? 0.62 : 0.32 }),
-        );
-        scene.add(particles);
-
-        pcGroup.rotation.y = -0.08;
-        pcGroup.rotation.x = 0.02;
-        pcGroup.position.x = -0.18;
-
-        const resize = () => {
-            const { clientWidth, clientHeight } = mount;
-            const width = Math.max(clientWidth, 1);
-            const height = Math.max(clientHeight, 1);
-            const aspect = width / height;
-            const scale = aspect < 0.95 ? 0.72 : aspect < 1.2 ? 0.82 : 0.9;
-            pcGroup.scale.setScalar(scale);
-            pcGroup.position.x = aspect < 0.95 ? -0.28 : -0.18;
-            camera.position.z = aspect < 0.95 ? 8.9 : 8.25;
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height, false);
-            renderer.render(scene, camera);
-        };
-
-        const updatePointer = (event) => {
-            const rect = mount.getBoundingClientRect();
-            pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            pointer.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
-        };
-
-        const updateHover = () => {
-            raycaster.setFromCamera(pointer, camera);
-            const hit = raycaster.intersectObjects(clickable, false)[0]?.object || null;
-
-            if (hit !== hovered) {
-                if (hovered) {
-                    hovered.material.map = hovered.userData.normalMap;
-                    hovered.material.needsUpdate = true;
-                    hovered.scale.setScalar(hovered.userData.baseScale);
-                    hovered.userData.ring.material.opacity = 0;
-                }
-                hovered = hit;
-                mount.style.cursor = hovered ? 'pointer' : 'default';
-                if (hovered) {
-                    hovered.material.map = hovered.userData.activeMap;
-                    hovered.material.needsUpdate = true;
-                    hovered.scale.setScalar(1.14);
-                    hovered.userData.ring.material.opacity = 0.58;
-                    statusMaterial.map = statusTextures.get(hovered.userData.statusKey || hovered.userData.path) || statusTextures.get('ready');
-                } else {
-                    statusMaterial.map = statusTextures.get('ready');
-                }
-                statusMaterial.needsUpdate = true;
-            }
-        };
-
-        const onPointerMove = (event) => {
-            updatePointer(event);
-            updateHover();
-        };
-
-        const onPointerLeave = () => {
-            if (hovered) {
-                hovered.material.map = hovered.userData.normalMap;
-                hovered.material.needsUpdate = true;
-                hovered.scale.setScalar(hovered.userData.baseScale);
-                hovered.userData.ring.material.opacity = 0;
-            }
-            hovered = null;
-            mount.style.cursor = 'default';
-            statusMaterial.map = statusTextures.get('ready');
-            statusMaterial.needsUpdate = true;
-        };
-
-        const onClick = (event) => {
-            updatePointer(event);
-            updateHover();
-            if (hovered?.userData?.action === 'toggleTheme') {
-                toggleTheme();
-                return;
-            }
-            if (hovered?.userData?.path) {
-                navigate(hovered.userData.path);
-            }
-        };
-
-        let startTime = 0;
-        const animate = (time) => {
-            frameId = 0;
-            if (!startTime) startTime = time;
-            const elapsed = (time - startTime) / 1000;
-            pcGroup.rotation.y += ((-0.08 + pointer.x * 0.06) - pcGroup.rotation.y) * 0.035;
-            pcGroup.rotation.x += ((0.02 - pointer.y * 0.025) - pcGroup.rotation.x) * 0.035;
-            keyboardGroup.position.y = keyboardGroup.userData.baseY + Math.sin(elapsed * 1.25) * 0.012;
-            scanLine.position.y = 1.7 - ((elapsed * 0.42) % 2.42);
-            screenGlow.material.opacity = (nightMode ? 0.21 : 0.13) + Math.sin(elapsed * 1.7) * 0.025;
-            fanRing.rotation.z = elapsed * 1.6;
-            fanBlade.rotation.z = elapsed * 3.2;
-            particles.rotation.y = elapsed * 0.035;
-            particles.rotation.x = Math.sin(elapsed * 0.22) * 0.02;
-            clickable.forEach((icon, index) => {
-                icon.position.y = icon.userData.baseY + Math.sin(elapsed * 1.6 + index * 0.9) * 0.015;
-                icon.userData.ring.rotation.z += hovered === icon ? 0.018 : 0.004;
-            });
-            ledKeys.forEach((key, index) => {
-                key.scale.y = 1 + Math.sin(elapsed * 3.2 + index) * 0.18;
-            });
-            keyboardKeys.forEach((key) => {
-                const tap = Math.max(0, Math.sin(elapsed * (hovered ? 5.2 : 2.8) + key.userData.phase));
-                key.position.y = key.userData.baseY - tap * 0.016;
-            });
-            hoverRings.forEach((ring) => {
-                const target = hovered && hovered.userData.ring === ring ? 0.58 : 0;
-                ring.material.opacity += (target - ring.material.opacity) * 0.16;
-            });
-            renderer.render(scene, camera);
-            if (isVisible && pageVisible) {
-                frameId = window.requestAnimationFrame(animate);
-            }
-        };
-
-        const stopAnimation = () => {
-            if (!frameId) return;
-            window.cancelAnimationFrame(frameId);
-            frameId = 0;
-        };
-
-        const startAnimation = () => {
-            if (prefersReducedMotion || !isVisible || !pageVisible || frameId) return;
-            frameId = window.requestAnimationFrame(animate);
-        };
-
-        const onVisibilityChange = () => {
-            pageVisible = !document.hidden;
-            if (pageVisible) {
-                startAnimation();
-            } else {
-                stopAnimation();
-            }
-        };
-
-        const visibilityObserver = 'IntersectionObserver' in window
-            ? new IntersectionObserver(([entry]) => {
-                isVisible = entry.isIntersecting;
-                if (isVisible) {
-                    startAnimation();
-                } else {
-                    stopAnimation();
-                }
-            }, { rootMargin: '160px 0px', threshold: 0.01 })
-            : null;
-
-        resize();
-        mount.addEventListener('pointermove', onPointerMove);
-        mount.addEventListener('pointerleave', onPointerLeave);
-        mount.addEventListener('click', onClick);
-        window.addEventListener('resize', resize);
-        document.addEventListener('visibilitychange', onVisibilityChange);
-        visibilityObserver?.observe(mount);
-
-        if (prefersReducedMotion) {
-            renderer.render(scene, camera);
-        } else {
-            startAnimation();
-        }
-
-        disposeScene = () => {
-            stopAnimation();
-            mount.removeEventListener('pointermove', onPointerMove);
-            mount.removeEventListener('pointerleave', onPointerLeave);
-            mount.removeEventListener('click', onClick);
-            window.removeEventListener('resize', resize);
-            document.removeEventListener('visibilitychange', onVisibilityChange);
-            visibilityObserver?.disconnect();
-            mount.classList.remove('three-model-ready');
-            if (renderer.domElement.parentNode === mount) {
-                mount.removeChild(renderer.domElement);
-            }
-            scene.traverse((object) => {
-                if (object.geometry) object.geometry.dispose();
-                if (object.material) {
-                    if (Array.isArray(object.material)) {
-                        object.material.forEach((material) => {
-                            material.dispose();
-                        });
-                    } else {
-                        object.material.dispose();
-                    }
-                }
-            });
-            ownedTextures.forEach((texture) => texture.dispose());
-            renderer.dispose();
-            renderer.forceContextLoss();
-        };
-        }).catch(() => {
-            if (!cancelled) mount.classList.add('three-model-unavailable');
-        });
-
-        return () => {
-            cancelled = true;
-            disposeScene();
-        };
-    }, [navigate, nightMode, toggleTheme]);
-
-    return (
-        <div className="three-model-stage reveal" ref={mountRef} data-mode={nightMode ? 'night' : 'day'}>
-            <div className="three-static-preview" aria-hidden="true">
-                <div className="three-static-monitor">
-                    <header>
-                        <strong>VINCENT OS</strong>
-                        <span>{nightMode ? 'Night' : 'Day'} workspace</span>
-                    </header>
-                    <div>
-                        {desktopLinks.map((link) => (
-                            <span key={link.path}>{link.label}</span>
-                        ))}
-                    </div>
-                    <footer>Software Engineer Workspace</footer>
-                </div>
-                <div className="three-static-tower"><span /><span /></div>
-            </div>
-            <span className="sr-only">Interactive 3D PC desktop with clickable folders for portfolio sections and a theme switch.</span>
-            <nav className="sr-only" aria-label="3D desktop fallback links">
-                {desktopLinks.map((link) => <a key={link.path} href={routeHref(link.path)}>{link.label}</a>)}
-            </nav>
-        </div>
-    );
-}
-
 function FeatureLink({ icon: Icon, title, copy, path, navigate }) {
     return (
         <a className="feature-link reveal" href={routeHref(path)} onClick={(event) => handleNav(event, path, navigate)}>
@@ -1637,7 +948,7 @@ function SiteFooter({ navigate }) {
     );
 }
 
-function ProjectsPage({ navigate, nightMode, toggleTheme }) {
+function ProjectsPage({ navigate }) {
     return (
         <>
             <section className="project-hero">
@@ -1654,12 +965,8 @@ function ProjectsPage({ navigate, nightMode, toggleTheme }) {
                             <ArrowRight size={18} weight="Bold" />
                         </a>
                     </div>
-                    <div className="project-model-panel" data-mode={nightMode ? 'night' : 'day'}>
-                        <div className="pc-scene-chrome" aria-hidden="true">
-                            <span><Monitor size={17} weight="Bold" />Workstation</span>
-                            <span>{nightMode ? <Moon size={16} weight="Bold" /> : <Sun size={16} weight="Bold" />}{nightMode ? 'Night' : 'Day'}</span>
-                        </div>
-                        <ThreeModelStage navigate={navigate} nightMode={nightMode} toggleTheme={toggleTheme} />
+                    <div className="project-stack-panel">
+                        <StackConstellation />
                     </div>
                 </div>
             </section>
