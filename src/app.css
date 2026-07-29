@@ -894,13 +894,91 @@ body.theme-night .systems-console {
     padding: 70px 0 28px;
 }
 
-.page-heading.dark {
-    margin-top: 28px;
-    border: 1px solid var(--line);
-    background: var(--panel);
-    color: var(--line);
-    padding: 56px;
+.experience-hero {
     position: relative;
+    isolation: isolate;
+    display: grid;
+    min-height: clamp(390px, 58vh, 620px);
+    overflow: hidden;
+    align-items: center;
+    padding: clamp(76px, 9vw, 120px) 0 clamp(70px, 8vw, 108px);
+}
+
+.experience-hero::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 14%;
+    right: -8%;
+    width: clamp(220px, 32vw, 480px);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.84);
+    animation: heroOrbitIn 1100ms 260ms var(--ease-out-smooth) forwards;
+}
+
+.experience-hero::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: 7%;
+    bottom: 17%;
+    width: clamp(90px, 14vw, 180px);
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    animation: heroLineIn 900ms 620ms var(--ease-out-smooth) forwards;
+}
+
+.experience-hero-content {
+    position: relative;
+}
+
+.experience-hero .eyebrow {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: heroTextIn 620ms 60ms var(--ease-out-smooth) forwards;
+}
+
+.experience-hero-title {
+    max-width: 1100px;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(46px, 5.5vw, 72px);
+    font-weight: 800;
+    line-height: 0.99;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    perspective: 900px;
+}
+
+.headline-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.headline-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translate3d(0, 0.62em, 0) rotateX(-38deg) scale(0.97);
+    transform-origin: 50% 100%;
+    animation: headlineLetterIn 700ms var(--letter-delay) var(--ease-out-smooth) forwards;
+}
+
+.experience-hero-copy {
+    max-width: 760px;
+    margin: 26px 0 0;
+    color: var(--muted);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.56;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: heroTextIn 700ms 1080ms var(--ease-out-smooth) forwards;
 }
 
 .eyebrow {
@@ -928,10 +1006,6 @@ body.theme-night .systems-console {
     font-size: 19px;
     font-weight: 500;
     line-height: 1.56;
-}
-
-.page-heading.dark p {
-    color: var(--line);
 }
 
 .section-heading {
@@ -1566,6 +1640,53 @@ body.theme-night .image-card:hover .card-bg-image {
     }
 }
 
+@keyframes headlineLetterIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0.62em, 0) rotateX(-38deg) scale(0.97);
+    }
+    55% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotateX(0) scale(1);
+    }
+}
+
+@keyframes heroTextIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroOrbitIn {
+    from {
+        opacity: 0;
+        transform: scale(0.84);
+    }
+    to {
+        opacity: 0.56;
+        transform: scale(1);
+    }
+}
+
+@keyframes heroLineIn {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    to {
+        opacity: 0.72;
+        transform: scaleX(1);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1579,6 +1700,14 @@ body.theme-night .image-card:hover .card-bg-image {
     .reveal {
         opacity: 1;
         transform: none;
+    }
+
+    .experience-hero .eyebrow,
+    .headline-letter,
+    .experience-hero-copy,
+    .experience-hero::before,
+    .experience-hero::after {
+        animation-delay: 0ms !important;
     }
 }
 
@@ -1670,7 +1799,33 @@ body.theme-night .image-card:hover .card-bg-image {
         font-size: 34px;
     }
 
-    .page-heading.dark,
+    .experience-hero {
+        min-height: auto;
+        padding: 72px 0 62px;
+    }
+
+    .experience-hero-title {
+        font-size: clamp(38px, 11vw, 50px);
+        line-height: 1;
+    }
+
+    .experience-hero-copy {
+        margin-top: 22px;
+        font-size: 17px;
+        line-height: 1.5;
+    }
+
+    .experience-hero::before {
+        top: 23%;
+        right: -34%;
+        width: 280px;
+    }
+
+    .experience-hero::after {
+        right: 6%;
+        bottom: 12%;
+    }
+
     .frame-card.inner {
         padding: 30px 22px;
     }

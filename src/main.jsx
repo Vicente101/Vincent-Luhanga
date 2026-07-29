@@ -1032,12 +1032,7 @@ function ProjectsPage({ navigate }) {
 function ExperiencePage() {
     return (
         <>
-            <PageHeading
-                eyebrow="Experience"
-                title="Professional experience shaped by accuracy, accountability, and continuous improvement."
-                copy="Development practice and quality-focused operational experience have built a disciplined approach to software, data, communication, and reliable delivery."
-                dark
-            />
+            <ExperienceHero />
             <section className="section-pad">
                 <div className="container-max timeline-grid experience-grid">
                     {timeline.map((item, index) => (
@@ -1060,6 +1055,55 @@ function ExperiencePage() {
                 </div>
             </section>
         </>
+    );
+}
+
+function AnimatedHeadline({ text }) {
+    let letterIndex = 0;
+    const words = text.split(' ');
+
+    return (
+        <h1 className="experience-hero-title" aria-label={text}>
+            <span aria-hidden="true">
+                {words.map((word, wordIndex) => (
+                    <React.Fragment key={`${word}-${wordIndex}`}>
+                        <span className="headline-word">
+                            {Array.from(word).map((letter, index) => {
+                                const delay = 100 + (letterIndex * 12);
+                                letterIndex += 1;
+
+                                return (
+                                    <span
+                                        className="headline-letter"
+                                        style={{ '--letter-delay': `${delay}ms` }}
+                                        key={`${letter}-${index}`}
+                                    >
+                                        {letter}
+                                    </span>
+                                );
+                            })}
+                        </span>
+                        {wordIndex < words.length - 1 && ' '}
+                    </React.Fragment>
+                ))}
+            </span>
+        </h1>
+    );
+}
+
+function ExperienceHero() {
+    const title = 'Professional experience shaped by accuracy, accountability, and continuous improvement.';
+
+    return (
+        <section className="experience-hero">
+            <div className="container-max experience-hero-content">
+                <p className="eyebrow">Experience</p>
+                <AnimatedHeadline text={title} />
+                <p className="experience-hero-copy">
+                    Development practice and quality-focused operational experience have built a disciplined approach to software, data, communication, and reliable delivery.
+                </p>
+            </div>
+        </section>
     );
 }
 
@@ -1127,10 +1171,10 @@ function ContactPage() {
     );
 }
 
-function PageHeading({ eyebrow, title, copy, dark = false }) {
+function PageHeading({ eyebrow, title, copy }) {
     return (
         <section className="container-max">
-            <div className={`page-heading reveal ${dark ? 'dark' : ''}`}>
+            <div className="page-heading reveal">
                 <p className="eyebrow">{eyebrow}</p>
                 <h1>{title}</h1>
                 <p>{copy}</p>
