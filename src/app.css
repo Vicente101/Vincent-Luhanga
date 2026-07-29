@@ -953,20 +953,6 @@ body.theme-night .systems-console {
     line-height: 0.99;
     letter-spacing: -0.025em;
     text-wrap: balance;
-    perspective: 900px;
-}
-
-.headline-word {
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.headline-letter {
-    display: inline-block;
-    opacity: 0;
-    transform: translate3d(0, 0.62em, 0) rotateX(-38deg) scale(0.97);
-    transform-origin: 50% 100%;
-    animation: headlineLetterIn 700ms var(--letter-delay) var(--ease-out-smooth) forwards;
 }
 
 .experience-hero-copy {
@@ -1640,20 +1626,6 @@ body.theme-night .image-card:hover .card-bg-image {
     }
 }
 
-@keyframes headlineLetterIn {
-    0% {
-        opacity: 0;
-        transform: translate3d(0, 0.62em, 0) rotateX(-38deg) scale(0.97);
-    }
-    55% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) rotateX(0) scale(1);
-    }
-}
-
 @keyframes heroTextIn {
     from {
         opacity: 0;
@@ -1703,7 +1675,6 @@ body.theme-night .image-card:hover .card-bg-image {
     }
 
     .experience-hero .eyebrow,
-    .headline-letter,
     .experience-hero-copy,
     .experience-hero::before,
     .experience-hero::after {
