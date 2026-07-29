@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
     AltArrowDown,
@@ -105,9 +105,6 @@ const contactPhones = [
 ];
 
 const cardImages = {
-    webApp: assetUrl('card-bg/web-app.svg'),
-    mobile: assetUrl('card-bg/mobile-app.svg'),
-    database: assetUrl('card-bg/data-grid.svg'),
     quality: assetUrl('card-bg/interface-quality.svg'),
     student: assetUrl('card-bg/student-system.svg'),
     booking: assetUrl('card-bg/venue-booking.svg'),
@@ -155,29 +152,6 @@ const projects = [
         tags: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
         liveUrl: 'https://smartgrow.nyimboo.com/HTML/index.php',
         image: cardImages.smartgrow,
-    },
-];
-
-const capabilities = [
-    {
-        title: 'Full-Stack Engineering',
-        copy: 'Maintainable web and mobile software shaped by clear requirements, sound structure, and attention to the complete user journey.',
-        image: cardImages.webApp,
-    },
-    {
-        title: 'Problem Solving & Design',
-        copy: 'Complex requirements are broken into practical components, data flows, interfaces, and implementation decisions.',
-        image: cardImages.mobile,
-    },
-    {
-        title: 'Quality Engineering',
-        copy: 'Testing, debugging, validation, and edge-case thinking support software that behaves predictably and protects data integrity.',
-        image: cardImages.database,
-    },
-    {
-        title: 'Collaboration & Delivery',
-        copy: 'Clear communication, agile teamwork, documentation, and responsible handover keep delivery aligned and maintainable.',
-        image: cardImages.quality,
     },
 ];
 
@@ -345,8 +319,31 @@ function TechnologyGlyph({ type }) {
 }
 
 function StackConstellation() {
+    const constellationRef = useRef(null);
+    const [isOrbiting, setIsOrbiting] = useState(true);
+
+    useEffect(() => {
+        const constellation = constellationRef.current;
+        if (!constellation) return undefined;
+        if (!('IntersectionObserver' in window)) {
+            setIsOrbiting(true);
+            return undefined;
+        }
+
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsOrbiting(entry.isIntersecting);
+        }, { threshold: 0.15 });
+        observer.observe(constellation);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="stack-constellation reveal" role="group" aria-label="Technology stack">
+        <div
+            className={`stack-constellation ${isOrbiting ? 'is-orbiting' : ''}`}
+            ref={constellationRef}
+            role="group"
+            aria-label="Technology stack"
+        >
             <div className="stack-orbit stack-orbit-outer" aria-hidden="true" />
             <div className="stack-orbit stack-orbit-inner" aria-hidden="true" />
             <div className="stack-core" aria-hidden="true">
@@ -365,12 +362,14 @@ function StackConstellation() {
                             '--stack-color': technology.color,
                         }}
                     >
-                        <span className="stack-node-icon">
-                            <svg viewBox="0 0 48 48" role="img" aria-label={technology.label}>
-                                <TechnologyGlyph type={technology.id} />
-                            </svg>
+                        <span className="stack-node-content">
+                            <span className="stack-node-icon">
+                                <svg viewBox="0 0 48 48" role="img" aria-label={technology.label}>
+                                    <TechnologyGlyph type={technology.id} />
+                                </svg>
+                            </span>
+                            <span className="stack-node-label">{technology.label}</span>
                         </span>
-                        <span className="stack-node-label">{technology.label}</span>
                     </li>
                 ))}
             </ul>
@@ -997,46 +996,9 @@ function CapabilitiesPage() {
                 copy="A balanced software engineering profile covering requirements, implementation, data, user experience, testing, collaboration, and maintainability."
             />
 
-            <section className="section-pad slim">
-                <CapabilityBoard />
-            </section>
-
             <CapabilityDetailSection />
             <BuildMethodSection />
         </>
-    );
-}
-
-function CapabilityBoard() {
-    return (
-        <div className="container-max capability-board reveal">
-            <div className="capability-board-row top">
-                {capabilities.slice(0, 2).map((item, index) => (
-                    <CapabilityBoardItem key={item.title} item={item} index={index} />
-                ))}
-            </div>
-
-            <div className="capability-board-divider" aria-hidden="true">
-                <span />
-                <strong>+</strong>
-                <span />
-            </div>
-
-            <div className="capability-board-row bottom">
-                {capabilities.slice(2).map((item, index) => (
-                    <CapabilityBoardItem key={item.title} item={item} index={index + 2} />
-                ))}
-            </div>
-        </div>
-    );
-}
-
-function CapabilityBoardItem({ item, index = 0 }) {
-    return (
-        <article className="capability-board-item" style={staggerStyle(index)}>
-            <h2>{item.title}</h2>
-            <p>{item.copy}</p>
-        </article>
     );
 }
 
@@ -1083,7 +1045,7 @@ function ExperiencePage() {
                 dark
             />
             <section className="section-pad">
-                <div className="container-max timeline-grid">
+                <div className="container-max timeline-grid experience-grid">
                     {timeline.map((item, index) => (
                         <TimelineCard key={item.title} item={item} index={index} />
                     ))}
@@ -1097,7 +1059,7 @@ function ExperiencePage() {
                         <h2>Formal training backed by ongoing practical learning.</h2>
                     </div>
                 </div>
-                <div className="container-max timeline-grid">
+                <div className="container-max timeline-grid experience-grid">
                     {educationItems.map((item, index) => (
                         <TimelineCard key={item.title} item={item} index={index} />
                     ))}
