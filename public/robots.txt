@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://vicente101.github.io/Vincent-Luhanga/sitemap.xml

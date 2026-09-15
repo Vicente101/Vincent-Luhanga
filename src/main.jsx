@@ -150,13 +150,13 @@ const projects = [
         image: cardImages.visualizer,
     },
     {
-        title: 'Crop Recommendation System',
-        role: 'Decision support system',
-        signal: 'Open SmartGrow',
-        result: 'A simple decision-support screen that turns agricultural inputs into useful crop guidance.',
-        detail: 'Designed around clear form logic, readable results, and a flow that non-technical users can follow.',
-        tags: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
-        liveUrl: 'https://smartgrow.nyimboo.com/HTML/index.php',
+        title: 'Munda',
+        role: 'Crop intelligence platform',
+        signal: 'AgriTech',
+        result: 'Location-aware weather intelligence paired with explainable crop recommendations, helping growers make better planting decisions.',
+        detail: 'A React and Vite front end that turns live weather data from the Open-Meteo API into clear, explainable guidance non-technical growers can act on.',
+        tags: ['React', 'Vite', 'Open-Meteo API', 'Explainable UX'],
+        liveUrl: 'https://vicente101.github.io/Smartgrow/',
         image: cardImages.smartgrow,
     },
 ];
@@ -207,6 +207,13 @@ const technologyStack = [
     { id: 'css', label: 'CSS3', x: 7, y: 45, color: '#57a9e9' },
     { id: 'html', label: 'HTML5', x: 16, y: 25, color: '#ff7849' },
     { id: 'api', label: 'REST APIs', x: 31, y: 13, color: '#c8ddef' },
+];
+
+const skillGroups = [
+    { title: 'Languages & Markup', items: ['JavaScript', 'TypeScript', 'PHP', 'HTML5', 'CSS3'] },
+    { title: 'Frameworks & Libraries', items: ['React', 'Laravel', 'Tailwind CSS'] },
+    { title: 'Data & Backend', items: ['MySQL', 'Supabase', 'REST APIs'] },
+    { title: 'Tools & Practice', items: ['Git', 'Testing & Debugging', 'Agile Collaboration'] },
 ];
 
 function TechnologyGlyph({ type }) {
@@ -728,12 +735,7 @@ function NavButton({ route, currentPath, navigate }) {
 }
 
 function HomePage({ navigate }) {
-    const slides = useMemo(() => [
-        config.assets?.cover,
-        config.assets?.image,
-        config.assets?.professional,
-        config.assets?.profile,
-    ].filter(Boolean), []);
+    const slides = useMemo(() => [config.assets?.cover].filter(Boolean), []);
     const [activeSlide, setActiveSlide] = useState(0);
     const [previousSlide, setPreviousSlide] = useState(null);
 
@@ -1013,6 +1015,8 @@ function ProjectsPage({ navigate }) {
                 </div>
             </section>
 
+            <SkillsSection />
+
             <section className="section-pad">
                 <div className="container-max section-heading reveal">
                     <div>
@@ -1027,6 +1031,29 @@ function ProjectsPage({ navigate }) {
                 </div>
             </section>
         </>
+    );
+}
+
+function SkillsSection() {
+    return (
+        <section className="section-pad slim">
+            <div className="container-max section-heading reveal">
+                <div>
+                    <p className="eyebrow">Core Skills</p>
+                    <h2>A full-stack toolkit built for dependable, production-ready software.</h2>
+                </div>
+            </div>
+            <div className="container-max skills-grid">
+                {skillGroups.map((group, index) => (
+                    <article className="skill-group-card reveal" key={group.title} style={staggerStyle(index)}>
+                        <h3>{group.title}</h3>
+                        <div className="tag-row">
+                            {group.items.map((item) => <span className="tag" key={item}>{item}</span>)}
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </section>
     );
 }
 
