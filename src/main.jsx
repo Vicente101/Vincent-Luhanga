@@ -125,7 +125,7 @@ const projects = [
         title: 'Peza Venue',
         role: 'Venue booking marketplace',
         signal: 'Venue Marketplace',
-        result: 'A marketplace where people can discover event spaces, compare the essentials, and move from shortlist to booking request — while venue providers manage their own listings.',
+        result: 'A marketplace where people can discover event spaces, compare the essentials, and move from shortlist to booking request, while venue providers manage their own listings.',
         detail: "I'm the developer behind this platform, currently building it as part of the team at WebDev Technologies Limited. Laravel and Supabase power the backend, with a Vite and React front end for browsing, listing, and booking venues.",
         tags: ['Laravel', 'React.js', 'Supabase', 'Vite'],
         liveUrl: 'https://pezavenue.com',
@@ -187,7 +187,7 @@ const homeSignals = [
     {
         value: 'Dependable',
         label: 'Engineering Quality',
-        copy: "Testing, validation, and data integrity aren't an afterthought for me — code should hold up under real use.",
+        copy: "Testing, validation, and data integrity aren't an afterthought for me. Code should hold up under real use.",
     },
     {
         value: 'Collaborative',
@@ -791,7 +791,7 @@ function HomePage({ navigate }) {
                         <h1 className="hero-title reveal">VINCENT <span>LUHANGA</span></h1>
                         <p className="hero-label reveal font-extrabold">Software Engineer</p>
                         <p className="reveal">
-                            I build dependable software and see it through end to end — from untangling requirements
+                            I build dependable software and see it through end to end, from untangling requirements
                             to shipping something people can actually rely on. I care about clean structure, honest
                             testing, and code the next person can work with.
                         </p>
@@ -837,7 +837,7 @@ function HomePage({ navigate }) {
                     <FeatureLink
                         icon={Layers}
                         title="Selected Work"
-                        copy="A closer look at what I've built — the decisions behind it, not just the demo."
+                        copy="A closer look at what I've built: the decisions behind it, not just the demo."
                         path="/projects"
                         navigate={navigate}
                     />
@@ -880,7 +880,7 @@ function HomeProfileSection() {
                     <p className="eyebrow">How I Work</p>
                     <h2>I turn requirements into software people can actually rely on.</h2>
                     <p>
-                        I pair solid technical foundations with real ownership — thinking through edge cases, and
+                        I pair solid technical foundations with real ownership, thinking through edge cases and
                         staying mindful of how the code I write affects the users, teammates, and goals behind it.
                     </p>
                 </div>
@@ -966,7 +966,7 @@ function SiteFooter({ navigate }) {
                         Vincent <span>Luhanga</span>
                     </a>
                     <p>
-                        I'm a software engineer who likes solving real problems with clean, dependable code —
+                        I'm a software engineer who likes solving real problems with clean, dependable code,
                         and I enjoy the collaboration that goes with it.
                     </p>
                 </div>
@@ -999,8 +999,8 @@ function ProjectsPage({ navigate }) {
                         <p className="eyebrow">Selected Work</p>
                         <h1>A few things I've built.</h1>
                         <p>
-                            Each project below solves a real problem — from data entry to booking flows to developer
-                            tooling — with attention to structure, usability, and the details that make software easy
+                            Each project below solves a real problem, from data entry to booking flows to developer
+                            tooling, with attention to structure, usability, and the details that make software easy
                             to trust.
                         </p>
                         <a className="action-button compact" href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}>
@@ -1094,7 +1094,7 @@ function ExperienceHero() {
                 <p className="eyebrow">Experience</p>
                 <h1 className="experience-hero-title">{title}</h1>
                 <p className="experience-hero-copy">
-                    Every role has sharpened how I build — writing dependable code, handling data carefully, and communicating clearly under real deadlines.
+                    Every role has sharpened how I build: writing dependable code, handling data carefully, and communicating clearly under real deadlines.
                 </p>
             </div>
         </section>
@@ -1128,7 +1128,7 @@ function ContactPage() {
             <PageHeading
                 eyebrow="Contact"
                 title="Let's build something together."
-                copy="I'm open to software engineering roles and collaborations where good problem-solving and honest, dependable delivery actually matter. Reach out — I'd like to hear what you're working on."
+                copy="I'm open to software engineering roles and collaborations where good problem-solving and honest, dependable delivery actually matter. Reach out. I'd like to hear what you're working on."
             />
             <section className="section-pad">
                 <div className="container-max frame-card inner reveal">
