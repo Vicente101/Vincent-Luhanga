@@ -122,6 +122,16 @@ const cardImages = {
 
 const projects = [
     {
+        title: 'Peza Venue',
+        role: 'Venue booking marketplace',
+        signal: 'Venue Marketplace',
+        result: 'A marketplace where people can discover event spaces, compare the essentials, and move from shortlist to booking request — while venue providers manage their own listings.',
+        detail: "I'm the developer behind this platform, currently building it as part of the team at WebDev Technologies Limited. Laravel and Supabase power the backend, with a Vite and React front end for browsing, listing, and booking venues.",
+        tags: ['Laravel', 'React.js', 'Supabase', 'Vite'],
+        liveUrl: 'https://pezavenue.com',
+        image: cardImages.booking,
+    },
+    {
         title: 'Database Visualizer',
         role: 'Developer system tool',
         signal: 'Developer Tooling',
@@ -150,16 +160,6 @@ const projects = [
         tags: ['Laravel', 'React.js', 'MySQL', 'Tailwind CSS'],
         repoUrl: 'https://github.com/vicente101/GradingSystem',
         image: cardImages.student,
-    },
-    {
-        title: 'Venue Booking System',
-        role: 'Venue management system',
-        signal: 'Reservations & Scheduling',
-        result: 'A booking flow for checking availability, managing reservations, and keeping venue schedules clear.',
-        detail: 'Built around Laravel workflows, mobile usability, reusable state, Supabase-backed data, and action-ready booking screens.',
-        tags: ['Laravel', 'React.js', 'Supabase', 'Booking UI'],
-        status: 'coming-soon',
-        image: cardImages.booking,
     },
 ];
 
