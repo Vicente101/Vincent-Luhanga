@@ -89,7 +89,7 @@ const config = {
 const routes = [
     { path: '/', label: 'Home', icon: Monitor },
     {
-        label: 'Professional Profile',
+        label: 'Profile',
         icon: UserCircle,
         children: [
             { path: '/experience', label: 'Experience', icon: CalendarMark },
@@ -122,24 +122,6 @@ const cardImages = {
 
 const projects = [
     {
-        title: 'Student Information System',
-        role: 'Academic management system',
-        signal: 'Academic Operations',
-        result: 'A structured interface for student records, academic results, and admin dashboards.',
-        detail: 'Built with Laravel-backed workflows, clean data entry, validation states, role-aware screens, and fast record review.',
-        tags: ['Laravel', 'React.js', 'MySQL', 'Tailwind CSS'],
-        image: cardImages.student,
-    },
-    {
-        title: 'Venue Booking System',
-        role: 'Venue management system',
-        signal: 'Reservations & Scheduling',
-        result: 'A booking flow for checking availability, managing reservations, and keeping venue schedules clear.',
-        detail: 'Built around Laravel workflows, mobile usability, reusable state, Supabase-backed data, and action-ready booking screens.',
-        tags: ['Laravel', 'React.js', 'Supabase', 'Booking UI'],
-        image: cardImages.booking,
-    },
-    {
         title: 'Database Visualizer',
         role: 'Developer system tool',
         signal: 'Developer Tooling',
@@ -158,6 +140,26 @@ const projects = [
         tags: ['React', 'Vite', 'Open-Meteo API', 'Explainable UX'],
         liveUrl: 'https://vicente101.github.io/Smartgrow/',
         image: cardImages.smartgrow,
+    },
+    {
+        title: 'Student Information System',
+        role: 'Academic management system',
+        signal: 'Academic Operations',
+        result: 'A structured interface for student records, academic results, and admin dashboards.',
+        detail: 'Built with Laravel-backed workflows, clean data entry, validation states, role-aware screens, and fast record review.',
+        tags: ['Laravel', 'React.js', 'MySQL', 'Tailwind CSS'],
+        repoUrl: 'https://github.com/vicente101/GradingSystem',
+        image: cardImages.student,
+    },
+    {
+        title: 'Venue Booking System',
+        role: 'Venue management system',
+        signal: 'Reservations & Scheduling',
+        result: 'A booking flow for checking availability, managing reservations, and keeping venue schedules clear.',
+        detail: 'Built around Laravel workflows, mobile usability, reusable state, Supabase-backed data, and action-ready booking screens.',
+        tags: ['Laravel', 'React.js', 'Supabase', 'Booking UI'],
+        status: 'coming-soon',
+        image: cardImages.booking,
     },
 ];
 
@@ -180,17 +182,17 @@ const homeSignals = [
     {
         value: 'Structured',
         label: 'Problem Solving',
-        copy: 'Requirements are analysed carefully, divided into manageable parts, and translated into practical technical decisions.',
+        copy: 'I break requirements down into manageable pieces and think them through before writing a line of code.',
     },
     {
         value: 'Dependable',
         label: 'Engineering Quality',
-        copy: 'Maintainable code, thoughtful validation, testing, debugging, and data integrity are treated as core responsibilities.',
+        copy: "Testing, validation, and data integrity aren't an afterthought for me — code should hold up under real use.",
     },
     {
         value: 'Collaborative',
         label: 'Team Contribution',
-        copy: 'Clear updates, constructive feedback, accountability, and continuous learning support healthy product delivery.',
+        copy: 'I communicate clearly, take feedback well, and keep learning. Good software is a team effort.',
     },
 ];
 
@@ -789,18 +791,14 @@ function HomePage({ navigate }) {
                         <h1 className="hero-title reveal">VINCENT <span>LUHANGA</span></h1>
                         <p className="hero-label reveal font-extrabold">Software Engineer</p>
                         <p className="reveal">
-                            Software engineer focused on dependable, maintainable products and responsible delivery.
-                            Brings structured problem-solving, full-stack development, quality discipline, and clear
-                            collaboration from requirement to release.
+                            I build dependable software and see it through end to end — from untangling requirements
+                            to shipping something people can actually rely on. I care about clean structure, honest
+                            testing, and code the next person can work with.
                         </p>
                         <div className="hero-actions reveal">
-                            <a className="action-button secondary" href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}>
+                            <a className="action-button" href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}>
                                 <span>View projects</span>
                                 <Folder size={19} weight="Bold" />
-                            </a>
-                            <a className="action-button" href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}>
-                                <span>View experience</span>
-                                <ArrowRight size={19} weight="Bold" />
                             </a>
                             <a className="action-button download" href={config.cvUrl} download>
                                 <span>Download CV</span>
@@ -832,21 +830,21 @@ function HomePage({ navigate }) {
                     <FeatureLink
                         icon={CalendarMark}
                         title="Experience"
-                        copy="Relevant work, formal engineering training, and the responsibilities that shaped a dependable professional."
+                        copy="Where I've worked, what I learned, and the training that got me here."
                         path="/experience"
                         navigate={navigate}
                     />
                     <FeatureLink
                         icon={Layers}
                         title="Selected Work"
-                        copy="A focused selection of software that demonstrates technical decisions, usability, and practical execution."
+                        copy="A closer look at what I've built — the decisions behind it, not just the demo."
                         path="/projects"
                         navigate={navigate}
                     />
                     <FeatureLink
                         icon={Letter}
                         title="Contact"
-                        copy="Get in touch to discuss software engineering opportunities, product needs, and professional collaboration."
+                        copy="Have an opportunity or an idea worth building? I'd like to hear about it."
                         path="/contact"
                         navigate={navigate}
                     />
@@ -879,11 +877,11 @@ function HomeProfileSection() {
         <section className="section-pad home-profile">
             <div className="container-max home-profile-layout">
                 <div className="home-profile-copy reveal">
-                    <p className="eyebrow">Professional Value</p>
-                    <h2>A dependable software engineer who turns requirements into clear, maintainable solutions.</h2>
+                    <p className="eyebrow">How I Work</p>
+                    <h2>I turn requirements into software people can actually rely on.</h2>
                     <p>
-                        Combines technical foundations with professional ownership, careful reasoning, and a practical
-                        understanding of how software supports users, teams, and business goals.
+                        I pair solid technical foundations with real ownership — thinking through edge cases, and
+                        staying mindful of how the code I write affects the users, teammates, and goals behind it.
                     </p>
                 </div>
 
@@ -968,8 +966,8 @@ function SiteFooter({ navigate }) {
                         Vincent <span>Luhanga</span>
                     </a>
                     <p>
-                        Software engineer bringing structured problem-solving, dependable implementation,
-                        quality discipline, and clear collaboration to product teams.
+                        I'm a software engineer who likes solving real problems with clean, dependable code —
+                        and I enjoy the collaboration that goes with it.
                     </p>
                 </div>
 
@@ -999,10 +997,11 @@ function ProjectsPage({ navigate }) {
                 <div className="container-max project-hero-grid">
                     <div className="project-hero-copy reveal">
                         <p className="eyebrow">Selected Work</p>
-                        <h1>Practical software that demonstrates sound engineering decisions.</h1>
+                        <h1>A few things I've built.</h1>
                         <p>
-                            These examples show the application of requirements analysis, interface design, data
-                            modelling, validation, and full-stack implementation to real user needs.
+                            Each project below solves a real problem — from data entry to booking flows to developer
+                            tooling — with attention to structure, usability, and the details that make software easy
+                            to trust.
                         </p>
                         <a className="action-button compact" href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}>
                             <span>View experience</span>
@@ -1021,7 +1020,7 @@ function ProjectsPage({ navigate }) {
                 <div className="container-max section-heading reveal">
                     <div>
                         <p className="eyebrow">Selected Projects</p>
-                        <h2>Evidence of technical ability, thoughtful execution, and practical outcomes.</h2>
+                        <h2>A closer look at how each one was built.</h2>
                     </div>
                 </div>
                 <div className="container-max project-grid">
@@ -1040,7 +1039,7 @@ function SkillsSection() {
             <div className="container-max section-heading reveal">
                 <div>
                     <p className="eyebrow">Core Skills</p>
-                    <h2>A full-stack toolkit built for dependable, production-ready software.</h2>
+                    <h2>The toolkit I reach for when building production-ready software.</h2>
                 </div>
             </div>
             <div className="container-max skills-grid">
@@ -1073,7 +1072,7 @@ function ExperiencePage() {
                 <div className="container-max section-heading reveal">
                     <div>
                         <p className="eyebrow">Education & Growth</p>
-                        <h2>Formal training backed by ongoing practical learning.</h2>
+                        <h2>My formal training, and the learning that never really stops.</h2>
                     </div>
                 </div>
                 <div className="container-max timeline-grid experience-grid">
@@ -1087,7 +1086,7 @@ function ExperiencePage() {
 }
 
 function ExperienceHero() {
-    const title = 'Professional experience shaped by accuracy, accountability, and continuous improvement.';
+    const title = "Where I've worked, and what it taught me.";
 
     return (
         <section className="experience-hero">
@@ -1095,7 +1094,7 @@ function ExperienceHero() {
                 <p className="eyebrow">Experience</p>
                 <h1 className="experience-hero-title">{title}</h1>
                 <p className="experience-hero-copy">
-                    Development practice and quality-focused operational experience have built a disciplined approach to software, data, communication, and reliable delivery.
+                    Every role has sharpened how I build — writing dependable code, handling data carefully, and communicating clearly under real deadlines.
                 </p>
             </div>
         </section>
@@ -1128,8 +1127,8 @@ function ContactPage() {
         <>
             <PageHeading
                 eyebrow="Contact"
-                title="Looking for a thoughtful, dependable software engineer?"
-                copy="Open to software engineering opportunities where strong problem-solving, responsible delivery, teamwork, and continuous growth are valued."
+                title="Let's build something together."
+                copy="I'm open to software engineering roles and collaborations where good problem-solving and honest, dependable delivery actually matter. Reach out — I'd like to hear what you're working on."
             />
             <section className="section-pad">
                 <div className="container-max frame-card inner reveal">
@@ -1179,8 +1178,10 @@ function PageHeading({ eyebrow, title, copy }) {
 }
 
 function ProjectCard({ project, index = 0 }) {
+    const hasFooter = Boolean(project.liveUrl || project.repoUrl || project.status === 'coming-soon');
+
     return (
-        <article className={`project-detail image-card reveal ${project.liveUrl ? 'has-live-link' : ''}`} style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
+        <article className={`project-detail image-card reveal ${hasFooter ? 'has-live-link' : ''}`} style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
             <span className="card-bg-image" aria-hidden="true" />
             <header>
                 <h2>{project.title}</h2>
@@ -1203,6 +1204,18 @@ function ProjectCard({ project, index = 0 }) {
                     <span>Go to project</span>
                     <SquareArrowRightUp size={17} weight="Bold" />
                 </a>
+            )}
+            {!project.liveUrl && project.repoUrl && (
+                <a className="project-live-link" href={project.repoUrl} target="_blank" rel="noreferrer">
+                    <span>View on GitHub</span>
+                    <GitHubIcon size={16} />
+                </a>
+            )}
+            {!project.liveUrl && !project.repoUrl && project.status === 'coming-soon' && (
+                <span className="project-status-badge">
+                    <span className="project-status-dot" aria-hidden="true" />
+                    Launching soon
+                </span>
             )}
         </article>
     );

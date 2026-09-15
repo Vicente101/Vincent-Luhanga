@@ -717,8 +717,8 @@ body.theme-night .hero-shade {
 
 .hero-actions {
     display: grid;
-    grid-template-columns: repeat(3, minmax(158px, 1fr));
-    width: min(100%, 620px);
+    grid-template-columns: repeat(2, minmax(158px, 1fr));
+    width: min(100%, 460px);
     gap: 12px;
     align-items: stretch;
     margin-top: 30px;
@@ -3442,10 +3442,6 @@ body.theme-night .empty-preview {
         width: min(100%, 460px);
     }
 
-    .hero-actions .action-button.download {
-        grid-column: 1 / -1;
-    }
-
     .project-stack-panel {
         min-height: 420px;
     }
@@ -3525,10 +3521,6 @@ body.theme-night .empty-preview {
         font-size: 14px;
         line-height: 1.16;
         white-space: normal;
-    }
-
-    .hero-actions .action-button.download {
-        grid-column: 1 / -1;
     }
 
     .stack-core {
@@ -3739,6 +3731,34 @@ body.theme-night .empty-preview {
     transform: translateX(0);
 }
 
+.project-status-badge {
+    position: absolute;
+    left: 48px;
+    bottom: 28px;
+    z-index: 2;
+    display: inline-flex;
+    width: fit-content;
+    min-height: 34px;
+    align-items: center;
+    gap: 8px;
+    border: 1px dashed color-mix(in srgb, var(--line) 55%, transparent);
+    border-radius: 2px;
+    padding: 8px 11px;
+    color: color-mix(in srgb, var(--line) 80%, var(--muted));
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.01em;
+}
+
+.project-status-dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
 body.theme-night .project-detail {
     border-color: color-mix(in srgb, var(--accent) 42%, rgba(200, 221, 239, 0.3));
 }
@@ -3758,7 +3778,8 @@ body.theme-night .project-detail .tag:hover {
         font-size: clamp(21px, 4.6vw, 24px);
     }
 
-    .project-live-link {
+    .project-live-link,
+    .project-status-badge {
         left: 24px;
         bottom: 24px;
     }
@@ -3771,7 +3792,8 @@ body.theme-night .project-detail .tag:hover {
     }
 
     .project-detail .tag,
-    .project-live-link {
+    .project-live-link,
+    .project-status-badge {
         min-height: 30px;
         padding: 7px 9px;
         font-size: 12px;
@@ -3789,7 +3811,8 @@ body.theme-night .project-detail .tag:hover {
         padding-bottom: 76px;
     }
 
-    .project-live-link {
+    .project-live-link,
+    .project-status-badge {
         left: 18px;
         bottom: 18px;
     }
@@ -3820,9 +3843,5 @@ body.theme-night .project-detail .tag:hover {
 @media (max-width: 380px) {
     .hero-actions {
         grid-template-columns: 1fr;
-    }
-
-    .hero-actions .action-button.download {
-        grid-column: auto;
     }
 }
