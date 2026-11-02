@@ -18,6 +18,10 @@ Push to `main` and the workflow in `.github/workflows/deploy.yml` will build and
 
 In repository settings, set **Pages > Build and deployment > Source** to **GitHub Actions**. Do not deploy from the branch root, because the root `index.html` is the Vite development entry and references `/src/main.jsx`.
 
+## Netlify
+
+The site can also be hosted on Netlify. `netlify.toml` builds it from the domain root (`VITE_BASE_PATH=/`) and sends every route to `index.html`, so no extra settings are needed when importing the repository. Pushes to `main` redeploy automatically.
+
 ## CV
 
 The downloadable CV (`public/Vincent-Luhanga-CV.pdf`) is generated from `cv/Vincent-Luhanga-CV.html`. After editing the HTML, regenerate the PDF with Microsoft Edge:

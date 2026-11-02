@@ -1,0 +1,14 @@
+# Netlify serves the site from the domain root, unlike GitHub Pages (/Vincent-Luhanga/).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  VITE_BASE_PATH = "/"
+
+# Single-page app: let React handle every route.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
