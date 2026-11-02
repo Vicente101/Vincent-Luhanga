@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Vincent Luhanga - Software Engineer - CV</title>
+<style>
+    @page {
+        size: A4;
+        margin: 14mm 16mm 16mm;
+
+        @bottom-left {
+            content: 'Vincent Luhanga  ·  Software Engineer';
+            color: #7b8f9b;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 7.5pt;
+            letter-spacing: 0.04em;
+        }
+
+        @bottom-right {
+            content: counter(page) ' / ' counter(pages);
+            color: #7b8f9b;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 7.5pt;
+        }
+    }
+
+    :root {
+        --ink: #0e1d25;
+        --body: #23343d;
+        --muted: #5d7380;
+        --accent: #0f7774;
+        --rule: #d5e1ec;
+        --gutter: 30mm;
+    }
+
+    * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body {
+        margin: 0;
+        color: var(--body);
+        font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+        font-size: 9.6pt;
+        line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    p { margin: 0; }
+
+    .icon {
+        width: 9pt;
+        height: 9pt;
+        flex: none;
+        fill: var(--accent);
+    }
+
+    .icon.stroke {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Header */
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12mm;
+        align-items: end;
+        padding-bottom: 9pt;
+    }
+
+    h1 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 26pt;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        line-height: 1;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .role {
+        margin-top: 7pt;
+        color: var(--ink);
+        font-size: 10pt;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .tagline {
+        margin-top: 5pt;
+        max-width: 96mm;
+        color: var(--muted);
+        font-size: 9pt;
+    }
+
+    .contact {
+        display: grid;
+        gap: 3.2pt;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 8.6pt;
+    }
+
+    .contact li {
+        display: flex;
+        align-items: center;
+        gap: 6pt;
+        color: var(--body);
+    }
+
+    .header-rule {
+        display: flex;
+        height: 2.4pt;
+    }
+
+    .header-rule span:first-child {
+        width: var(--gutter);
+        background: var(--accent);
+    }
+
+    .header-rule span:last-child {
+        flex: 1;
+        background: var(--ink);
+    }
+
+    /* Sections */
+
+    section { margin-top: 14pt; }
+
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: 8pt;
+        margin: 0 0 8pt;
+        color: var(--accent);
+        font-size: 8.8pt;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    h2::after {
+        content: '';
+        flex: 1;
+        border-top: 0.75pt solid var(--rule);
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: var(--gutter) 1fr;
+        break-inside: avoid;
+    }
+
+    .row + .row { margin-top: 10pt; }
+
+    .side {
+        padding-right: 5mm;
+        color: var(--muted);
+        font-size: 8.2pt;
+        font-weight: 600;
+        line-height: 1.35;
+        padding-top: 1.4pt;
+    }
+
+    .side.label {
+        color: var(--ink);
+        font-weight: 700;
+    }
+
+    .side.caps {
+        font-size: 7.4pt;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .skills .row + .row { margin-top: 3.5pt; }
+
+    .title-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10pt;
+    }
+
+    .title {
+        color: var(--ink);
+        font-size: 10.6pt;
+        font-weight: 700;
+    }
+
+    .org {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .org::before {
+        content: '';
+        display: inline-block;
+        width: 3pt;
+        height: 3pt;
+        margin: 0 6pt 2pt;
+        border-radius: 50%;
+        background: var(--rule);
+    }
+
+    .meta {
+        margin-top: 1.5pt;
+        color: var(--muted);
+        font-size: 8.4pt;
+    }
+
+    .desc { margin-top: 3pt; }
+
+    ul {
+        margin: 4pt 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li.duty {
+        margin-top: 2.4pt;
+        padding-left: 11pt;
+        text-indent: -11pt;
+    }
+
+    li.duty::before {
+        content: '';
+        display: inline-block;
+        width: 5pt;
+        height: 1.4pt;
+        margin-right: 6pt;
+        vertical-align: 0.24em;
+        background: var(--accent);
+    }
+
+    .new-page { break-before: page; margin-top: 0; }
+
+    .links {
+        display: flex;
+        flex: none;
+        gap: 9pt;
+        font-size: 8.2pt;
+        font-weight: 600;
+    }
+
+    .links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 4pt;
+        color: var(--accent);
+    }
+
+    .links .icon {
+        width: 8pt;
+        height: 8pt;
+    }
+</style>
+</head>
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-mail" viewBox="0 0 24 24">
+            <path d="M3 4.5h18A1.5 1.5 0 0 1 22.5 6v12a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 18V6A1.5 1.5 0 0 1 3 4.5Zm1.2 2.2L12 12l7.8-5.3H4.2Zm16.1 1.7-7.6 5.2a1.2 1.2 0 0 1-1.4 0L3.7 8.4v9h16.6V8.4Z" />
+        </symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24">
+            <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z" />
+        </symbol>
+        <symbol id="i-whatsapp" viewBox="0 0 24 24">
+            <path d="M12.04 2.2A9.75 9.75 0 0 0 3.6 16.82L2.5 21.8l5.08-1.08a9.7 9.7 0 0 0 4.46 1.08h.01a9.8 9.8 0 0 0 0-19.6Zm0 17.95h-.01a8.05 8.05 0 0 1-4.1-1.12l-.29-.17-3.02.64.65-2.94-.19-.31a8.08 8.08 0 1 1 6.96 3.9Zm4.42-6.05c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
+        </symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+        </symbol>
+        <symbol id="i-github" viewBox="0 0 24 24">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.15c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18.92-.26 1.9-.38 2.88-.39.98.01 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.42-2.69 5.39-5.25 5.67.41.35.77 1.04.77 2.1v3.1c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+        </symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24">
+            <path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.67H9.34V8.98h3.41v1.57h.05a3.74 3.74 0 0 1 3.37-1.85c3.61 0 4.28 2.38 4.28 5.47v6.28ZM5.32 7.42a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.03H3.54V8.98H7.1v11.47ZM22.23 0H1.76C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.76 24h20.47c.97 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0Z" />
+        </symbol>
+    </svg>
+
+    <header>
+        <div>
+            <h1>VINCENT <span>LUHANGA</span></h1>
+            <p class="role">Software Engineer</p>
+            <p class="tagline">Full-stack engineer building reliable software across web and application development, backend, data and AI-assisted engineering.</p>
+        </div>
+        <ul class="contact">
+            <li><svg class="icon"><use href="#i-mail" /></svg><a href="mailto:vluhanga64@gmail.com">vluhanga64@gmail.com</a></li>
+            <li><svg class="icon"><use href="#i-phone" /></svg><a href="tel:+260963659222">+260 963 659 222</a></li>
+            <li><svg class="icon"><use href="#i-whatsapp" /></svg><a href="https://wa.me/260768891429">+260 768 891 429</a></li>
+            <li><svg class="icon stroke"><use href="#i-globe" /></svg><a href="https://vicente101.github.io/Vincent-Luhanga/">vicente101.github.io/Vincent-Luhanga</a></li>
+            <li><svg class="icon"><use href="#i-github" /></svg><a href="https://github.com/vicente101">github.com/vicente101</a></li>
+            <li><svg class="icon"><use href="#i-linkedin" /></svg><a href="https://www.linkedin.com/in/vincent-luhanga-782256240/">linkedin.com/in/vincent-luhanga-782256240</a></li>
+        </ul>
+    </header>
+    <div class="header-rule" aria-hidden="true"><span></span><span></span></div>
+
+    <section>
+        <h2>Profile</h2>
+        <p>
+            Software Engineer with commercial experience designing, developing, testing and supporting software
+            applications and systems. Works across the software lifecycle, from requirements analysis and system
+            design through implementation, testing, maintenance and production support. Holds a Bachelor of Software
+            Engineering with Distinction.
+        </p>
+    </section>
+
+    <section class="skills">
+        <h2>Technical Skills</h2>
+        <div class="row"><p class="side label">Languages</p><p>JavaScript, TypeScript, PHP, Java, SQL, HTML5, CSS3</p></div>
+        <div class="row"><p class="side label">Frameworks &amp; Libraries</p><p>React, Laravel, Tailwind CSS</p></div>
+        <div class="row"><p class="side label">Databases</p><p>MySQL, Supabase</p></div>
+        <div class="row"><p class="side label">Tools</p><p>Git, GitHub, Vite, Claude Code, OpenAI Codex, GitHub Copilot</p></div>
+        <div class="row"><p class="side label">Engineering Practices</p><p>Requirements analysis, system design, database design, REST APIs, testing and debugging, maintenance and support, agile delivery, prompt engineering, UI/UX design</p></div>
+    </section>
+
+    <section>
+        <h2>Professional Experience</h2>
+
+        <div class="row">
+            <p class="side">2026 – Present</p>
+            <div>
+                <p class="title">Software Engineer<span class="org">WebDev Technologies Limited</span></p>
+                <p class="desc">
+                    Lead developer on Peza Venue (<a href="https://pezavenue.com">pezavenue.com</a>), a live venue-booking
+                    marketplace built with Laravel, Supabase, React and Tailwind CSS.
+                </p>
+                <ul>
+                    <li class="duty">Analyse requirements and translate them into features for listings, reservations, scheduling and availability.</li>
+                    <li class="duty">Design and develop features across the front end, back end and database layers.</li>
+                    <li class="duty">Test, debug and resolve defects so features perform to specification.</li>
+                    <li class="duty">Maintain and support the production system, shipping fixes and improvements.</li>
+                    <li class="duty">Collaborate with the engineering team in an agile workflow, using Git and GitHub for version control.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="side">2025</p>
+            <div>
+                <p class="title">Docufree Workflow Placement<span class="org">Wiphan</span></p>
+                <ul>
+                    <li class="duty">Managed document workflows, data entry and verification within enterprise systems.</li>
+                    <li class="duty">Performed quality assurance checks with consistent process compliance to maintain accuracy and data integrity.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="side">2020 – 2022</p>
+            <div>
+                <p class="title">Sales Assistant &amp; Cashier<span class="org">Pep Stores Zambia</span></p>
+                <ul>
+                    <li class="duty">Customer service, cash handling and stock control in a fast-paced retail environment.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="new-page">
+        <h2>Selected Projects</h2>
+
+        <div class="row">
+            <p class="side caps">Marketplace Platform</p>
+            <div>
+                <div class="title-line">
+                    <p class="title">Peza Venue</p>
+                    <span class="links">
+                        <a href="https://pezavenue.com"><svg class="icon stroke"><use href="#i-globe" /></svg>Live product</a>
+                    </span>
+                </div>
+                <p class="meta">Laravel · Supabase · React · Tailwind CSS</p>
+                <p class="desc">
+                    Two-sided marketplace that replaces scattered listings and slow back-and-forth with discovery,
+                    comparison and booking requests, while venue providers manage listings, scheduling and availability.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="side caps">Developer Tooling</p>
+            <div>
+                <div class="title-line">
+                    <p class="title">Database Visualizer</p>
+                    <span class="links">
+                        <a href="https://vicente101.github.io/Database-Schema-Visualizer/"><svg class="icon stroke"><use href="#i-globe" /></svg>Live product</a>
+                        <a href="https://github.com/vicente101/Database-Schema-Visualizer"><svg class="icon"><use href="#i-github" /></svg>Source code</a>
+                    </span>
+                </div>
+                <p class="meta">React · TypeScript · Vite</p>
+                <p class="desc">
+                    Open-source schema explorer that renders tables and their relationships visually, replacing
+                    table-by-table reading of raw schema definitions during debugging and onboarding.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="side caps">AgriTech</p>
+            <div>
+                <div class="title-line">
+                    <p class="title">Munda</p>
+                    <span class="links">
+                        <a href="https://vicente101.github.io/Smartgrow/"><svg class="icon stroke"><use href="#i-globe" /></svg>Live product</a>
+                        <a href="https://github.com/vicente101/Smartgrow"><svg class="icon"><use href="#i-github" /></svg>Source code</a>
+                    </span>
+                </div>
+                <p class="meta">React · Vite · Tailwind CSS · Open-Meteo API · Node.js test runner</p>
+                <p class="desc">
+                    Crop intelligence application that combines location-aware weather data with explainable crop
+                    recommendations, giving non-technical growers plain-language guidance they can act on.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="side caps">Records Management</p>
+            <div>
+                <div class="title-line">
+                    <p class="title">Student Information System</p>
+                    <span class="links">
+                        <a href="https://github.com/vicente101/GradingSystem"><svg class="icon"><use href="#i-github" /></svg>Source code</a>
+                    </span>
+                </div>
+                <p class="meta">Laravel · PHP · MySQL · Tailwind CSS</p>
+                <p class="desc">
+                    Centralised system for student records, academic results and administrative dashboards, with
+                    validated data entry and role-based access control.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <div class="row">
+            <p class="side">Conferred 2026</p>
+            <div>
+                <p class="title">Bachelor of Software Engineering (with Distinction)</p>
+                <p class="meta">Zambia University College of Technology</p>
+                <p class="desc">Studies completed December 2025; degree conferred 2026.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>References</h2>
+        <p>Available on request.</p>
+    </section>
+</body>
+</html>

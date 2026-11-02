@@ -17,3 +17,11 @@ This repo is configured for GitHub Pages at:
 Push to `main` and the workflow in `.github/workflows/deploy.yml` will build and deploy the React app from `dist`.
 
 In repository settings, set **Pages > Build and deployment > Source** to **GitHub Actions**. Do not deploy from the branch root, because the root `index.html` is the Vite development entry and references `/src/main.jsx`.
+
+## CV
+
+The downloadable CV (`public/Vincent-Luhanga-CV.pdf`) is generated from `cv/Vincent-Luhanga-CV.html`. After editing the HTML, regenerate the PDF with Microsoft Edge:
+
+```sh
+msedge --headless=new --no-pdf-header-footer --print-to-pdf=public/Vincent-Luhanga-CV.pdf cv/Vincent-Luhanga-CV.html
+```

@@ -9,7 +9,6 @@ import {
     Download,
     Folder,
     HamburgerMenu,
-    Layers,
     Letter,
     Monitor,
     Moon,
@@ -100,13 +99,24 @@ const routes = [
 ];
 
 const whatsappContact = {
-    label: '+260 768891429',
+    label: '+260 768 891 429',
     href: 'https://wa.me/260768891429?text=Hello%20Vincent%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20contact%20you.',
 };
 
 const contactPhones = [
-    { label: '0963659222', href: 'tel:0963659222' },
-    { label: '0955334043', href: 'tel:0955334043' },
+    { label: '+260 963 659 222', href: 'tel:+260963659222' },
+    { label: '+260 955 334 043', href: 'tel:+260955334043' },
+];
+
+const profileLinks = {
+    github: 'https://github.com/vicente101',
+    linkedin: 'https://www.linkedin.com/in/vincent-luhanga-782256240/',
+};
+
+const heroProof = [
+    { label: 'Currently at', value: 'WebDev Technologies Limited' },
+    { label: 'Core stack', value: 'Laravel · React · TypeScript · SQL · Claude Code' },
+    { label: 'Qualification', value: 'Bachelor of Software Engineering (with Distinction)' },
 ];
 
 const cardImages = {
@@ -116,48 +126,49 @@ const cardImages = {
     visualizer: assetUrl('card-bg/data-visualizer.svg'),
     smartgrow: assetUrl('card-bg/smartgrow.svg'),
     delivery: assetUrl('card-bg/operations-flow.svg'),
-    learning: assetUrl('card-bg/learning.svg'),
     education: assetUrl('card-bg/education.svg'),
 };
 
 const projects = [
     {
         title: 'Peza Venue',
-        role: 'Venue booking marketplace',
-        signal: 'Venue Marketplace',
-        result: 'A marketplace where people can discover event spaces, compare the essentials, and move from shortlist to booking request, while venue providers manage their own listings.',
-        detail: "I'm the developer behind this platform, currently building it as part of the team at WebDev Technologies Limited. Laravel and Supabase power the backend, with a Vite and React front end for browsing, listing, and booking venues.",
-        tags: ['Laravel', 'React.js', 'Supabase', 'Vite'],
+        signal: 'Marketplace Platform',
+        problem: 'Booking an event venue means chasing scattered listings and slow back-and-forth with providers, while venue owners lack a simple way to manage their own listings and incoming requests.',
+        result: 'A two-sided marketplace where clients discover and compare event spaces and submit booking requests, while venue providers manage listings, scheduling and availability.',
+        detail: 'Lead developer at WebDev Technologies Limited. Laravel and Supabase backend with a React, Vite and Tailwind CSS front end, covering listings, reservations, scheduling and availability.',
+        tags: ['Laravel', 'React', 'Supabase', 'Tailwind CSS'],
         liveUrl: 'https://pezavenue.com',
         image: cardImages.booking,
     },
     {
         title: 'Database Visualizer',
-        role: 'Developer system tool',
         signal: 'Developer Tooling',
-        result: 'A visual tool that helps developers inspect tables, relationships, and structure faster.',
-        detail: 'Designed for technical users who need clear context, stateful controls, and readable schema views.',
-        tags: ['React.js', 'TypeScript', 'Context UI', 'Open Source'],
+        problem: 'Understanding an unfamiliar database means reading raw schema definitions table by table, which hides relationships and slows down debugging and onboarding.',
+        result: 'An interactive schema explorer that renders tables and their relationships visually, so developers can understand a database structure at a glance.',
+        detail: 'React and TypeScript application built with Vite, with a typed SQL DDL parser that turns table definitions into an interactive schema canvas, plus layout, export and browser-storage services.',
+        tags: ['React', 'TypeScript', 'Vite', 'Open Source'],
         liveUrl: 'https://vicente101.github.io/Database-Schema-Visualizer/',
+        repoUrl: 'https://github.com/vicente101/Database-Schema-Visualizer',
         image: cardImages.visualizer,
     },
     {
         title: 'Munda',
-        role: 'Crop intelligence platform',
         signal: 'AgriTech',
-        result: 'Location-aware weather intelligence paired with explainable crop recommendations, helping growers make better planting decisions.',
-        detail: 'A React and Vite front end that turns live weather data from the Open-Meteo API into clear, explainable guidance non-technical growers can act on.',
-        tags: ['React', 'Vite', 'Open-Meteo API', 'Explainable UX'],
+        problem: 'Growers often decide what and when to plant without location-specific weather data, and generic advice rarely explains why a crop suits their conditions.',
+        result: 'A crop intelligence application that combines location-aware weather data with explainable crop recommendations growers can act on.',
+        detail: 'React and Vite front end integrating Open-Meteo forecast and historical climate data, with the recommendation and weather logic covered by unit tests using the Node.js test runner.',
+        tags: ['React', 'Vite', 'Tailwind CSS', 'Open-Meteo API'],
         liveUrl: 'https://vicente101.github.io/Smartgrow/',
+        repoUrl: 'https://github.com/vicente101/Smartgrow',
         image: cardImages.smartgrow,
     },
     {
         title: 'Student Information System',
-        role: 'Academic management system',
-        signal: 'Academic Operations',
-        result: 'A structured interface for student records, academic results, and admin dashboards.',
-        detail: 'Built with Laravel-backed workflows, clean data entry, validation states, role-aware screens, and fast record review.',
-        tags: ['Laravel', 'React.js', 'MySQL', 'Tailwind CSS'],
+        signal: 'Records Management',
+        problem: 'Student records and results spread across spreadsheets and paperwork make data entry error-prone, reviews slow, and access hard to control by role.',
+        result: 'A centralised system for student records, academic results and administrative dashboards, with validated data entry, role-based access and responsive views.',
+        detail: 'Laravel and MySQL application with server-rendered views styled in Tailwind CSS, implementing validation, role-based access control and efficient record review workflows.',
+        tags: ['Laravel', 'PHP', 'MySQL', 'Tailwind CSS'],
         repoUrl: 'https://github.com/vicente101/GradingSystem',
         image: cardImages.student,
     },
@@ -165,57 +176,74 @@ const projects = [
 
 const timeline = [
     {
-        time: '2026 - Present',
+        time: '2026 – Present',
         title: 'Software Engineer, WebDev Technologies Limited',
-        copy: 'Software development, testing, debugging, system maintenance, and collaboration with development teams in an agile environment.',
+        copy: 'Lead developer on Peza Venue, a live venue-booking marketplace built with Laravel, Supabase, React and Tailwind CSS.',
+        duties: [
+            'Analyse requirements and translate them into features for listings, reservations, scheduling and availability.',
+            'Design and develop features across the front end, back end and database layers.',
+            'Test, debug and resolve defects so features perform to specification.',
+            'Maintain and support the production system, shipping fixes and improvements.',
+            'Collaborate with the engineering team in an agile workflow, using Git and GitHub for version control.',
+        ],
         image: cardImages.delivery,
     },
     {
         time: '2025',
         title: 'Docufree Workflow Placement, Wiphan',
-        copy: 'Strengthened quality-assurance discipline through document verification, accurate data handling, and consistent process compliance.',
+        copy: 'Document verification, data handling and quality assurance within enterprise systems, following consistent process compliance to protect accuracy and data integrity.',
         image: cardImages.quality,
     },
 ];
 
 const homeSignals = [
     {
-        value: 'Structured',
-        label: 'Problem Solving',
-        copy: 'I break requirements down into manageable pieces and think them through before writing a line of code.',
+        value: 'Analyse',
+        label: 'Requirements & Gaps',
+        copy: 'I start from user needs and the limits of existing systems, and turn them into clear, testable requirements.',
     },
     {
-        value: 'Dependable',
-        label: 'Engineering Quality',
-        copy: "Testing, validation, and data integrity aren't an afterthought for me. Code should hold up under real use.",
+        value: 'Design',
+        label: 'Systems & Data',
+        copy: 'I plan data models, application structure and interfaces up front so systems stay maintainable as they grow.',
     },
     {
-        value: 'Collaborative',
-        label: 'Team Contribution',
-        copy: 'I communicate clearly, take feedback well, and keep learning. Good software is a team effort.',
+        value: 'Build & Test',
+        label: 'Quality to Specification',
+        copy: 'I write code to defined requirements, then test and debug it until it performs as specified in real use.',
+    },
+    {
+        value: 'Support',
+        label: 'Maintain & Improve',
+        copy: 'I maintain production systems, diagnose and fix defects, and refine features based on how they are used.',
     },
 ];
 
 const technologyStack = [
-    { id: 'javascript', label: 'JavaScript', x: 50, y: 10, color: '#f7df1e' },
-    { id: 'typescript', label: 'TypeScript', x: 70, y: 13, color: '#5aa7e8' },
-    { id: 'react', label: 'React', x: 86, y: 27, color: '#61dafb' },
-    { id: 'supabase', label: 'Supabase', x: 92, y: 49, color: '#4ade80' },
-    { id: 'laravel', label: 'Laravel', x: 86, y: 72, color: '#ff6b68' },
-    { id: 'php', label: 'PHP', x: 69, y: 87, color: '#a7a9dc' },
-    { id: 'mysql', label: 'MySQL', x: 47, y: 91, color: '#67c5e8' },
-    { id: 'git', label: 'Git', x: 26, y: 86, color: '#f97352' },
-    { id: 'tailwind', label: 'Tailwind CSS', x: 9, y: 68, color: '#38bdf8' },
-    { id: 'css', label: 'CSS3', x: 7, y: 45, color: '#57a9e9' },
-    { id: 'html', label: 'HTML5', x: 16, y: 25, color: '#ff7849' },
-    { id: 'api', label: 'REST APIs', x: 31, y: 13, color: '#c8ddef' },
+    { id: 'javascript', label: 'JavaScript', x: 50, y: 9, color: '#f7df1e' },
+    { id: 'typescript', label: 'TypeScript', x: 66, y: 12, color: '#5aa7e8' },
+    { id: 'react', label: 'React', x: 80, y: 21, color: '#61dafb' },
+    { id: 'java', label: 'Java', x: 89, y: 34, color: '#5b9bd5' },
+    { id: 'supabase', label: 'Supabase', x: 92, y: 50, color: '#4ade80' },
+    { id: 'laravel', label: 'Laravel', x: 89, y: 66, color: '#ff6b68' },
+    { id: 'php', label: 'PHP', x: 80, y: 79, color: '#a7a9dc' },
+    { id: 'mysql', label: 'MySQL', x: 66, y: 88, color: '#67c5e8' },
+    { id: 'git', label: 'Git', x: 50, y: 91, color: '#f97352' },
+    { id: 'tailwind', label: 'Tailwind CSS', x: 34, y: 88, color: '#38bdf8' },
+    { id: 'css', label: 'CSS3', x: 20, y: 79, color: '#57a9e9' },
+    { id: 'html', label: 'HTML5', x: 11, y: 66, color: '#ff7849' },
+    { id: 'api', label: 'REST APIs', x: 8, y: 50, color: '#c8ddef' },
+    { id: 'codex', label: 'Codex', x: 11, y: 34, color: '#10a37f' },
+    { id: 'copilot', label: 'Copilot', x: 20, y: 21, color: '#c084fc' },
+    { id: 'claude', label: 'Claude Code', x: 34, y: 12, color: '#d97757' },
 ];
 
 const skillGroups = [
-    { title: 'Languages & Markup', items: ['JavaScript', 'TypeScript', 'PHP', 'HTML5', 'CSS3'] },
+    { title: 'Languages', items: ['JavaScript', 'TypeScript', 'PHP', 'Java', 'SQL', 'HTML5', 'CSS3'] },
     { title: 'Frameworks & Libraries', items: ['React', 'Laravel', 'Tailwind CSS'] },
-    { title: 'Data & Backend', items: ['MySQL', 'Supabase', 'REST APIs'] },
-    { title: 'Tools & Practice', items: ['Git', 'Testing & Debugging', 'Agile Collaboration'] },
+    { title: 'Databases', items: ['MySQL', 'Supabase'] },
+    { title: 'Tools', items: ['Git', 'GitHub', 'Vite', 'Claude Code', 'OpenAI Codex', 'GitHub Copilot'] },
+    { title: 'Engineering Practices', items: ['Requirements Analysis', 'System Design', 'Database Design', 'REST APIs', 'Testing & Debugging', 'Maintenance & Support', 'Agile Delivery', 'Prompt Engineering', 'UI/UX Design'] },
 ];
 
 function TechnologyGlyph({ type }) {
@@ -288,6 +316,45 @@ function TechnologyGlyph({ type }) {
                 <circle cx="14" cy="9" r="4" />
                 <circle cx="34" cy="33" r="4" />
                 <circle cx="29" cy="19" r="4" />
+            </>
+        );
+    }
+
+    if (type === 'claude') {
+        return (
+            <>
+                <path d="M24 7v34M7 24h34M12 12l24 24M36 12 12 36" />
+                <circle cx="24" cy="24" r="4" className="tech-glyph-fill" />
+            </>
+        );
+    }
+
+    if (type === 'codex') {
+        return (
+            <>
+                <rect x="6" y="9" width="36" height="30" rx="6" />
+                <path d="m14 19 7 5-7 5M24 31h10" />
+            </>
+        );
+    }
+
+    if (type === 'copilot') {
+        return (
+            <>
+                <path d="M9 25c0-9.4 6.7-16 15-16s15 6.6 15 16v5c0 5-6.7 9-15 9s-15-4-15-9z" />
+                <rect x="13" y="19" width="9.5" height="8" rx="3" />
+                <rect x="25.5" y="19" width="9.5" height="8" rx="3" />
+                <path d="M19 33v2.5M29 33v2.5" />
+            </>
+        );
+    }
+
+    if (type === 'java') {
+        return (
+            <>
+                <path d="M12 21h21v8a9 9 0 0 1-9 9h-3a9 9 0 0 1-9-9z" />
+                <path d="M33 24h2.5a4.5 4.5 0 0 1 0 9H32M9 42h27" />
+                <path d="M18 8c-2.4 2.6 2.4 4.4 0 7.5M24.5 6c-2.4 2.6 2.4 4.4 0 7.5M31 8c-2.4 2.6 2.4 4.4 0 7.5" />
             </>
         );
     }
@@ -374,15 +441,9 @@ const staggerStyle = (index = 0, step = 70) => ({
 
 const educationItems = [
     {
-        time: 'Ongoing',
-        title: 'Professional Growth',
-        copy: 'Continuous learning across software engineering, UI/UX design, database management, testing, and mobile application development.',
-        image: cardImages.learning,
-    },
-    {
-        time: 'December 2025',
-        title: 'Bachelor of Software Engineering',
-        copy: 'Zambia University College of Technology. Strong academic performance with multiple distinctions.',
+        time: 'Conferred 2026',
+        title: 'Bachelor of Software Engineering (with Distinction)',
+        copy: 'Zambia University College of Technology. Studies completed December 2025; degree conferred 2026.',
         image: cardImages.education,
     },
 ];
@@ -496,7 +557,13 @@ function App() {
     const [path, navigate, isPageLeaving] = useRoute();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
-    const [nightMode, setNightMode] = useState(() => localStorage.getItem('portfolio-theme') === 'night');
+    const [nightMode, setNightMode] = useState(() => {
+        try {
+            return localStorage.getItem('portfolio-theme') === 'night';
+        } catch {
+            return false;
+        }
+    });
     const [themeBurst, setThemeBurst] = useState(false);
     useReveal(path);
 
@@ -512,7 +579,11 @@ function App() {
 
     useEffect(() => {
         document.body.classList.toggle('theme-night', nightMode);
-        localStorage.setItem('portfolio-theme', nightMode ? 'night' : 'day');
+        try {
+            localStorage.setItem('portfolio-theme', nightMode ? 'night' : 'day');
+        } catch {
+            // Storage is unavailable in some private modes; the theme still applies for this visit.
+        }
     }, [nightMode]);
 
     useEffect(() => {
@@ -589,7 +660,7 @@ function App() {
 
             <main className={`page-shell ${isPageLeaving ? 'page-leaving' : ''}`} key={path}>
                 {page}
-                {path === '/' && <SiteFooter navigate={navigate} />}
+                <SiteFooter navigate={navigate} />
             </main>
         </div>
     );
@@ -788,23 +859,54 @@ function HomePage({ navigate }) {
 
                 <div className="container-max hero-window">
                     <div className="hero-copy">
-                        <h1 className="hero-title reveal">VINCENT <span>LUHANGA</span></h1>
-                        <p className="hero-label reveal font-extrabold">Software Engineer</p>
-                        <p className="reveal">
-                            I build dependable software and see it through end to end, from untangling requirements
-                            to shipping something people can actually rely on. I care about clean structure, honest
-                            testing, and code the next person can work with.
+                        <div className="hero-label reveal">
+                            <span>Vincent Luhanga</span>
+                            <span className="hero-label-divider" aria-hidden="true" />
+                            <span>Software Engineer</span>
+                        </div>
+                        <h1 className="hero-title reveal">
+                            I build and ship reliable software <span>from requirements through release.</span>
+                        </h1>
+                        <p className="hero-summary reveal">
+                            Full-stack engineer focused on clean architecture, maintainable code, and practical
+                            solutions that hold up in real use. I work across web and application development,
+                            backend, data, AI-assisted development, and testing to deliver software that is clear, dependable, and
+                            easy for the next engineer to build on.
                         </p>
                         <div className="hero-actions reveal">
                             <a className="action-button" href={routeHref('/projects')} onClick={(event) => handleNav(event, '/projects', navigate)}>
-                                <span>View projects</span>
+                                <span>View Projects</span>
                                 <Folder size={19} weight="Bold" />
                             </a>
-                            <a className="action-button download" href={config.cvUrl} download>
+                            <a className="action-button outline" href={config.cvUrl} download>
                                 <span>Download CV</span>
                                 <Download size={19} weight="Bold" />
                             </a>
+                            <a className="action-button outline" href={routeHref('/contact')} onClick={(event) => handleNav(event, '/contact', navigate)}>
+                                <span>Contact Me</span>
+                                <Letter size={19} weight="Bold" />
+                            </a>
                         </div>
+                        <div className="hero-profiles reveal" aria-label="Professional profiles">
+                            <a className="hero-profile-link" href={profileLinks.github} target="_blank" rel="noreferrer">
+                                <GitHubIcon size={17} />
+                                <span>GitHub</span>
+                                <SquareArrowRightUp size={14} weight="Bold" />
+                            </a>
+                            <a className="hero-profile-link" href={profileLinks.linkedin} target="_blank" rel="noreferrer">
+                                <LinkedInIcon size={17} />
+                                <span>LinkedIn</span>
+                                <SquareArrowRightUp size={14} weight="Bold" />
+                            </a>
+                        </div>
+                        <dl className="hero-proof reveal">
+                            {heroProof.map((item) => (
+                                <div key={item.label}>
+                                    <dt>{item.label}</dt>
+                                    <dd>{item.value}</dd>
+                                </div>
+                            ))}
+                        </dl>
                     </div>
                 </div>
 
@@ -825,50 +927,8 @@ function HomePage({ navigate }) {
                 )}
             </section>
 
-            <section className="section-pad home-hub">
-                <div className="container-max hub-grid">
-                    <FeatureLink
-                        icon={CalendarMark}
-                        title="Experience"
-                        copy="Where I've worked, what I learned, and the training that got me here."
-                        path="/experience"
-                        navigate={navigate}
-                    />
-                    <FeatureLink
-                        icon={Layers}
-                        title="Selected Work"
-                        copy="A closer look at what I've built: the decisions behind it, not just the demo."
-                        path="/projects"
-                        navigate={navigate}
-                    />
-                    <FeatureLink
-                        icon={Letter}
-                        title="Contact"
-                        copy="Have an opportunity or an idea worth building? I'd like to hear about it."
-                        path="/contact"
-                        navigate={navigate}
-                    />
-                </div>
-            </section>
-
             <HomeProfileSection />
         </>
-    );
-}
-
-function FeatureLink({ icon: Icon, title, copy, path, navigate }) {
-    return (
-        <a className="feature-link reveal" href={routeHref(path)} onClick={(event) => handleNav(event, path, navigate)}>
-            <div className="feature-link-head">
-                <Icon size={28} weight="Bold" />
-                <h2>{title}</h2>
-            </div>
-            <p>{copy}</p>
-            <span>
-                Open
-                <ArrowRight size={17} weight="Bold" />
-            </span>
-        </a>
     );
 }
 
@@ -878,10 +938,11 @@ function HomeProfileSection() {
             <div className="container-max home-profile-layout">
                 <div className="home-profile-copy reveal">
                     <p className="eyebrow">How I Work</p>
-                    <h2>I turn requirements into software people can actually rely on.</h2>
+                    <h2>Engineering habits that keep software dependable long after launch.</h2>
                     <p>
-                        I pair solid technical foundations with real ownership, thinking through edge cases and
-                        staying mindful of how the code I write affects the users, teammates, and goals behind it.
+                        I own features from requirements to production: I structure code for maintainability, test
+                        and debug until it performs to specification, and collaborate closely with my team in an
+                        agile workflow.
                     </p>
                 </div>
 
@@ -965,10 +1026,7 @@ function SiteFooter({ navigate }) {
                     <a href={routeHref('/')} className="footer-brand" onClick={(event) => handleNav(event, '/', navigate)}>
                         Vincent <span>Luhanga</span>
                     </a>
-                    <p>
-                        I'm a software engineer who likes solving real problems with clean, dependable code,
-                        and I enjoy the collaboration that goes with it.
-                    </p>
+                    <p>Software Engineer · Full-stack, data and AI-assisted development.</p>
                 </div>
 
                 <nav className="footer-links" aria-label="Footer navigation">
@@ -996,12 +1054,12 @@ function ProjectsPage({ navigate }) {
             <section className="project-hero">
                 <div className="container-max project-hero-grid">
                     <div className="project-hero-copy reveal">
-                        <p className="eyebrow">Selected Work</p>
-                        <h1>A few things I've built.</h1>
+                        <p className="eyebrow">Case Studies</p>
+                        <h1>Software engineered around real problems.</h1>
                         <p>
-                            Each project below solves a real problem, from data entry to booking flows to developer
-                            tooling, with attention to structure, usability, and the details that make software easy
-                            to trust.
+                            Marketplace platforms, developer tooling, data-driven applications and records
+                            management, each taken from problem definition through architecture, implementation and
+                            delivery.
                         </p>
                         <a className="action-button compact" href={routeHref('/experience')} onClick={(event) => handleNav(event, '/experience', navigate)}>
                             <span>View experience</span>
@@ -1014,21 +1072,15 @@ function ProjectsPage({ navigate }) {
                 </div>
             </section>
 
-            <SkillsSection />
-
             <section className="section-pad">
-                <div className="container-max section-heading reveal">
-                    <div>
-                        <p className="eyebrow">Selected Projects</p>
-                        <h2>A closer look at how each one was built.</h2>
-                    </div>
-                </div>
                 <div className="container-max project-grid">
                     {projects.map((project, index) => (
                         <ProjectCard key={project.title} project={project} index={index} />
                     ))}
                 </div>
             </section>
+
+            <SkillsSection />
         </>
     );
 }
@@ -1039,7 +1091,7 @@ function SkillsSection() {
             <div className="container-max section-heading reveal">
                 <div>
                     <p className="eyebrow">Core Skills</p>
-                    <h2>The toolkit I reach for when building production-ready software.</h2>
+                    <h2>Technologies and practices behind the work.</h2>
                 </div>
             </div>
             <div className="container-max skills-grid">
@@ -1071,8 +1123,8 @@ function ExperiencePage() {
             <section className="section-pad slim">
                 <div className="container-max section-heading reveal">
                     <div>
-                        <p className="eyebrow">Education & Growth</p>
-                        <h2>My formal training, and the learning that never really stops.</h2>
+                        <p className="eyebrow">Education</p>
+                        <h2>Formal training in software engineering.</h2>
                     </div>
                 </div>
                 <div className="container-max timeline-grid experience-grid">
@@ -1086,7 +1138,7 @@ function ExperiencePage() {
 }
 
 function ExperienceHero() {
-    const title = "Where I've worked, and what it taught me.";
+    const title = 'Professional experience and education.';
 
     return (
         <section className="experience-hero">
@@ -1094,7 +1146,7 @@ function ExperienceHero() {
                 <p className="eyebrow">Experience</p>
                 <h1 className="experience-hero-title">{title}</h1>
                 <p className="experience-hero-copy">
-                    Every role has sharpened how I build: writing dependable code, handling data carefully, and communicating clearly under real deadlines.
+                    Commercial software engineering in a delivery team, backed by a Bachelor of Software Engineering and a grounding in data quality and process discipline.
                 </p>
             </div>
         </section>
@@ -1127,20 +1179,20 @@ function ContactPage() {
         <>
             <PageHeading
                 eyebrow="Contact"
-                title="Let's build something together."
-                copy="I'm open to software engineering roles and collaborations where good problem-solving and honest, dependable delivery actually matter. Reach out. I'd like to hear what you're working on."
+                title="Available for Software Engineer roles."
+                copy="Email is the fastest way to reach me for roles, interviews or technical discussions. My CV, GitHub and LinkedIn are linked below."
             />
             <section className="section-pad">
                 <div className="container-max frame-card inner reveal">
                     <div className="contact-layout">
                         <div>
                             <p className="eyebrow">Direct Lines</p>
-                            <h2>Let's start with a chat.</h2>
                             <div className="contact-links">
                                 <a href="mailto:vluhanga64@gmail.com"><Letter size={21} weight="Bold" />vluhanga64@gmail.com</a>
                                 <PhoneSequenceLinks iconSize={21} />
                                 <a href="https://github.com/vicente101" target="_blank" rel="noreferrer"><GitHubIcon size={21} />github.com/vicente101</a>
                                 <a href="https://www.linkedin.com/in/vincent-luhanga-782256240/" target="_blank" rel="noreferrer"><LinkedInIcon size={21} />LinkedIn profile</a>
+                                <a href={config.cvUrl} download><Download size={21} weight="Bold" />Download CV</a>
                             </div>
                         </div>
 
@@ -1155,6 +1207,10 @@ function ContactPage() {
                                         <span>Send message</span>
                                         <ArrowRight size={19} weight="Bold" />
                                     </button>
+                                    <p className="form-note">
+                                        The form opens your email app. You can also email{' '}
+                                        <a href="mailto:vluhanga64@gmail.com">vluhanga64@gmail.com</a> directly.
+                                    </p>
                                 </div>
                             </form>
                         </div>
@@ -1178,17 +1234,22 @@ function PageHeading({ eyebrow, title, copy }) {
 }
 
 function ProjectCard({ project, index = 0 }) {
-    const hasFooter = Boolean(project.liveUrl || project.repoUrl || project.status === 'coming-soon');
+    const hasFooter = Boolean(project.liveUrl || project.repoUrl);
 
     return (
         <article className={`project-detail image-card reveal ${hasFooter ? 'has-live-link' : ''}`} style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
             <span className="card-bg-image" aria-hidden="true" />
             <header>
+                <p className="project-category">{project.signal}</p>
                 <h2>{project.title}</h2>
             </header>
+            <div className="project-problem">
+                <h3>Gap</h3>
+                <p>{project.problem}</p>
+            </div>
             <div className="project-columns">
                 <div>
-                    <h3>{project.signal}</h3>
+                    <h3>System Overview</h3>
                     <p>{project.result}</p>
                 </div>
                 <div>
@@ -1199,23 +1260,21 @@ function ProjectCard({ project, index = 0 }) {
                     </div>
                 </div>
             </div>
-            {project.liveUrl && (
-                <a className="project-live-link" href={project.liveUrl} target="_blank" rel="noreferrer">
-                    <span>Go to project</span>
-                    <SquareArrowRightUp size={17} weight="Bold" />
-                </a>
-            )}
-            {!project.liveUrl && project.repoUrl && (
-                <a className="project-live-link" href={project.repoUrl} target="_blank" rel="noreferrer">
-                    <span>View on GitHub</span>
-                    <GitHubIcon size={16} />
-                </a>
-            )}
-            {!project.liveUrl && !project.repoUrl && project.status === 'coming-soon' && (
-                <span className="project-status-badge">
-                    <span className="project-status-dot" aria-hidden="true" />
-                    Launching soon
-                </span>
+            {(project.liveUrl || project.repoUrl) && (
+                <div className="project-links">
+                    {project.liveUrl && (
+                        <a className="project-live-link" href={project.liveUrl} target="_blank" rel="noreferrer">
+                            <span>View live product</span>
+                            <SquareArrowRightUp size={17} weight="Bold" />
+                        </a>
+                    )}
+                    {project.repoUrl && (
+                        <a className={`project-live-link ${project.liveUrl ? 'secondary' : ''}`} href={project.repoUrl} target="_blank" rel="noreferrer">
+                            <span>Source code</span>
+                            <GitHubIcon size={16} />
+                        </a>
+                    )}
+                </div>
             )}
         </article>
     );
@@ -1228,6 +1287,11 @@ function TimelineCard({ item, index = 0 }) {
             <span className="time">{item.time}</span>
             <h3>{item.title}</h3>
             <p>{item.copy}</p>
+            {item.duties && (
+                <ul className="timeline-duties">
+                    {item.duties.map((duty) => <li key={duty}>{duty}</li>)}
+                </ul>
+            )}
         </article>
     );
 }
