@@ -3800,6 +3800,29 @@ body.theme-night .empty-preview {
     transform: translateX(0);
 }
 
+.project-status {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    gap: 8px;
+    border: 1px dashed color-mix(in srgb, var(--line) 55%, transparent);
+    border-radius: 2px;
+    color: color-mix(in srgb, var(--line) 84%, transparent);
+    padding: 8px 11px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.project-status-dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
 .project-live-link.secondary {
     background: transparent;
     color: var(--accent);
@@ -3843,7 +3866,8 @@ body.theme-night .project-detail .tag:hover {
     }
 
     .project-detail .tag,
-    .project-live-link {
+    .project-live-link,
+    .project-status {
         min-height: 30px;
         padding: 7px 9px;
         font-size: 12px;

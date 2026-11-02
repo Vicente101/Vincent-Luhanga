@@ -137,7 +137,7 @@ const projects = [
         result: 'A two-sided marketplace where clients discover and compare event spaces and submit booking requests, while venue providers manage listings, scheduling and availability.',
         detail: 'Lead developer at WebDev Technologies Limited. Laravel and Supabase backend with a React, Vite and Tailwind CSS front end, covering listings, reservations, scheduling and availability.',
         tags: ['Laravel', 'React', 'Supabase', 'Tailwind CSS'],
-        liveUrl: 'https://pezavenue.com',
+        status: 'In active development at WebDev Technologies',
         image: cardImages.booking,
     },
     {
@@ -178,12 +178,12 @@ const timeline = [
     {
         time: '2026 – Present',
         title: 'Software Engineer, WebDev Technologies Limited',
-        copy: 'Lead developer on Peza Venue, a live venue-booking marketplace built with Laravel, Supabase, React and Tailwind CSS.',
+        copy: 'Lead developer on Peza Venue, a venue-booking marketplace in active development, built with Laravel, Supabase, React and Tailwind CSS.',
         duties: [
             'Analyse requirements and translate them into features for listings, reservations, scheduling and availability.',
             'Design and develop features across the front end, back end and database layers.',
             'Test, debug and resolve defects so features perform to specification.',
-            'Maintain and support the production system, shipping fixes and improvements.',
+            'Maintain and support the platform, shipping fixes and improvements.',
             'Collaborate with the engineering team in an agile workflow, using Git and GitHub for version control.',
         ],
         image: cardImages.delivery,
@@ -1234,7 +1234,7 @@ function PageHeading({ eyebrow, title, copy }) {
 }
 
 function ProjectCard({ project, index = 0 }) {
-    const hasFooter = Boolean(project.liveUrl || project.repoUrl);
+    const hasFooter = Boolean(project.liveUrl || project.repoUrl || project.status);
 
     return (
         <article className={`project-detail image-card reveal ${hasFooter ? 'has-live-link' : ''}`} style={{ ...cardBackgroundStyle(project.image), ...staggerStyle(index) }}>
@@ -1260,8 +1260,14 @@ function ProjectCard({ project, index = 0 }) {
                     </div>
                 </div>
             </div>
-            {(project.liveUrl || project.repoUrl) && (
+            {hasFooter && (
                 <div className="project-links">
+                    {project.status && (
+                        <span className="project-status">
+                            <span className="project-status-dot" aria-hidden="true" />
+                            {project.status}
+                        </span>
+                    )}
                     {project.liveUrl && (
                         <a className="project-live-link" href={project.liveUrl} target="_blank" rel="noreferrer">
                             <span>View live product</span>

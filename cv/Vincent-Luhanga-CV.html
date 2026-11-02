@@ -254,6 +254,22 @@
         font-weight: 600;
     }
 
+    .links .status {
+        color: var(--muted);
+        font-weight: 600;
+    }
+
+    .links .status::before {
+        content: '';
+        display: inline-block;
+        width: 4.5pt;
+        height: 4.5pt;
+        margin-right: 4pt;
+        border-radius: 50%;
+        vertical-align: 0.1em;
+        background: var(--accent);
+    }
+
     .links a {
         display: inline-flex;
         align-items: center;
@@ -334,14 +350,14 @@
             <div>
                 <p class="title">Software Engineer<span class="org">WebDev Technologies Limited</span></p>
                 <p class="desc">
-                    Lead developer on Peza Venue (<a href="https://pezavenue.com">pezavenue.com</a>), a live venue-booking
-                    marketplace built with Laravel, Supabase, React and Tailwind CSS.
+                    Lead developer on Peza Venue, a venue-booking marketplace in active development, built with
+                    Laravel, Supabase, React and Tailwind CSS.
                 </p>
                 <ul>
                     <li class="duty">Analyse requirements and translate them into features for listings, reservations, scheduling and availability.</li>
                     <li class="duty">Design and develop features across the front end, back end and database layers.</li>
                     <li class="duty">Test, debug and resolve defects so features perform to specification.</li>
-                    <li class="duty">Maintain and support the production system, shipping fixes and improvements.</li>
+                    <li class="duty">Maintain and support the platform, shipping fixes and improvements.</li>
                     <li class="duty">Collaborate with the engineering team in an agile workflow, using Git and GitHub for version control.</li>
                 </ul>
             </div>
@@ -378,7 +394,7 @@
                 <div class="title-line">
                     <p class="title">Peza Venue</p>
                     <span class="links">
-                        <a href="https://pezavenue.com"><svg class="icon stroke"><use href="#i-globe" /></svg>Live product</a>
+                        <span class="status">In active development at WebDev Technologies</span>
                     </span>
                 </div>
                 <p class="meta">Laravel · Supabase · React · Tailwind CSS</p>
