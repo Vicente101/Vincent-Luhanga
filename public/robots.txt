@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://vicente101.github.io/Vincent-Luhanga/sitemap.xml
+Sitemap: https://vincent-luhanga.netlify.app/sitemap.xml

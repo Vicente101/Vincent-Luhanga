@@ -2,6 +2,8 @@
 
 React-only portfolio built with Vite.
 
+Live site: https://vincent-luhanga.netlify.app
+
 ## Scripts
 
 - `npm run dev` starts the local development server.
